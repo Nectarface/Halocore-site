@@ -17,3 +17,8 @@
   from = "/bond-terms"
   to = "/bond-terms.html"
   status = 301
+
+[[redirects]]
+  from = "/bond-beta"
+  to = "/bond-beta-signup.html"
+  status = 301
