@@ -1,0 +1,20 @@
+[build]
+  # No build command needed for static HTML
+  command = "echo 'Static site - no build needed'"
+  publish = "."
+
+# Redirect rules
+[[redirects]]
+  from = "/bond-delete"
+  to = "/bond-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/bond-privacy"
+  to = "/bond-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/bond-terms"
+  to = "/bond-terms.html"
+  status = 301
