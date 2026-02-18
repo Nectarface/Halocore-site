@@ -3,6 +3,8 @@
   publish = "dist"
 
 # Redirect rules
+
+# BOND app redirects
 [[redirects]]
   from = "/bond-delete"
   to = "/bond-delete-account.html"
@@ -21,4 +23,886 @@
 [[redirects]]
   from = "/bond-beta"
   to = "/bond-beta-signup.html"
+  status = 301
+
+# QRCodeSuite redirects
+[[redirects]]
+  from = "/qrcodesuite-delete"
+  to = "/QRCodeSuite-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/qrcodesuite-privacy"
+  to = "/QRCodeSuite-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/qrcodesuite-terms"
+  to = "/QRCodeSuite-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/qrcodesuite-beta"
+  to = "/QRCodeSuite-beta-signup.html"
+  status = 301
+
+# TipCalc redirects
+[[redirects]]
+  from = "/tipcalc-delete"
+  to = "/TipCalc-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/tipcalc-privacy"
+  to = "/TipCalc-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/tipcalc-terms"
+  to = "/TipCalc-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/tipcalc-beta"
+  to = "/TipCalc-beta-signup.html"
+  status = 301
+
+# HaloCoreHub redirects
+[[redirects]]
+  from = "/halocorehub-delete"
+  to = "/HaloCoreHub-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/halocorehub-privacy"
+  to = "/HaloCoreHub-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/halocorehub-terms"
+  to = "/HaloCoreHub-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/halocorehub-beta"
+  to = "/HaloCoreHub-beta-signup.html"
+  status = 301
+
+# InvoiceGenerator redirects
+[[redirects]]
+  from = "/invoicegenerator-delete"
+  to = "/InvoiceGenerator-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/invoicegenerator-privacy"
+  to = "/InvoiceGenerator-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/invoicegenerator-terms"
+  to = "/InvoiceGenerator-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/invoicegenerator-beta"
+  to = "/InvoiceGenerator-beta-signup.html"
+  status = 301
+
+# ReceiptScanner redirects
+[[redirects]]
+  from = "/receiptscanner-delete"
+  to = "/ReceiptScanner-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/receiptscanner-privacy"
+  to = "/ReceiptScanner-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/receiptscanner-terms"
+  to = "/ReceiptScanner-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/receiptscanner-beta"
+  to = "/ReceiptScanner-beta-signup.html"
+  status = 301
+
+# HaloCoreToolkit redirects
+[[redirects]]
+  from = "/halocoretoolkit-delete"
+  to = "/HaloCoreToolkit-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/halocoretoolkit-privacy"
+  to = "/HaloCoreToolkit-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/halocoretoolkit-terms"
+  to = "/HaloCoreToolkit-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/halocoretoolkit-beta"
+  to = "/HaloCoreToolkit-beta-signup.html"
+  status = 301
+
+# HashCheck redirects
+[[redirects]]
+  from = "/hashcheck-delete"
+  to = "/HashCheck-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/hashcheck-privacy"
+  to = "/HashCheck-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/hashcheck-terms"
+  to = "/HashCheck-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/hashcheck-beta"
+  to = "/HashCheck-beta-signup.html"
+  status = 301
+
+# FileConverter redirects
+[[redirects]]
+  from = "/fileconverter-delete"
+  to = "/FileConverter-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/fileconverter-privacy"
+  to = "/FileConverter-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/fileconverter-terms"
+  to = "/FileConverter-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/fileconverter-beta"
+  to = "/FileConverter-beta-signup.html"
+  status = 301
+
+# HabitPunch redirects
+[[redirects]]
+  from = "/habitpunch-delete"
+  to = "/HabitPunch-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/habitpunch-privacy"
+  to = "/HabitPunch-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/habitpunch-terms"
+  to = "/HabitPunch-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/habitpunch-beta"
+  to = "/HabitPunch-beta-signup.html"
+  status = 301
+
+# CalWidget redirects
+[[redirects]]
+  from = "/calwidget-delete"
+  to = "/CalWidget-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/calwidget-privacy"
+  to = "/CalWidget-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/calwidget-terms"
+  to = "/CalWidget-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/calwidget-beta"
+  to = "/CalWidget-beta-signup.html"
+  status = 301
+
+# ColorPicker redirects
+[[redirects]]
+  from = "/colorpicker-delete"
+  to = "/ColorPicker-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/colorpicker-privacy"
+  to = "/ColorPicker-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/colorpicker-terms"
+  to = "/ColorPicker-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/colorpicker-beta"
+  to = "/ColorPicker-beta-signup.html"
+  status = 301
+
+# KeyGen redirects
+[[redirects]]
+  from = "/keygen-delete"
+  to = "/KeyGen-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/keygen-privacy"
+  to = "/KeyGen-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/keygen-terms"
+  to = "/KeyGen-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/keygen-beta"
+  to = "/KeyGen-beta-signup.html"
+  status = 301
+
+# PhotoResize redirects
+[[redirects]]
+  from = "/photoresize-delete"
+  to = "/PhotoResize-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/photoresize-privacy"
+  to = "/PhotoResize-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/photoresize-terms"
+  to = "/PhotoResize-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/photoresize-beta"
+  to = "/PhotoResize-beta-signup.html"
+  status = 301
+
+# NetTools redirects
+[[redirects]]
+  from = "/nettools-delete"
+  to = "/NetTools-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/nettools-privacy"
+  to = "/NetTools-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/nettools-terms"
+  to = "/NetTools-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/nettools-beta"
+  to = "/NetTools-beta-signup.html"
+  status = 301
+
+# FakeCall redirects
+[[redirects]]
+  from = "/fakecall-delete"
+  to = "/FakeCall-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/fakecall-privacy"
+  to = "/FakeCall-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/fakecall-terms"
+  to = "/FakeCall-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/fakecall-beta"
+  to = "/FakeCall-beta-signup.html"
+  status = 301
+
+# PriceCompare redirects
+[[redirects]]
+  from = "/pricecompare-delete"
+  to = "/PriceCompare-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/pricecompare-privacy"
+  to = "/PriceCompare-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/pricecompare-terms"
+  to = "/PriceCompare-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/pricecompare-beta"
+  to = "/PriceCompare-beta-signup.html"
+  status = 301
+
+# RandomGen redirects
+[[redirects]]
+  from = "/randomgen-delete"
+  to = "/RandomGen-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/randomgen-privacy"
+  to = "/RandomGen-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/randomgen-terms"
+  to = "/RandomGen-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/randomgen-beta"
+  to = "/RandomGen-beta-signup.html"
+  status = 301
+
+# TinyFile redirects
+[[redirects]]
+  from = "/tinyfile-delete"
+  to = "/TinyFile-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/tinyfile-privacy"
+  to = "/TinyFile-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/tinyfile-terms"
+  to = "/TinyFile-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/tinyfile-beta"
+  to = "/TinyFile-beta-signup.html"
+  status = 301
+
+# FocusList redirects
+[[redirects]]
+  from = "/focuslist-delete"
+  to = "/FocusList-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/focuslist-privacy"
+  to = "/FocusList-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/focuslist-terms"
+  to = "/FocusList-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/focuslist-beta"
+  to = "/FocusList-beta-signup.html"
+  status = 301
+
+# BLERadar redirects
+[[redirects]]
+  from = "/bleradar-delete"
+  to = "/BLERadar-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/bleradar-privacy"
+  to = "/BLERadar-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/bleradar-terms"
+  to = "/BLERadar-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/bleradar-beta"
+  to = "/BLERadar-beta-signup.html"
+  status = 301
+
+# SplitBill redirects
+[[redirects]]
+  from = "/splitbill-delete"
+  to = "/SplitBill-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/splitbill-privacy"
+  to = "/SplitBill-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/splitbill-terms"
+  to = "/SplitBill-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/splitbill-beta"
+  to = "/SplitBill-beta-signup.html"
+  status = 301
+
+# GhostNet redirects
+[[redirects]]
+  from = "/ghostnet-delete"
+  to = "/GhostNet-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/ghostnet-privacy"
+  to = "/GhostNet-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/ghostnet-terms"
+  to = "/GhostNet-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/ghostnet-beta"
+  to = "/GhostNet-beta-signup.html"
+  status = 301
+
+# SubnetNinja redirects
+[[redirects]]
+  from = "/subnetninja-delete"
+  to = "/SubnetNinja-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/subnetninja-privacy"
+  to = "/SubnetNinja-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/subnetninja-terms"
+  to = "/SubnetNinja-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/subnetninja-beta"
+  to = "/SubnetNinja-beta-signup.html"
+  status = 301
+
+# StreamViewer redirects
+[[redirects]]
+  from = "/streamviewer-delete"
+  to = "/StreamViewer-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/streamviewer-privacy"
+  to = "/StreamViewer-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/streamviewer-terms"
+  to = "/StreamViewer-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/streamviewer-beta"
+  to = "/StreamViewer-beta-signup.html"
+  status = 301
+
+# SensorGraph redirects
+[[redirects]]
+  from = "/sensorgraph-delete"
+  to = "/SensorGraph-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/sensorgraph-privacy"
+  to = "/SensorGraph-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/sensorgraph-terms"
+  to = "/SensorGraph-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/sensorgraph-beta"
+  to = "/SensorGraph-beta-signup.html"
+  status = 301
+
+# PixelPurge redirects
+[[redirects]]
+  from = "/pixelpurge-delete"
+  to = "/PixelPurge-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/pixelpurge-privacy"
+  to = "/PixelPurge-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/pixelpurge-terms"
+  to = "/PixelPurge-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/pixelpurge-beta"
+  to = "/PixelPurge-beta-signup.html"
+  status = 301
+
+# BreakTimer redirects
+[[redirects]]
+  from = "/breaktimer-delete"
+  to = "/BreakTimer-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/breaktimer-privacy"
+  to = "/BreakTimer-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/breaktimer-terms"
+  to = "/BreakTimer-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/breaktimer-beta"
+  to = "/BreakTimer-beta-signup.html"
+  status = 301
+
+# NotificationRules redirects
+[[redirects]]
+  from = "/notificationrules-delete"
+  to = "/NotificationRules-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/notificationrules-privacy"
+  to = "/NotificationRules-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/notificationrules-terms"
+  to = "/NotificationRules-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/notificationrules-beta"
+  to = "/NotificationRules-beta-signup.html"
+  status = 301
+
+# TimestampNotes redirects
+[[redirects]]
+  from = "/timestampnotes-delete"
+  to = "/TimestampNotes-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/timestampnotes-privacy"
+  to = "/TimestampNotes-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/timestampnotes-terms"
+  to = "/TimestampNotes-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/timestampnotes-beta"
+  to = "/TimestampNotes-beta-signup.html"
+  status = 301
+
+# DeviceInfo redirects
+[[redirects]]
+  from = "/deviceinfo-delete"
+  to = "/DeviceInfo-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/deviceinfo-privacy"
+  to = "/DeviceInfo-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/deviceinfo-terms"
+  to = "/DeviceInfo-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/deviceinfo-beta"
+  to = "/DeviceInfo-beta-signup.html"
+  status = 301
+
+# BarcodeMaker redirects
+[[redirects]]
+  from = "/barcodemaker-delete"
+  to = "/BarcodeMaker-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/barcodemaker-privacy"
+  to = "/BarcodeMaker-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/barcodemaker-terms"
+  to = "/BarcodeMaker-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/barcodemaker-beta"
+  to = "/BarcodeMaker-beta-signup.html"
+  status = 301
+
+# SignalHunter redirects
+[[redirects]]
+  from = "/signalhunter-delete"
+  to = "/SignalHunter-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/signalhunter-privacy"
+  to = "/SignalHunter-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/signalhunter-terms"
+  to = "/SignalHunter-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/signalhunter-beta"
+  to = "/SignalHunter-beta-signup.html"
+  status = 301
+
+# CallRecorder redirects
+[[redirects]]
+  from = "/callrecorder-delete"
+  to = "/CallRecorder-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/callrecorder-privacy"
+  to = "/CallRecorder-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/callrecorder-terms"
+  to = "/CallRecorder-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/callrecorder-beta"
+  to = "/CallRecorder-beta-signup.html"
+  status = 301
+
+# QuickNotes redirects
+[[redirects]]
+  from = "/quicknotes-delete"
+  to = "/QuickNotes-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/quicknotes-privacy"
+  to = "/QuickNotes-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/quicknotes-terms"
+  to = "/QuickNotes-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/quicknotes-beta"
+  to = "/QuickNotes-beta-signup.html"
+  status = 301
+
+# SimpleSteps redirects
+[[redirects]]
+  from = "/simplesteps-delete"
+  to = "/SimpleSteps-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/simplesteps-privacy"
+  to = "/SimpleSteps-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/simplesteps-terms"
+  to = "/SimpleSteps-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/simplesteps-beta"
+  to = "/SimpleSteps-beta-signup.html"
+  status = 301
+
+# LedgerLite redirects
+[[redirects]]
+  from = "/ledgerlite-delete"
+  to = "/LedgerLite-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/ledgerlite-privacy"
+  to = "/LedgerLite-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/ledgerlite-terms"
+  to = "/LedgerLite-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/ledgerlite-beta"
+  to = "/LedgerLite-beta-signup.html"
+  status = 301
+
+# LocalAI redirects
+[[redirects]]
+  from = "/localai-delete"
+  to = "/LocalAI-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/localai-privacy"
+  to = "/LocalAI-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/localai-terms"
+  to = "/LocalAI-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/localai-beta"
+  to = "/LocalAI-beta-signup.html"
+  status = 301
+
+# SleepSoundsPro redirects
+[[redirects]]
+  from = "/sleepsoundspro-delete"
+  to = "/SleepSoundsPro-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/sleepsoundspro-privacy"
+  to = "/SleepSoundsPro-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/sleepsoundspro-terms"
+  to = "/SleepSoundsPro-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/sleepsoundspro-beta"
+  to = "/SleepSoundsPro-beta-signup.html"
+  status = 301
+
+# HIITForge redirects
+[[redirects]]
+  from = "/hiitforge-delete"
+  to = "/HIITForge-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/hiitforge-privacy"
+  to = "/HIITForge-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/hiitforge-terms"
+  to = "/HIITForge-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/hiitforge-beta"
+  to = "/HIITForge-beta-signup.html"
+  status = 301
+
+# ResumeBuilder redirects
+[[redirects]]
+  from = "/resumebuilder-delete"
+  to = "/ResumeBuilder-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/resumebuilder-privacy"
+  to = "/ResumeBuilder-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/resumebuilder-terms"
+  to = "/ResumeBuilder-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/resumebuilder-beta"
+  to = "/ResumeBuilder-beta-signup.html"
+  status = 301
+
+# CryptoIntel redirects
+[[redirects]]
+  from = "/cryptointel-delete"
+  to = "/CryptoIntel-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/cryptointel-privacy"
+  to = "/CryptoIntel-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/cryptointel-terms"
+  to = "/CryptoIntel-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/cryptointel-beta"
+  to = "/CryptoIntel-beta-signup.html"
+  status = 301
+
+# AI_Suite_Production redirects
+[[redirects]]
+  from = "/aisuite-delete"
+  to = "/AI_Suite_Production-delete-account.html"
+  status = 301
+
+[[redirects]]
+  from = "/aisuite-privacy"
+  to = "/AI_Suite_Production-privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/aisuite-terms"
+  to = "/AI_Suite_Production-terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/aisuite-beta"
+  to = "/AI_Suite_Production-beta-signup.html"
   status = 301
