@@ -1,7 +1,6 @@
 [build]
-  # No build command needed for static HTML
-  command = "echo 'Static site - no build needed'"
-  publish = "."
+  command = "mkdir -p dist && cp *.html dist/"
+  publish = "dist"
 
 # Redirect rules
 [[redirects]]
