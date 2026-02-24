@@ -15,7 +15,7 @@
         .scanlines::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.02) 2px, rgba(0, 240, 255, 0.02) 4px); pointer-events: none; z-index: 1000; }
         .neon-cyan { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
         .neon-pink { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
-        .cyber-panel { background: rgba(10, 10, 15, 0.9); border: 1px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); position: relative; }
+        .cyber-panel { background: rgba(10, 10, 15, 0.9); border: 1px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); position: relative; transition: all 0.3s; }
         .cyber-panel::before { content: ''; position: absolute; top: -1px; left: -1px; width: 10px; height: 10px; border-top: 2px solid #00f0ff; border-left: 2px solid #00f0ff; }
         .cyber-panel::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 10px; height: 10px; border-bottom: 2px solid #00f0ff; border-right: 2px solid #00f0ff; }
         .cyber-panel-pink { border-color: rgba(255, 0, 255, 0.3); box-shadow: 0 0 20px rgba(255, 0, 255, 0.1); }
@@ -26,16 +26,22 @@
         .cyber-btn-pink { background: linear-gradient(45deg, transparent 5%, rgba(255, 0, 255, 0.1) 5%); border-color: #ff00ff; color: #ff00ff; }
         .cyber-btn-pink:hover { background: #ff00ff; color: #000; box-shadow: 0 0 30px #ff00ff; }
         .nav-cyber { background: rgba(5, 5, 5, 0.95); border-bottom: 1px solid rgba(0, 240, 255, 0.3); backdrop-filter: blur(10px); }
-        .nav-link-cyber { color: #888; transition: all 0.3s; position: relative; }
+        .nav-link-cyber { color: #888; transition: all 0.3s; position: relative; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; }
         .nav-link-cyber:hover { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
         .nav-link-cyber::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00f0ff; transition: width 0.3s; }
         .nav-link-cyber:hover::after { width: 100%; }
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .app-card { transition: all 0.3s; cursor: pointer; }
-        .app-card:hover { transform: translateY(-5px); border-color: #00f0ff; }
-        .category-btn { transition: all 0.3s; }
+        .app-card:hover { transform: translateY(-5px); border-color: #00f0ff; box-shadow: 0 10px 40px rgba(0, 240, 255, 0.2); }
+        .app-card.pink:hover { border-color: #ff00ff; box-shadow: 0 10px 40px rgba(255, 0, 255, 0.2); }
+        .category-btn { transition: all 0.3s; cursor: pointer; }
         .category-btn.active { background: #00f0ff; color: #000; box-shadow: 0 0 20px #00f0ff; }
+        .category-btn:hover:not(.active) { border-color: #00f0ff; color: #00f0ff; }
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+        .modal.active { display: flex; }
+        .modal-content { max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: #00f0ff; cursor: pointer; }
     </style>
 </head>
 <body class="scanlines">
@@ -45,15 +51,16 @@
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="index.html" class="flex items-center gap-3">
-                    <img src="logo.png" alt="HALOCORE" class="w-10 h-10">
-                    <span class="font-orbitron text-xl font-bold text-white tracking-widest">HALO<span class="neon-cyan">CORE</span></span>
+                    <img src="logo.png" alt="HALOCORE" class="w-12 h-12" style="filter: drop-shadow(0 0 10px #00f0ff);">
+                    <span class="font-orbitron text-2xl font-bold text-white tracking-widest">HALO<span class="neon-cyan">CORE</span></span>
                 </a>
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="architecture.html" class="nav-link-cyber font-orbitron text-sm">ARCHITECTURE</a>
-                    <a href="services.html" class="nav-link-cyber font-orbitron text-sm">SERVICES</a>
-                    <a href="agents.html" class="nav-link-cyber font-orbitron text-sm">AGENTS</a>
-                    <a href="apps.html" class="nav-link-cyber font-orbitron text-sm text-cyber-cyan">APPS</a>
-                    <a href="contact.html" class="cyber-btn font-orbitron text-sm px-6 py-2">CONTACT</a>
+                    <a href="architecture.html" class="nav-link-cyber font-orbitron">ARCHITECTURE</a>
+                    <a href="services.html" class="nav-link-cyber font-orbitron">SERVICES</a>
+                    <a href="agents.html" class="nav-link-cyber font-orbitron">AGENTS</a>
+                    <a href="apps.html" class="nav-link-cyber font-orbitron text-cyber-cyan">APPS</a>
+                    <a href="pricing.html" class="nav-link-cyber font-orbitron">PRICING</a>
+                    <a href="contact.html" class="cyber-btn font-orbitron text-sm px-6 py-3">CONTACT</a>
                 </div>
             </div>
         </div>
@@ -68,75 +75,467 @@
             <h1 class="font-orbitron text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
                 ANDROID <span class="neon-pink">APPS</span>
             </h1>
-            <p class="font-rajdhani text-lg text-gray-400 max-w-3xl mx-auto">
-                43+ production applications. Kotlin. Jetpack Compose.
+            <p class="font-rajdhani text-xl text-gray-400 max-w-3xl mx-auto mb-8">
+                43+ production applications. Click any app to learn more, read privacy policies, or join the beta.
             </p>
+            <a href="#beta-signup" class="cyber-btn-pink font-orbitron inline-flex items-center gap-2 px-8 py-4 text-lg">
+                <i class="fas fa-rocket"></i> JOIN BETA PROGRAM
+            </a>
         </div>
     </section>
 
-    <!-- HaloCore Hub Feature -->
-    <section class="py-16 px-6 relative z-10 border-t border-cyber-cyan/20">
+    <!-- Category Filter -->
+    <section class="py-8 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
-            <div class="cyber-panel p-8 md:p-12 reveal">
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1 border border-cyber-cyan/50 bg-cyber-cyan/10 mb-4">
-                            <i class="fas fa-star text-cyber-cyan"></i>
-                            <span class="font-orbitron text-xs text-cyber-cyan">FLAGSHIP</span>
-                        </div>
-                        <h2 class="font-orbitron text-3xl text-white mb-4">HALOCORE <span class="neon-cyan">HUB</span></h2>
-                        <p class="font-rajdhani text-gray-400 mb-6">Central dashboard for the entire HALO ecosystem. Access all apps, monitor system status, manage AI agents.</p>
-                        <div class="flex gap-3">
-                            <span class="px-3 py-1 border border-green-500/50 text-green-400 text-xs font-orbitron">PUBLISHED</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-center">
-                        <div class="w-48 h-48 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                            <i class="fas fa-home text-cyber-cyan text-6xl"></i>
-                        </div>
-                    </div>
-                </div>
+            <div class="flex flex-wrap justify-center gap-3 reveal">
+                <button class="category-btn active px-6 py-3 border border-cyber-cyan/50 rounded font-orbitron text-sm" data-category="all">ALL APPS</button>
+                <button class="category-btn px-6 py-3 border border-cyber-cyan/50 rounded font-orbitron text-sm text-gray-400" data-category="productivity">PRODUCTIVITY</button>
+                <button class="category-btn px-6 py-3 border border-cyber-cyan/50 rounded font-orbitron text-sm text-gray-400" data-category="business">BUSINESS</button>
+                <button class="category-btn px-6 py-3 border border-cyber-cyan/50 rounded font-orbitron text-sm text-gray-400" data-category="utility">UTILITY</button>
+                <button class="category-btn px-6 py-3 border border-cyber-cyan/50 rounded font-orbitron text-sm text-gray-400" data-category="security">SECURITY</button>
+                <button class="category-btn px-6 py-3 border border-cyber-cyan/50 rounded font-orbitron text-sm text-gray-400" data-category="ai">AI TOOLS</button>
             </div>
         </div>
     </section>
 
-    <!-- App Grid -->
+    <!-- Apps Grid - All 43 Apps -->
     <section class="py-16 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <div class="cyber-panel app-card p-4 text-center reveal">
-                    <i class="fas fa-home text-cyber-cyan text-2xl mb-2"></i>
-                    <div class="font-orbitron text-xs text-white">HUB</div>
+            <div id="apps-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                
+                <!-- Productivity -->
+                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="HaloCoreHub" onclick="openAppModal('halocorehub')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-home text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">HaloCore Hub</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Central Dashboard</p>
                 </div>
-                <div class="cyber-panel cyber-panel-pink app-card p-4 text-center reveal" style="transition-delay: 50ms;">
-                    <i class="fas fa-qrcode text-cyber-pink text-2xl mb-2"></i>
-                    <div class="font-orbitron text-xs text-white">QR SUITE</div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="QuickNotes" onclick="openAppModal('quicknotes')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-sticky-note text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">QuickNotes</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Fast Notes</p>
                 </div>
-                <div class="cyber-panel app-card p-4 text-center reveal" style="transition-delay: 100ms;">
-                    <i class="fas fa-file-invoice text-cyber-cyan text-2xl mb-2"></i>
-                    <div class="font-orbitron text-xs text-white">INVOICE</div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="FocusList" onclick="openAppModal('focuslist')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-tasks text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">FocusList</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Todo & Tasks</p>
                 </div>
-                <div class="cyber-panel cyber-panel-pink app-card p-4 text-center reveal" style="transition-delay: 150ms;">
-                    <i class="fas fa-wifi text-cyber-pink text-2xl mb-2"></i>
-                    <div class="font-orbitron text-xs text-white">SIGNAL</div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="HabitPunch" onclick="openAppModal('habitpunch')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-fist-raised text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">HabitPunch</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Habit Tracker</p>
                 </div>
-                <div class="cyber-panel app-card p-4 text-center reveal" style="transition-delay: 200ms;">
-                    <i class="fab fa-bluetooth text-cyber-cyan text-2xl mb-2"></i>
-                    <div class="font-orbitron text-xs text-white">BLE</div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="BreakTimer" onclick="openAppModal('breaktimer')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-clock text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">BreakTimer</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Pomodoro Timer</p>
                 </div>
-                <div class="cyber-panel cyber-panel-pink app-card p-4 text-center reveal" style="transition-delay: 250ms;">
-                    <i class="fas fa-ghost text-cyber-pink text-2xl mb-2"></i>
-                    <div class="font-orbitron text-xs text-white">GHOST</div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="TimestampNotes" onclick="openAppModal('timestampnotes')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-history text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">TimestampNotes</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Auto Timestamp</p>
                 </div>
-            </div>
-            
-            <div class="mt-12 text-center reveal">
-                <a href="#" class="cyber-btn-pink font-orbitron inline-flex items-center gap-2 px-6 py-3">
-                    VIEW ALL 43 APPS <i class="fas fa-arrow-right"></i>
-                </a>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="SimpleSteps" onclick="openAppModal('simplesteps')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-walking text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">SimpleSteps</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Step Counter</p>
+                </div>
+
+                <!-- Business -->
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="QRCodeSuite" onclick="openAppModal('qrcodesuite')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-qrcode text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">QRCodeSuite</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">QR Scanner</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="TipCalc" onclick="openAppModal('tipcalc')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-calculator text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">TipCalc</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Tip Calculator</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="InvoiceGenerator" onclick="openAppModal('invoicegenerator')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-file-invoice text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">Invoice Generator</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">PDF Invoices</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="ReceiptScanner" onclick="openAppModal('receiptscanner')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-receipt text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">ReceiptScanner</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">OCR Scanning</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="ResumeBuilder" onclick="openAppModal('resumebuilder')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-id-card text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">ResumeBuilder</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">CV Creator</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="SplitBill" onclick="openAppModal('splitbill')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-users text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">SplitBill</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Expense Split</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="LedgerLite" onclick="openAppModal('ledgerlite')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-book text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">LedgerLite</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Accounting</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="PriceCompare" onclick="openAppModal('pricecompare')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-tags text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">PriceCompare</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Unit Pricing</p>
+                </div>
+
+                <!-- Utility -->
+                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="FileConverter" onclick="openAppModal('fileconverter')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-exchange-alt text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">FileConverter</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Format Convert</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="HashCheck" onclick="openAppModal('hashcheck')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-hashtag text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">HashCheck</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">File Verification</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="BarcodeMaker" onclick="openAppModal('barcodemaker')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-barcode text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">BarcodeMaker</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Barcode Gen</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="PhotoResize" onclick="openAppModal('photoresize')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-image text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">PhotoResize</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Batch Resize</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="ColorPicker" onclick="openAppModal('colorpicker')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-eye-dropper text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">ColorPicker</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Color ID</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="DeviceInfo" onclick="openAppModal('deviceinfo')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-mobile-alt text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">DeviceInfo</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Phone Specs</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="RandomGen" onclick="openAppModal('randomgen')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-random text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">RandomGen</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Password Gen</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="KeyGen" onclick="openAppModal('keygen')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-key text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">KeyGen</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Key Generator</p>
+                </div>
+
+                <!-- Security -->
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="security" data-app="SignalHunter" onclick="openAppModal('signalhunter')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-wifi text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">SignalHunter</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">WiFi Analyzer</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="security" data-app="BLERadar" onclick="openAppModal('bleradar')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fab fa-bluetooth text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">BLERadar</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">BT Scanner</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="security" data-app="GhostNet" onclick="openAppModal('ghostnet')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-ghost text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">GhostNet</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Privacy Toolkit</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="security" data-app="NetTools" onclick="openAppModal('nettools')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-network-wired text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">NetTools</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Network Tools</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="security" data-app="SubnetNinja" onclick="openAppModal('subnetninja')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-sitemap text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">SubnetNinja</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Subnet Calc</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="security" data-app="PixelPurge" onclick="openAppModal('pixelpurge')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-trash-alt text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">PixelPurge</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Secure Delete</p>
+                </div>
+
+                <!-- AI Tools -->
+                <div class="cyber-panel app-card p-5 text-center" data-category="ai" data-app="LocalAI" onclick="openAppModal('localai')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-brain text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">LocalAI</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">On-Device AI</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="ai" data-app="AI_Suite_Production" onclick="openAppModal('aisuite')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-robot text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">AI Suite</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">AI Toolkit</p>
+                </div>
+
+                <div class="cyber-panel app-card p-5 text-center" data-category="ai" data-app="SensorGraph" onclick="openAppModal('sensorgraph')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-wave-square text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">SensorGraph</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Sensor Viz</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="ai" data-app="CryptoIntel" onclick="openAppModal('cryptointel')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fab fa-bitcoin text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">CryptoIntel</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Crypto Tracker</p>
+                </div>
+
+                <!-- More Productivity -->
+                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="CalWidget" onclick="openAppModal('calwidget')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-calendar text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">CalWidget</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Calendar Widget</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="SleepSoundsPro" onclick="openAppModal('sleepsoundspro')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-moon text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">SleepSounds</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Sleep Aid</p>
+                </div>
+
+                <!-- More Business -->
+                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="CallRecorder" onclick="openAppModal('callrecorder')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-phone text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">CallRecorder</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Record Calls</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="FakeCall" onclick="openAppModal('fakecall')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-phone-volume text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">FakeCall</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Fake Calls</p>
+                </div>
+
+                <!-- More Utility -->
+                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="TinyFile" onclick="openAppModal('tinyfile')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-folder text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">TinyFile</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">File Manager</p>
+                </div>
+
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="StreamViewer" onclick="openAppModal('streamviewer')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-video text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">StreamViewer</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Media Player</p>
+                </div>
+
+                <!-- More Security -->
+                <div class="cyber-panel app-card p-5 text-center" data-category="security" data-app="HaloCoreToolkit" onclick="openAppModal('halocoretoolkit')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-toolbox text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">Toolkit</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Dev Tools</p>
+                </div>
+
+                <!-- Health/Fitness -->
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="HIITForge" onclick="openAppModal('hiitforge')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-dumbbell text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">HIITForge</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Workout App</p>
+                </div>
+
+                <!-- Social -->
+                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="bond" onclick="openAppModal('bond')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
+                        <i class="fas fa-heart text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">bond</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">For Couples</p>
+                </div>
+
+                <!-- Games -->
+                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="NotificationRules" onclick="openAppModal('notificationrules')">
+                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
+                        <i class="fas fa-bell text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-sm text-white mb-1">NotifRules</h3>
+                    <p class="font-rajdhani text-xs text-gray-500">Auto DND</p>
+                </div>
+
             </div>
         </div>
     </section>
+
+    <!-- Beta Signup Section -->
+    <section id="beta-signup" class="py-24 px-6 relative z-10 border-t border-cyber-cyan/20">
+        <div class="max-w-4xl mx-auto">
+            <div class="cyber-panel cyber-panel-pink p-8 md:p-12 reveal">
+                <div class="text-center mb-8">
+                    <i class="fas fa-rocket text-cyber-pink text-4xl mb-4"></i>
+                    <h2 class="font-orbitron text-3xl text-white mb-4">JOIN THE <span class="neon-pink">BETA</span></h2>
+                    <p class="font-rajdhani text-gray-400 text-lg">Get early access to new apps and features. Be the first to test cutting-edge tools.</p>
+                </div>
+
+                <form name="beta-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/beta-success.html" class="space-y-6">
+                    <input type="hidden" name="form-name" value="beta-signup" />
+                    <p class="hidden"><label>Don't fill: <input name="bot-field" /></label></p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="font-orbitron text-cyber-pink text-sm mb-2 block">NAME *</label>
+                            <input type="text" name="name" required class="w-full px-4 py-3 bg-black/50 border border-cyber-pink/50 text-white font-rajdhani focus:outline-none focus:border-cyber-pink focus:shadow-[0_0_20px_rgba(255,0,255,0.3)]" placeholder="Your name">
+                        </div>
+                        <div>
+                            <label class="font-orbitron text-cyber-pink text-sm mb-2 block">EMAIL *</label>
+                            <input type="email" name="email" required class="w-full px-4 py-3 bg-black/50 border border-cyber-pink/50 text-white font-rajdhani focus:outline-none focus:border-cyber-pink focus:shadow-[0_0_20px_rgba(255,0,255,0.3)]" placeholder="your@email.com">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-orbitron text-cyber-pink text-sm mb-2 block">APPS INTERESTED IN</label>
+                        <select name="apps" class="w-full px-4 py-3 bg-black/50 border border-cyber-pink/50 text-white font-rajdhani focus:outline-none focus:border-cyber-pink">
+                            <option value="">Select primary interest...</option>
+                            <option value="productivity">Productivity Apps</option>
+                            <option value="business">Business Tools</option>
+                            <option value="security">Security & Network</option>
+                            <option value="ai">AI Tools</option>
+                            <option value="all">All Apps</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="font-orbitron text-cyber-pink text-sm mb-2 block">DEVICE TYPE</label>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="device" value="android" class="accent-cyber-pink" checked>
+                                <span class="font-rajdhani text-gray-300">Android</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="device" value="ios" class="accent-cyber-pink">
+                                <span class="font-rajdhani text-gray-300">iOS (Coming Soon)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-orbitron text-cyber-pink text-sm mb-2 block">WHY JOIN?</label>
+                        <textarea name="reason" rows="3" class="w-full px-4 py-3 bg-black/50 border border-cyber-pink/50 text-white font-rajdhani focus:outline-none focus:border-cyber-pink focus:shadow-[0_0_20px_rgba(255,0,255,0.3)]" placeholder="Tell us why you want to join the beta..."></textarea>
+                    </div>
+
+                    <button type="submit" class="cyber-btn-pink w-full py-4 font-orbitron text-lg">
+                        <i class="fas fa-paper-plane mr-2"></i>JOIN BETA
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Detail Modal -->
+    <div id="app-modal" class="modal">
+        <div class="modal-content cyber-panel p-8 relative">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div id="modal-content">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
 
     <footer class="border-t border-cyber-cyan/30 py-12 px-6 relative z-10 bg-cyber-black">
         <div class="max-w-7xl mx-auto text-center">
@@ -145,9 +544,196 @@
     </footer>
 
     <script>
+        // App data
+        const appData = {
+            halocorehub: {
+                name: "HaloCore Hub",
+                category: "Productivity",
+                desc: "Central dashboard for the entire HALO ecosystem. Access all apps, monitor system status, manage AI agents.",
+                icon: "fa-home",
+                color: "cyan",
+                privacy: "HaloCoreHub-privacy.html",
+                beta: "HaloCoreHub-beta-signup.html"
+            },
+            quicknotes: {
+                name: "QuickNotes",
+                category: "Productivity", 
+                desc: "Fast note-taking with folders and organization. Sync across devices.",
+                icon: "fa-sticky-note",
+                color: "pink",
+                privacy: "QuickNotes-privacy.html",
+                beta: "QuickNotes-beta-signup.html"
+            },
+            focuslist: {
+                name: "FocusList",
+                category: "Productivity",
+                desc: "Todo list with priorities, deadlines, and productivity tracking.",
+                icon: "fa-tasks",
+                color: "cyan",
+                privacy: "FocusList-privacy.html",
+                beta: "FocusList-beta-signup.html"
+            },
+            habitpunch: {
+                name: "HabitPunch",
+                category: "Productivity",
+                desc: "Habit tracker with streaks, reminders, and progress analytics.",
+                icon: "fa-fist-raised",
+                color: "pink",
+                privacy: "HabitPunch-privacy.html",
+                beta: "HabitPunch-beta-signup.html"
+            },
+            breaktimer: {
+                name: "BreakTimer",
+                category: "Productivity",
+                desc: "Pomodoro timer with customizable work/break intervals.",
+                icon: "fa-clock",
+                color: "cyan",
+                privacy: "BreakTimer-privacy.html",
+                beta: "BreakTimer-beta-signup.html"
+            },
+            qrcodesuite: {
+                name: "QRCodeSuite",
+                category: "Business",
+                desc: "QR code scanner and generator with history and sharing.",
+                icon: "fa-qrcode",
+                color: "pink",
+                privacy: "QRCodeSuite-privacy.html",
+                beta: "QRCodeSuite-beta-signup.html"
+            },
+            invoicegenerator: {
+                name: "InvoiceGenerator",
+                category: "Business",
+                desc: "Professional PDF invoice creation with templates and branding.",
+                icon: "fa-file-invoice",
+                color: "cyan",
+                privacy: "InvoiceGenerator-privacy.html",
+                beta: "InvoiceGenerator-beta-signup.html"
+            },
+            signalhunter: {
+                name: "SignalHunter",
+                category: "Security",
+                desc: "WiFi signal analyzer with heat maps and channel recommendations.",
+                icon: "fa-wifi",
+                color: "pink",
+                privacy: "SignalHunter-privacy.html",
+                beta: "SignalHunter-beta-signup.html"
+            },
+            bleradar: {
+                name: "BLERadar",
+                category: "Security",
+                desc: "Bluetooth device scanner for finding nearby devices.",
+                icon: "fa-bluetooth",
+                color: "cyan",
+                privacy: "BLERadar-privacy.html",
+                beta: "BLERadar-beta-signup.html"
+            },
+            ghostnet: {
+                name: "GhostNet",
+                category: "Security",
+                desc: "Privacy toolkit with VPN, DNS, and tracking protection.",
+                icon: "fa-ghost",
+                color: "pink",
+                privacy: "GhostNet-privacy.html",
+                beta: "GhostNet-beta-signup.html"
+            },
+            localai: {
+                name: "LocalAI",
+                category: "AI Tools",
+                desc: "On-device AI chat with local LLM processing. No cloud required.",
+                icon: "fa-brain",
+                color: "cyan",
+                privacy: "LocalAI-privacy.html",
+                beta: "LocalAI-beta-signup.html"
+            },
+            aisuite: {
+                name: "AI Suite",
+                category: "AI Tools",
+                desc: "Collection of AI-powered tools for productivity and creativity.",
+                icon: "fa-robot",
+                color: "pink",
+                privacy: "AI_Suite_Production-privacy.html",
+                beta: "AI_Suite_Production-beta-signup.html"
+            }
+        };
+
+        // Category filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const appCards = document.querySelectorAll('.app-card');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.classList.add('text-gray-400');
+                });
+                btn.classList.add('active');
+                btn.classList.remove('text-gray-400');
+
+                const category = btn.dataset.category;
+                appCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal functions
+        function openAppModal(appKey) {
+            const app = appData[appKey];
+            if (!app) {
+                // Generic modal for apps not in data
+                document.getElementById('modal-content').innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-mobile-alt text-6xl text-cyber-cyan mb-4"></i>
+                        <h2 class="font-orbitron text-2xl text-white mb-4">Coming Soon</h2>
+                        <p class="font-rajdhani text-gray-400 mb-6">Detailed information for this app will be available soon.</p>
+                        <a href="#beta-signup" onclick="closeModal()" class="cyber-btn font-orbitron px-6 py-3 inline-block">Join Beta</a>
+                    </div>
+                `;
+            } else {
+                const colorClass = app.color === 'cyan' ? 'text-cyber-cyan' : 'text-cyber-pink';
+                const borderClass = app.color === 'cyan' ? 'border-cyber-cyan' : 'border-cyber-pink';
+                
+                document.getElementById('modal-content').innerHTML = `
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center border-2 ${borderClass}">
+                            <i class="fas ${app.icon} ${colorClass} text-3xl"></i>
+                        </div>
+                        <h2 class="font-orbitron text-2xl text-white mb-2">${app.name}</h2>
+                        <span class="px-3 py-1 border ${borderClass} ${colorClass} text-xs font-orbitron">${app.category}</span>
+                    </div>
+                    <p class="font-rajdhani text-gray-400 text-center mb-6">${app.desc}</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="${app.privacy}" class="cyber-btn font-orbitron px-6 py-3 text-center">Privacy Policy</a>
+                        <a href="${app.beta}" class="cyber-btn-pink font-orbitron px-6 py-3 text-center">Join Beta</a>
+                    </div>
+                `;
+            }
+            document.getElementById('app-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('app-modal').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('app-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('app-modal')) {
+                closeModal();
+            }
+        });
+
+        // Scroll reveal
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
         }, { threshold: 0.1 });
         revealElements.forEach(el => revealObserver.observe(el));
     </script>

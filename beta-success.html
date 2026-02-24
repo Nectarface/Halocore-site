@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta Signup Complete | HALOCORE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Rajdhani', sans-serif; 
+            background: #050505; 
+            color: #fff; 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .font-orbitron { font-family: 'Orbitron', monospace; }
+        .cyber-grid { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: 0; }
+        .scanlines::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.02) 2px, rgba(0, 240, 255, 0.02) 4px); pointer-events: none; z-index: 1000; }
+        .neon-pink { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
+        .cyber-panel-pink { background: rgba(10, 10, 15, 0.9); border: 1px solid rgba(255, 0, 255, 0.3); box-shadow: 0 0 20px rgba(255, 0, 255, 0.1); position: relative; }
+        .cyber-panel-pink::before { content: ''; position: absolute; top: -1px; left: -1px; width: 10px; height: 10px; border-top: 2px solid #ff00ff; border-left: 2px solid #ff00ff; }
+        .cyber-panel-pink::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 10px; height: 10px; border-bottom: 2px solid #ff00ff; border-right: 2px solid #ff00ff; }
+        .cyber-btn { background: linear-gradient(45deg, transparent 5%, rgba(0, 240, 255, 0.1) 5%); border: 1px solid #00f0ff; color: #00f0ff; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+        .cyber-btn:hover { background: #00f0ff; color: #000; box-shadow: 0 0 30px #00f0ff; }
+        .cyber-btn-pink { background: linear-gradient(45deg, transparent 5%, rgba(255, 0, 255, 0.1) 5%); border: 1px solid #ff00ff; color: #ff00ff; transition: all 0.3s; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+        .cyber-btn-pink:hover { background: #ff00ff; color: #000; box-shadow: 0 0 30px #ff00ff; }
+    </style>
+</head>
+<body class="scanlines">
+    <div class="cyber-grid"></div>
+    
+    <div class="max-w-md w-full mx-auto px-6 relative z-10">
+        <div class="cyber-panel-pink p-12 text-center">
+            <div class="w-20 h-20 mx-auto border-2 border-cyber-pink flex items-center justify-center mb-6" style="box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);">
+                <i class="fas fa-rocket text-cyber-pink text-3xl"></i>
+            </div>
+            
+            <h1 class="font-orbitron text-2xl text-white mb-4">BETA <span class="neon-pink">ACCESS</span> REQUESTED</h1>
+            <p class="font-rajdhani text-gray-400 mb-8">Welcome to the program. You'll receive an email when your access is ready.</p>
+            
+            <div class="space-y-3">
+                <a href="apps.html" class="cyber-btn-pink block py-3 font-orbitron">
+                    <i class="fas fa-mobile-alt mr-2"></i>EXPLORE APPS
+                </a>
+                <a href="index.html" class="cyber-btn block py-3 font-orbitron">
+                    <i class="fas fa-home mr-2"></i>RETURN HOME
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
