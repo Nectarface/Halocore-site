@@ -4,78 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Architecture | HALOCORE</title>
-    <meta name="description" content="Technical architecture of HALO Core - 36 production services, multi-model orchestration, persistent memory.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Rajdhani', sans-serif;
-            background: #050505;
-            color: #fff;
-            overflow-x: hidden;
-        }
+        body { font-family: 'Rajdhani', sans-serif; background: #050505; color: #fff; overflow-x: hidden; }
         .font-orbitron { font-family: 'Orbitron', monospace; }
-        .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
-        
-        .cyber-grid {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none; z-index: 0;
-        }
-        .scanlines::before {
-            content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.02) 2px, rgba(0, 240, 255, 0.02) 4px);
-            pointer-events: none; z-index: 1000;
-        }
+        .cyber-grid { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: 0; }
+        .scanlines::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.02) 2px, rgba(0, 240, 255, 0.02) 4px); pointer-events: none; z-index: 1000; }
         .neon-cyan { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
         .neon-pink { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
-        .neon-magenta { color: #ff0080; text-shadow: 0 0 10px #ff0080; }
-        
-        .cyber-panel {
-            background: rgba(10, 10, 15, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.05);
-            position: relative;
-        }
+        .cyber-panel { background: rgba(10, 10, 15, 0.9); border: 1px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); position: relative; }
         .cyber-panel::before { content: ''; position: absolute; top: -1px; left: -1px; width: 10px; height: 10px; border-top: 2px solid #00f0ff; border-left: 2px solid #00f0ff; }
         .cyber-panel::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 10px; height: 10px; border-bottom: 2px solid #00f0ff; border-right: 2px solid #00f0ff; }
-        .cyber-panel-pink { border-color: rgba(255, 0, 255, 0.3); box-shadow: 0 0 20px rgba(255, 0, 255, 0.1), inset 0 0 20px rgba(255, 0, 255, 0.05); }
+        .cyber-panel-pink { border-color: rgba(255, 0, 255, 0.3); box-shadow: 0 0 20px rgba(255, 0, 255, 0.1); }
         .cyber-panel-pink::before { border-top-color: #ff00ff; border-left-color: #ff00ff; }
         .cyber-panel-pink::after { border-bottom-color: #ff00ff; border-right-color: #ff00ff; }
-        
-        .cyber-btn {
-            background: linear-gradient(45deg, transparent 5%, rgba(0, 240, 255, 0.1) 5%);
-            border: 1px solid #00f0ff; color: #00f0ff;
-            position: relative; transition: all 0.3s;
-            text-transform: uppercase; letter-spacing: 2px;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-        }
+        .cyber-btn { background: linear-gradient(45deg, transparent 5%, rgba(0, 240, 255, 0.1) 5%); border: 1px solid #00f0ff; color: #00f0ff; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
         .cyber-btn:hover { background: #00f0ff; color: #000; box-shadow: 0 0 30px #00f0ff; }
         .cyber-btn-pink { background: linear-gradient(45deg, transparent 5%, rgba(255, 0, 255, 0.1) 5%); border-color: #ff00ff; color: #ff00ff; }
         .cyber-btn-pink:hover { background: #ff00ff; color: #000; box-shadow: 0 0 30px #ff00ff; }
-        
         .nav-cyber { background: rgba(5, 5, 5, 0.95); border-bottom: 1px solid rgba(0, 240, 255, 0.3); backdrop-filter: blur(10px); }
-        .nav-link-cyber { color: #888; transition: all 0.3s; position: relative; }
+        .nav-link-cyber { color: #888; transition: all 0.3s; position: relative; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; }
         .nav-link-cyber:hover { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
-        .nav-link-cyber::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00f0ff; transition: width 0.3s; box-shadow: 0 0 10px #00f0ff; }
+        .nav-link-cyber::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00f0ff; transition: width 0.3s; }
         .nav-link-cyber:hover::after { width: 100%; }
-        
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        .topology-node {
-            background: rgba(10, 10, 15, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            position: relative;
-            transition: all 0.3s;
-        }
-        .topology-node:hover { border-color: #00f0ff; box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
-        .topology-node.pink { border-color: rgba(255, 0, 255, 0.3); }
-        .topology-node.pink:hover { border-color: #ff00ff; box-shadow: 0 0 20px rgba(255, 0, 255, 0.3); }
     </style>
 </head>
 <body class="scanlines">
@@ -85,16 +41,15 @@
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="index.html" class="flex items-center gap-3">
-                    <img src="logo.png" alt="HALOCORE" class="w-10 h-10">
-                    <span class="font-orbitron text-xl font-bold text-white tracking-widest">HALO<span class="neon-cyan">CORE</span></span>
+                    <img src="logo.png" alt="HALOCORE" class="w-12 h-12" style="filter: drop-shadow(0 0 10px #00f0ff);">
+                    <span class="font-orbitron text-2xl font-bold text-white tracking-widest">HALO<span class="neon-cyan">CORE</span></span>
                 </a>
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="architecture.html" class="nav-link-cyber font-orbitron text-sm text-cyber-cyan">ARCHITECTURE</a>
-                    <a href="services.html" class="nav-link-cyber font-orbitron text-sm">SERVICES</a>
-                    <a href="agents.html" class="nav-link-cyber font-orbitron text-sm">AGENTS</a>
-                    <a href="apps.html" class="nav-link-cyber font-orbitron text-sm">APPS</a>
-                    <a href="pricing.html" class="nav-link-cyber font-orbitron text-sm">PRICING</a>
-                    <a href="contact.html" class="cyber-btn font-orbitron text-sm px-6 py-2">CONTACT</a>
+                    <a href="architecture.html" class="nav-link-cyber font-orbitron text-cyber-cyan">ARCHITECTURE</a>
+                    <a href="services.html" class="nav-link-cyber font-orbitron">SERVICES</a>
+                    <a href="agents.html" class="nav-link-cyber font-orbitron">AGENTS</a>
+                    <a href="pricing.html" class="nav-link-cyber font-orbitron">PRICING</a>
+                    <a href="contact.html" class="cyber-btn font-orbitron text-sm px-6 py-3">CONTACT</a>
                 </div>
             </div>
         </div>
@@ -110,151 +65,89 @@
                 TECHNICAL <span class="neon-cyan">BLUEPRINT</span>
             </h1>
             <p class="font-rajdhani text-lg text-gray-400 max-w-3xl mx-auto">
-                36 production services orchestrated across GPU clusters. Multi-model routing. Persistent memory.
+                36 production services orchestrated across GPU clusters
             </p>
         </div>
     </section>
 
-    <!-- Topology Diagram -->
+    <!-- Models Section - No small text -->
     <section class="py-16 px-6 relative z-10">
-        <div class="max-w-6xl mx-auto">
-            <div class="cyber-panel p-8 reveal">
-                <h2 class="font-orbitron text-xl text-white mb-8 text-center">SYSTEM TOPOLOGY</h2>
-                
-                <!-- HALO CORE Header -->
-                <div class="text-center mb-8">
-                    <div class="inline-block px-6 py-3 border border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <span class="font-orbitron text-cyber-cyan">HALO CORE SYSTEM</span>
-                    </div>
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-orbitron text-3xl text-white mb-8 text-center reveal">AI <span class="neon-cyan">MODELS</span></h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="cyber-panel p-6 reveal">
+                    <h3 class="font-orbitron text-xl text-white mb-2">ORCHESTRATOR</h3>
+                    <p class="font-rajdhani text-cyber-cyan text-lg">32 Billion Parameters</p>
+                    <p class="font-rajdhani text-gray-400 mt-2">Main coordination model</p>
                 </div>
-                
-                <!-- Layer 1 -->
-                <div class="grid grid-cols-3 gap-4 mb-6">
-                    <div class="topology-node p-4 text-center">
-                        <div class="font-orbitron text-cyber-cyan text-xs mb-1">PORT 9000</div>
-                        <div class="font-orbitron text-white text-sm">API GATEWAY</div>
-                        <div class="font-rajdhani text-gray-500 text-xs">FastAPI</div>
-                    </div>
-                    <div class="topology-node p-4 text-center">
-                        <div class="font-orbitron text-cyber-pink text-xs mb-1">PORT 8889</div>
-                        <div class="font-orbitron text-white text-sm">ROUTER</div>
-                        <div class="font-rajdhani text-gray-500 text-xs">Intelligent</div>
-                    </div>
-                    <div class="topology-node p-4 text-center">
-                        <div class="font-orbitron text-cyber-magenta text-xs mb-1">SQLITE-VEC</div>
-                        <div class="font-orbitron text-white text-sm">MEMORY</div>
-                        <div class="font-rajdhani text-gray-500 text-xs">32GB+ Vector</div>
-                    </div>
+                <div class="cyber-panel cyber-panel-pink p-6 reveal" style="transition-delay: 100ms;">
+                    <h3 class="font-orbitron text-xl text-white mb-2">CODER</h3>
+                    <p class="font-rajdhani text-cyber-pink text-lg">32 Billion Parameters</p>
+                    <p class="font-rajdhani text-gray-400 mt-2">Code generation & analysis</p>
                 </div>
-                
-                <!-- Connection -->
-                <div class="flex justify-center mb-6">
-                    <div class="w-px h-8 bg-gradient-to-b from-cyber-cyan to-cyber-pink"></div>
-                </div>
-                
-                <!-- Layer 2: GPU Cluster -->
-                <div class="grid grid-cols-3 gap-4 mb-6">
-                    <div class="topology-node pink p-4 text-center">
-                        <div class="font-orbitron text-cyber-cyan text-xs mb-1">GPU 0: RTX 5090</div>
-                        <div class="font-orbitron text-white text-sm">32B MODELS</div>
-                        <div class="font-rajdhani text-gray-500 text-xs">Hot-swap</div>
-                    </div>
-                    <div class="topology-node p-4 text-center">
-                        <div class="font-orbitron text-cyber-pink text-xs mb-1">GPU 1: RTX 3060</div>
-                        <div class="font-orbitron text-white text-sm">7B COORDINATOR</div>
-                        <div class="font-rajdhani text-gray-500 text-xs">Always-on</div>
-                    </div>
-                    <div class="topology-node pink p-4 text-center">
-                        <div class="font-orbitron text-cyber-magenta text-xs mb-1">CPU</div>
-                        <div class="font-orbitron text-white text-sm">TTS 1.7B</div>
-                        <div class="font-rajdhani text-gray-500 text-xs">Port 8010</div>
-                    </div>
-                </div>
-                
-                <!-- Connection -->
-                <div class="flex justify-center mb-6">
-                    <div class="w-px h-8 bg-gradient-to-b from-cyber-pink to-cyber-magenta"></div>
-                </div>
-                
-                <!-- Layer 3: Subsystems -->
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="topology-node p-4 text-center border-cyber-cyan/50">
-                        <div class="font-orbitron text-cyber-cyan text-xs mb-1">PORT 8091</div>
-                        <div class="font-orbitron text-white text-sm">TRADING</div>
-                        <div class="font-rajdhani text-gray-500 text-xs">QAMAS</div>
-                    </div>
-                    <div class="topology-node pink p-4 text-center">
-                        <div class="font-orbitron text-cyber-pink text-xs mb-1">EREBUS PRIME</div>
-                        <div class="font-orbitron text-white text-sm">SECURITY</div>
-                        <div class="font-rajdhani text-gray-500 text-xs">Bug Bounty</div>
-                    </div>
-                    <div class="topology-node p-4 text-center border-cyber-magenta/50">
-                        <div class="font-orbitron text-cyber-magenta text-xs mb-1">100+ TOOLS</div>
-                        <div class="font-orbitron text-white text-sm">OSINT</div>
-                        <div class="font-rajdhani text-gray-500 text-xs">Intelligence</div>
-                    </div>
+                <div class="cyber-panel p-6 reveal" style="transition-delay: 200ms;">
+                    <h3 class="font-orbitron text-xl text-white mb-2">COORDINATOR</h3>
+                    <p class="font-rajdhani text-cyber-magenta text-lg">7 Billion Parameters</p>
+                    <p class="font-rajdhani text-gray-400 mt-2">Always-on fast queries</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Service Inventory -->
+    <!-- Services Grid - Clean layout no port numbers -->
     <section class="py-16 px-6 relative z-10 border-t border-cyber-cyan/20">
         <div class="max-w-7xl mx-auto">
-            <h2 class="font-orbitron text-2xl text-white mb-8 text-center reveal">SERVICE INVENTORY <span class="neon-cyan">[36]</span></h2>
+            <h2 class="font-orbitron text-3xl text-white mb-8 text-center reveal">CORE <span class="neon-pink">SERVICES</span></h2>
             
-            <div class="cyber-panel p-6 reveal">
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="border-b border-cyber-cyan/30">
-                                <th class="text-left font-orbitron text-cyber-cyan text-sm pb-4">SERVICE</th>
-                                <th class="text-left font-orbitron text-cyber-cyan text-sm pb-4">PORT</th>
-                                <th class="text-left font-orbitron text-cyber-cyan text-sm pb-4">PURPOSE</th>
-                                <th class="text-left font-orbitron text-cyber-cyan text-sm pb-4">RESOURCE</th>
-                            </tr>
-                        </thead>
-                        <tbody class="font-rajdhani text-sm">
-                            <tr class="border-b border-gray-800">
-                                <td class="py-3 font-orbitron text-cyber-cyan">halo-api-memory</td>
-                                <td class="py-3 text-gray-400">9000</td>
-                                <td class="py-3 text-gray-400">API Gateway</td>
-                                <td class="py-3"><span class="px-2 py-1 border border-gray-600 text-gray-400 text-xs">CPU</span></td>
-                            </tr>
-                            <tr class="border-b border-gray-800">
-                                <td class="py-3 font-orbitron text-cyber-cyan">halo-router</td>
-                                <td class="py-3 text-gray-400">8889</td>
-                                <td class="py-3 text-gray-400">Request Router</td>
-                                <td class="py-3"><span class="px-2 py-1 border border-gray-600 text-gray-400 text-xs">CPU</span></td>
-                            </tr>
-                            <tr class="border-b border-gray-800">
-                                <td class="py-3 font-orbitron text-cyber-pink">halo-vllm-orchestrator</td>
-                                <td class="py-3 text-gray-400">8002</td>
-                                <td class="py-3 text-gray-400">Main AI (32B)</td>
-                                <td class="py-3"><span class="px-2 py-1 border border-cyber-cyan/50 text-cyber-cyan text-xs">GPU 0</span></td>
-                            </tr>
-                            <tr class="border-b border-gray-800">
-                                <td class="py-3 font-orbitron text-cyber-pink">halo-vllm-coder</td>
-                                <td class="py-3 text-gray-400">8005</td>
-                                <td class="py-3 text-gray-400">Code Model (32B)</td>
-                                <td class="py-3"><span class="px-2 py-1 border border-cyber-cyan/50 text-cyber-cyan text-xs">GPU 0</span></td>
-                            </tr>
-                            <tr class="border-b border-gray-800">
-                                <td class="py-3 font-orbitron text-cyber-magenta">halo-vllm-7b</td>
-                                <td class="py-3 text-gray-400">8006</td>
-                                <td class="py-3 text-gray-400">Coordinator (7B)</td>
-                                <td class="py-3"><span class="px-2 py-1 border border-cyber-pink/50 text-cyber-pink text-xs">GPU 1</span></td>
-                            </tr>
-                            <tr class="border-b border-gray-800">
-                                <td class="py-3 font-orbitron text-cyber-cyan">halo-trading-bridge</td>
-                                <td class="py-3 text-gray-400">8091</td>
-                                <td class="py-3 text-gray-400">Trading API</td>
-                                <td class="py-3"><span class="px-2 py-1 border border-gray-600 text-gray-400 text-xs">CPU</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="cyber-panel p-6 reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-server text-cyber-cyan text-xl"></i>
+                        <h3 class="font-orbitron text-white">API GATEWAY</h3>
+                    </div>
+                    <p class="font-rajdhani text-gray-400">FastAPI entry point for all requests</p>
                 </div>
-                <p class="text-center font-rajdhani text-gray-600 text-xs mt-4">+ 30 additional specialized services</p>
+                
+                <div class="cyber-panel cyber-panel-pink p-6 reveal" style="transition-delay: 50ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-route text-cyber-pink text-xl"></i>
+                        <h3 class="font-orbitron text-white">ROUTER</h3>
+                    </div>
+                    <p class="font-rajdhani text-gray-400">Intelligent model selection</p>
+                </div>
+                
+                <div class="cyber-panel p-6 reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-database text-cyber-magenta text-xl"></i>
+                        <h3 class="font-orbitron text-white">MEMORY SYSTEM</h3>
+                    </div>
+                    <p class="font-rajdhani text-gray-400">Vector database & semantic search</p>
+                </div>
+                
+                <div class="cyber-panel cyber-panel-pink p-6 reveal" style="transition-delay: 150ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-chart-line text-cyber-cyan text-xl"></i>
+                        <h3 class="font-orbitron text-white">TRADING</h3>
+                    </div>
+                    <p class="font-rajdhani text-gray-400">QAMAS trading platform</p>
+                </div>
+                
+                <div class="cyber-panel p-6 reveal" style="transition-delay: 200ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-shield-alt text-cyber-pink text-xl"></i>
+                        <h3 class="font-orbitron text-white">SECURITY</h3>
+                    </div>
+                    <p class="font-rajdhani text-gray-400">ErebusPrime vulnerability scanning</p>
+                </div>
+                
+                <div class="cyber-panel cyber-panel-pink p-6 reveal" style="transition-delay: 250ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-search text-cyber-magenta text-xl"></i>
+                        <h3 class="font-orbitron text-white">OSINT</h3>
+                    </div>
+                    <p class="font-rajdhani text-gray-400">Intelligence gathering tools</p>
+                </div>
             </div>
         </div>
     </section>
@@ -262,28 +155,24 @@
     <!-- Performance -->
     <section class="py-16 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
-            <h2 class="font-orbitron text-2xl text-white mb-8 text-center reveal">PERFORMANCE <span class="neon-pink">METRICS</span></h2>
+            <h2 class="font-orbitron text-3xl text-white mb-8 text-center reveal">PERFORMANCE <span class="neon-pink">METRICS</span></h2>
             
             <div class="grid md:grid-cols-4 gap-4">
                 <div class="cyber-panel p-6 text-center reveal">
-                    <div class="font-orbitron text-3xl neon-cyan mb-2">50ms</div>
-                    <div class="font-rajdhani text-gray-400 text-sm">Memory Search</div>
-                    <div class="font-rajdhani text-gray-600 text-xs mt-1">P99: 200ms</div>
+                    <div class="font-orbitron text-4xl neon-cyan mb-2">50ms</div>
+                    <div class="font-orbitron text-white">MEMORY SEARCH</div>
                 </div>
                 <div class="cyber-panel cyber-panel-pink p-6 text-center reveal" style="transition-delay: 100ms;">
-                    <div class="font-orbitron text-3xl neon-pink mb-2">5-10s</div>
-                    <div class="font-rajdhani text-gray-400 text-sm">Model Response</div>
-                    <div class="font-rajdhani text-gray-600 text-xs mt-1">P99: 30s</div>
+                    <div class="font-orbitron text-4xl neon-pink mb-2">5-10s</div>
+                    <div class="font-orbitron text-white">MODEL RESPONSE</div>
                 </div>
                 <div class="cyber-panel p-6 text-center reveal" style="transition-delay: 200ms;">
-                    <div class="font-orbitron text-3xl text-cyber-magenta mb-2" style="text-shadow: 0 0 10px #ff0080;">&lt;50ms</div>
-                    <div class="font-rajdhani text-gray-400 text-sm">Trade Execution</div>
-                    <div class="font-rajdhani text-gray-600 text-xs mt-1">P99: 100ms</div>
+                    <div class="font-orbitron text-4xl text-cyber-magenta mb-2" style="text-shadow: 0 0 10px #ff0080;">&lt;50ms</div>
+                    <div class="font-orbitron text-white">TRADE EXECUTION</div>
                 </div>
                 <div class="cyber-panel cyber-panel-pink p-6 text-center reveal" style="transition-delay: 300ms;">
-                    <div class="font-orbitron text-3xl text-cyber-purple mb-2" style="text-shadow: 0 0 10px #8b5cf6;">200ms</div>
-                    <div class="font-rajdhani text-gray-400 text-sm">Agent Coordination</div>
-                    <div class="font-rajdhani text-gray-600 text-xs mt-1">P99: 1s</div>
+                    <div class="font-orbitron text-4xl text-cyber-purple mb-2" style="text-shadow: 0 0 10px #8b5cf6;">200ms</div>
+                    <div class="font-orbitron text-white">AGENT COORDINATION</div>
                 </div>
             </div>
         </div>
@@ -304,18 +193,14 @@
 
     <footer class="border-t border-cyber-cyan/30 py-12 px-6 relative z-10 bg-cyber-black">
         <div class="max-w-7xl mx-auto text-center">
-            <div class="font-orbitron text-xs text-gray-600">
-                © 2026 HALOCORE. ALL SYSTEMS OPERATIONAL.
-            </div>
+            <div class="font-orbitron text-xs text-gray-600">© 2026 HALOCORE. ALL SYSTEMS OPERATIONAL.</div>
         </div>
     </footer>
 
     <script>
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         revealElements.forEach(el => revealObserver.observe(el));
     </script>
