@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://halocore.ai/sitemap.xml
+
+# Disallow legal app pages from indexing (too many)
+Disallow: /*-privacy.html
+Disallow: /*-terms.html
+Disallow: /*-delete-account.html
+Disallow: /*-beta-signup.html
+
+# Allow main pages
+Allow: /index.html
+Allow: /apps.html
+Allow: /architecture.html
+Allow: /pricing.html
+Allow: /contact.html
+Allow: /services.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /404.html

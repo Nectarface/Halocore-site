@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Demos | HALOCORE</title>
+    <meta name="description" content="Experience HALOCORE interactive demos. Terminal hacking game, AI chat demo, and Android app previews.">
+    <meta name="theme-color" content="#00f0ff">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://halocore.ai/demo.html">
+    <meta property="og:title" content="Interactive Demos | HALOCORE">
+    <meta property="og:description" content="Experience HALOCORE interactive demos and simulations.">
+    <meta property="og:image" content="https://halocore.ai/logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #050505;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .font-orbitron { font-family: 'Orbitron', monospace; }
+        
+        /* Background */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .scanlines::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 240, 255, 0.02) 2px,
+                rgba(0, 240, 255, 0.02) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        /* Neon colors */
+        .neon-cyan { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
+        .neon-pink { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
+        .neon-green { color: #00ff88; text-shadow: 0 0 10px #00ff88; }
+        
+        /* Cyber panels */
+        .cyber-panel {
+            background: rgba(10, 10, 15, 0.95);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+            position: relative;
+        }
+        
+        .cyber-panel::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 15px;
+            height: 15px;
+            border-top: 2px solid #00f0ff;
+            border-left: 2px solid #00f0ff;
+        }
+        
+        .cyber-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 15px;
+            height: 15px;
+            border-bottom: 2px solid #00f0ff;
+            border-right: 2px solid #00f0ff;
+        }
+        
+        /* Navigation */
+        .nav-cyber {
+            background: rgba(5, 5, 5, 0.95);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-link-cyber {
+            color: #888;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .nav-link-cyber:hover {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff;
+        }
+        
+        .nav-link-cyber::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00f0ff;
+            transition: width 0.3s;
+        }
+        
+        .nav-link-cyber:hover::after {
+            width: 100%;
+        }
+        
+        /* Demo selector tabs */
+        .demo-tab {
+            padding: 15px 30px;
+            background: transparent;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #888;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .demo-tab:hover {
+            border-color: #00f0ff;
+            color: #00f0ff;
+        }
+        
+        .demo-tab.active {
+            background: #00f0ff;
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+        }
+        
+        /* Demo containers */
+        .demo-container {
+            display: none;
+        }
+        
+        .demo-container.active {
+            display: block;
+        }
+        
+        /* Terminal Game Styles */
+        .terminal-game {
+            background: #0a0a0f;
+            border: 1px solid #00f0ff;
+            font-family: 'Courier New', monospace;
+            height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .terminal-line {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .terminal-prompt {
+            color: #00ff88;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #00f0ff;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: calc(100% - 150px);
+            outline: none;
+        }
+        
+        .terminal-output {
+            color: #ccc;
+        }
+        
+        .terminal-error {
+            color: #ff4444;
+        }
+        
+        .terminal-success {
+            color: #00ff88;
+        }
+        
+        .terminal-hint {
+            color: #888;
+            font-style: italic;
+        }
+        
+        /* Progress bar for hacking */
+        .hack-progress {
+            width: 100%;
+            height: 20px;
+            background: #1a1a1f;
+            border: 1px solid #00f0ff;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hack-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00f0ff, #ff00ff);
+            transition: width 0.1s linear;
+            box-shadow: 0 0 20px #00f0ff;
+        }
+        
+        /* Matrix rain effect */
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        /* AI Chat Styles */
+        .chat-container {
+            background: #0a0a0f;
+            border: 1px solid #ff00ff;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            background: linear-gradient(90deg, rgba(255, 0, 255, 0.2), transparent);
+            padding: 15px 20px;
+            border-bottom: 1px solid #ff00ff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff00ff, #00f0ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .chat-status {
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .chat-message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .chat-message.user {
+            align-self: flex-end;
+            background: rgba(0, 240, 255, 0.15);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #00f0ff;
+        }
+        
+        .chat-message.ai {
+            align-self: flex-start;
+            background: rgba(255, 0, 255, 0.15);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            color: #fff;
+        }
+        
+        .chat-typing {
+            display: none;
+            align-self: flex-start;
+            padding: 12px 16px;
+        }
+        
+        .chat-typing.active {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff00ff;
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        .chat-input-area {
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255, 0, 255, 0.3);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            padding: 12px 16px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .chat-input:focus {
+            border-color: #ff00ff;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+        }
+        
+        .chat-send {
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid #ff00ff;
+            color: #ff00ff;
+            font-family: 'Orbitron', monospace;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chat-send:hover {
+            background: #ff00ff;
+            color: #000;
+            box-shadow: 0 0 20px #ff00ff;
+        }
+        
+        /* Phone Preview Styles */
+        .phone-preview {
+            background: #1a1a1f;
+            border-radius: 40px;
+            padding: 15px;
+            box-shadow: 
+                0 0 0 2px #333,
+                0 0 50px rgba(0, 240, 255, 0.2);
+            width: 320px;
+            margin: 0 auto;
+        }
+        
+        .phone-screen {
+            background: #050505;
+            border-radius: 30px;
+            overflow: hidden;
+            aspect-ratio: 9/19;
+            position: relative;
+        }
+        
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        
+        .app-ui {
+            height: 100%;
+            padding: 40px 20px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .app-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .app-btn {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .app-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .app-nav-item {
+            color: #666;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .app-nav-item:hover,
+        .app-nav-item.active {
+            color: #00f0ff;
+        }
+        
+        /* App selector */
+        .app-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .app-select-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #888;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 8px;
+        }
+        
+        .app-select-btn:hover {
+            border-color: #00f0ff;
+            color: #00f0ff;
+        }
+        
+        .app-select-btn.active {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: #00f0ff;
+            color: #00f0ff;
+        }
+        
+        /* Animations */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .glitch-effect {
+            animation: glitch 0.3s infinite;
+        }
+        
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="scanlines">
+    <!-- Scroll Progress Bar -->
+    <div class="progress-bar" id="scrollProgress" style="position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #00f0ff, #ff00ff); box-shadow: 0 0 10px #00f0ff; z-index: 9999; width: 0%; transition: width 0.1s;"></div>
+    
+    <div class="cyber-grid"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav-cyber fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="logo.png" alt="HALOCORE" class="w-12 h-12" loading="lazy" style="filter: drop-shadow(0 0 10px #00f0ff);">
+                    <span class="font-orbitron text-2xl font-bold text-white tracking-widest">HALO<span class="neon-cyan">CORE</span></span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="architecture.html" class="nav-link-cyber font-orbitron">ARCHITECTURE</a>
+                    <a href="services.html" class="nav-link-cyber font-orbitron">SERVICES</a>
+                    <a href="apps.html" class="nav-link-cyber font-orbitron">APPS</a>
+                    <a href="pricing.html" class="nav-link-cyber font-orbitron">PRICING</a>
+                    <a href="contact.html" class="nav-link-cyber font-orbitron">CONTACT</a>
+                    <a href="demo.html" class="nav-link-cyber font-orbitron text-cyan-400">DEMO</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 cyber-panel mb-6">
+                <i class="fas fa-gamepad neon-cyan"></i>
+                <span class="font-orbitron text-xs neon-cyan tracking-widest">INTERACTIVE EXPERIENCES</span>
+            </div>
+            <h1 class="font-orbitron text-4xl md:text-6xl font-black text-white mb-6">
+                THE <span class="neon-pink">PLAYGROUND</span>
+            </h1>
+            <p class="font-rajdhani text-xl text-gray-400 max-w-3xl mx-auto mb-12">
+                Experience HALOCORE technology firsthand. Hack the terminal, chat with our AI, 
+                or preview our Android ecosystem.
+            </p>
+            
+            <!-- Demo Selector -->
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <button class="demo-tab active" onclick="switchDemo('terminal')">
+                    <i class="fas fa-terminal mr-2"></i>Terminal Hacker
+                </button>
+                <button class="demo-tab" onclick="switchDemo('chat')">
+                    <i class="fas fa-robot mr-2"></i>AI Chat
+                </button>
+                <button class="demo-tab" onclick="switchDemo('android')">
+                    <i class="fab fa-android mr-2"></i>App Previews
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Content -->
+    <section class="pb-24 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- TERMINAL HACKER DEMO -->
+            <div id="terminal-demo" class="demo-container active">
+                <div class="cyber-panel p-1">
+                    <div class="terminal-game" id="terminalGame">
+                        <div class="matrix-bg" id="matrixBg"></div>
+                        <div id="terminalOutput"></div>
+                        <div class="terminal-line" style="display: flex; align-items: center;">
+                            <span class="terminal-prompt" id="terminalPrompt">guest@halocore:~$ </span>
+                            <input type="text" class="terminal-input" id="terminalInput" autocomplete="off" spellcheck="false">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mission Panel -->
+                <div class="mt-6 grid md:grid-cols-3 gap-4">
+                    <div class="cyber-panel p-4">
+                        <h3 class="font-orbitron text-sm neon-cyan mb-2"><i class="fas fa-bullseye mr-2"></i>CURRENT MISSION</h3>
+                        <p class="text-gray-400 text-sm" id="currentMission">Type 'start' to begin your first hacking mission.</p>
+                    </div>
+                    <div class="cyber-panel p-4">
+                        <h3 class="font-orbitron text-sm neon-pink mb-2"><i class="fas fa-trophy mr-2"></i>SCORE</h3>
+                        <p class="text-2xl font-orbitron neon-cyan" id="hackerScore">0</p>
+                    </div>
+                    <div class="cyber-panel p-4">
+                        <h3 class="font-orbitron text-sm neon-green mb-2"><i class="fas fa-unlock mr-2"></i>UNLOCKS</h3>
+                        <p class="text-gray-400 text-sm" id="unlockedItems">None yet. Complete missions to unlock rewards.</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Help -->
+                <div class="mt-4 text-center">
+                    <p class="text-gray-500 text-sm">Type <span class="neon-cyan">help</span> for available commands</p>
+                </div>
+            </div>
+
+            <!-- AI CHAT DEMO -->
+            <div id="chat-demo" class="demo-container">
+                <div class="cyber-panel p-1">
+                    <div class="chat-container">
+                        <div class="chat-header">
+                            <div class="chat-avatar">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-orbitron text-lg">COORDINATOR-7B</h3>
+                                <div class="flex items-center gap-2 text-sm text-gray-400">
+                                    <div class="chat-status"></div>
+                                    <span>Online</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="chat-message ai">
+                                Greetings. I am COORDINATOR-7B, HALOCORE's task orchestration AI. I can help you understand our infrastructure, pricing, or Android ecosystem. What would you like to know?
+                            </div>
+                        </div>
+                        
+                        <div class="chat-typing" id="chatTyping">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything about HALOCORE..." maxlength="200">
+                            <button class="chat-send" id="chatSend">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Suggested Questions -->
+                <div class="mt-6">
+                    <p class="text-gray-500 text-sm mb-3 text-center">Suggested questions:</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button class="app-select-btn text-sm" onclick="askQuestion('What is HALOCORE?')">What is HALOCORE?</button>
+                        <button class="app-select-btn text-sm" onclick="askQuestion('How much does it cost?')">How much does it cost?</button>
+                        <button class="app-select-btn text-sm" onclick="askQuestion('Tell me about the Android apps')">Tell me about the Android apps</button>
+                        <button class="app-select-btn text-sm" onclick="askQuestion('What makes you different?')">What makes you different?</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANDROID APP PREVIEWS -->
+            <div id="android-demo" class="demo-container">
+                <!-- App Selector -->
+                <div class="app-selector">
+                    <button class="app-select-btn active" onclick="switchApp('focuslist')">
+                        <i class="fas fa-tasks mr-2"></i>FocusList
+                    </button>
+                    <button class="app-select-btn" onclick="switchApp('sleep')">
+                        <i class="fas fa-moon mr-2"></i>SleepSounds
+                    </button>
+                    <button class="app-select-btn" onclick="switchApp('habit')">
+                        <i class="fas fa-fist-raised mr-2"></i>HabitPunch
+                    </button>
+                    <button class="app-select-btn" onclick="switchApp('trading')">
+                        <i class="fas fa-chart-line mr-2"></i>CryptoIntel
+                    </button>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <!-- Phone Preview -->
+                    <div class="reveal">
+                        <div class="phone-preview">
+                            <div class="phone-screen" id="phoneScreen">
+                                <div class="phone-notch"></div>
+                                
+                                <!-- FocusList App -->
+                                <div id="app-focuslist" class="app-ui" style="display: block;">
+                                    <div class="app-header">
+                                        <div class="app-icon" style="background: linear-gradient(135deg, #00f0ff, #0088ff);">
+                                            <i class="fas fa-check-circle text-white"></i>
+                                        </div>
+                                        <h3 class="font-orbitron text-xl neon-cyan">FocusList</h3>
+                                        <p class="text-gray-400 text-sm">Task Mastery</p>
+                                    </div>
+                                    <div class="app-content">
+                                        <div style="background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 12px; padding: 15px; margin-bottom: 10px;">
+                                            <div class="flex items-center gap-3">
+                                                <i class="fas fa-circle neon-cyan"></i>
+                                                <span>Review architecture specs</span>
+                                            </div>
+                                            <p class="text-gray-500 text-xs mt-1 ml-6">Due today • High Priority</p>
+                                        </div>
+                                        <div style="background: rgba(255, 0, 255, 0.1); border: 1px solid rgba(255, 0, 255, 0.3); border-radius: 12px; padding: 15px; margin-bottom: 10px;">
+                                            <div class="flex items-center gap-3">
+                                                <i class="fas fa-check-circle" style="color: #00ff88;"></i>
+                                                <span style="text-decoration: line-through; color: #666;">Update app metadata</span>
+                                            </div>
+                                            <p class="text-gray-500 text-xs mt-1 ml-6">Completed</p>
+                                        </div>
+                                        <div style="background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 12px; padding: 15px;">
+                                            <div class="flex items-center gap-3">
+                                                <i class="far fa-circle" style="color: #666;"></i>
+                                                <span>Deploy new build</span>
+                                            </div>
+                                            <p class="text-gray-500 text-xs mt-1 ml-6">Tomorrow</p>
+                                        </div>
+                                    </div>
+                                    <div class="app-nav">
+                                        <div class="app-nav-item active"><i class="fas fa-list"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-calendar"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-chart-pie"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-cog"></i></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- SleepSounds App -->
+                                <div id="app-sleep" class="app-ui" style="display: none; background: linear-gradient(180deg, #1a0a2e 0%, #0a0a0f 100%);">
+                                    <div class="app-header">
+                                        <div class="app-icon" style="background: linear-gradient(135deg, #9d4edd, #5a189a);">
+                                            <i class="fas fa-moon text-white"></i>
+                                        </div>
+                                        <h3 class="font-orbitron text-xl" style="color: #c77dff;">SleepSounds Pro</h3>
+                                        <p class="text-gray-400 text-sm">Rest & Recovery</p>
+                                    </div>
+                                    <div class="app-content">
+                                        <div class="text-center mb-6">
+                                            <div style="width: 120px; height: 120px; margin: 0 auto; border-radius: 50%; border: 3px solid #9d4edd; display: flex; align-items: center; justify-content: center; position: relative;">
+                                                <i class="fas fa-play" style="font-size: 2rem; color: #c77dff;"></i>
+                                                <div style="position: absolute; inset: -5px; border-radius: 50%; border: 2px solid transparent; border-top-color: #c77dff; animation: spin 2s linear infinite;"></div>
+                                            </div>
+                                            <p class="mt-4 text-gray-300">Rain on Roof</p>
+                                            <p class="text-gray-500 text-sm">45:00 remaining</p>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                            <div style="background: rgba(157, 78, 221, 0.2); border-radius: 12px; padding: 15px; text-align: center;">
+                                                <i class="fas fa-cloud-rain" style="color: #c77dff; font-size: 1.5rem;"></i>
+                                                <p class="text-xs mt-2">Rain</p>
+                                            </div>
+                                            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
+                                                <i class="fas fa-wind" style="color: #888; font-size: 1.5rem;"></i>
+                                                <p class="text-xs mt-2 text-gray-500">Wind</p>
+                                            </div>
+                                            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
+                                                <i class="fas fa-fire" style="color: #888; font-size: 1.5rem;"></i>
+                                                <p class="text-xs mt-2 text-gray-500">Fire</p>
+                                            </div>
+                                            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
+                                                <i class="fas fa-water" style="color: #888; font-size: 1.5rem;"></i>
+                                                <p class="text-xs mt-2 text-gray-500">Ocean</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="app-nav">
+                                        <div class="app-nav-item active"><i class="fas fa-play-circle"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-music"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-moon"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-cog"></i></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- HabitPunch App -->
+                                <div id="app-habit" class="app-ui" style="display: none;">
+                                    <div class="app-header">
+                                        <div class="app-icon" style="background: linear-gradient(135deg, #ff6b35, #f7931e);">
+                                            <i class="fas fa-fist-raised text-white"></i>
+                                        </div>
+                                        <h3 class="font-orbitron text-xl" style="color: #ff6b35;">HabitPunch</h3>
+                                        <p class="text-gray-400 text-sm">Build Streaks</p>
+                                    </div>
+                                    <div class="app-content">
+                                        <div style="text-align: center; margin-bottom: 20px;">
+                                            <div style="font-size: 3rem; font-weight: bold; color: #ff6b35;">🔥 12</div>
+                                            <p class="text-gray-400">Day Streak</p>
+                                        </div>
+                                        <div style="margin-bottom: 15px;">
+                                            <div class="flex justify-between mb-2">
+                                                <span class="text-sm">Daily Workout</span>
+                                                <span style="color: #00ff88;"><i class="fas fa-check"></i> Done</span>
+                                            </div>
+                                            <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                                <div style="width: 100%; height: 100%; background: linear-gradient(90deg, #ff6b35, #f7931e); border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 15px;">
+                                            <div class="flex justify-between mb-2">
+                                                <span class="text-sm">Read 30 mins</span>
+                                                <span style="color: #00ff88;"><i class="fas fa-check"></i> Done</span>
+                                            </div>
+                                            <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                                <div style="width: 100%; height: 100%; background: linear-gradient(90deg, #ff6b35, #f7931e); border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 15px;">
+                                            <div class="flex justify-between mb-2">
+                                                <span class="text-sm">Meditate</span>
+                                                <span style="color: #ff6b35;">Pending</span>
+                                            </div>
+                                            <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                                <div style="width: 0%; height: 100%; background: linear-gradient(90deg, #ff6b35, #f7931e); border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                        <button class="app-btn" style="background: linear-gradient(135deg, #ff6b35, #f7931e); color: white; margin-top: 10px;">
+                                            <i class="fas fa-plus mr-2"></i>Punch Habit
+                                        </button>
+                                    </div>
+                                    <div class="app-nav">
+                                        <div class="app-nav-item active"><i class="fas fa-fire"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-calendar-alt"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-chart-bar"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-user"></i></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- CryptoIntel App -->
+                                <div id="app-trading" class="app-ui" style="display: none;">
+                                    <div class="app-header">
+                                        <div class="app-icon" style="background: linear-gradient(135deg, #00ff88, #00cc6a);">
+                                            <i class="fas fa-chart-line text-white"></i>
+                                        </div>
+                                        <h3 class="font-orbitron text-xl" style="color: #00ff88;">CryptoIntel</h3>
+                                        <p class="text-gray-400 text-sm">Trading Signals</p>
+                                    </div>
+                                    <div class="app-content">
+                                        <div style="background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="font-bold">BTC/USDT</span>
+                                                <span style="color: #00ff88;">+5.2% <i class="fas fa-arrow-up"></i></span>
+                                            </div>
+                                            <div style="font-size: 1.5rem; font-weight: bold;">$67,420.50</div>
+                                            <div class="flex gap-2 mt-2">
+                                                <span style="background: rgba(0, 255, 136, 0.2); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: #00ff88;">BULLISH</span>
+                                                <span style="background: rgba(0, 240, 255, 0.2); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: #00f0ff;">AI CONFIDENCE: 87%</span>
+                                            </div>
+                                        </div>
+                                        <div style="background: rgba(255, 0, 0, 0.1); border: 1px solid rgba(255, 0, 0, 0.3); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="font-bold">ETH/USDT</span>
+                                                <span style="color: #ff4444;">-1.8% <i class="fas fa-arrow-down"></i></span>
+                                            </div>
+                                            <div style="font-size: 1.5rem; font-weight: bold;">$3,420.15</div>
+                                            <div class="flex gap-2 mt-2">
+                                                <span style="background: rgba(255, 0, 0, 0.2); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: #ff4444;">BEARISH</span>
+                                                <span style="background: rgba(0, 240, 255, 0.2); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: #00f0ff;">AI CONFIDENCE: 72%</span>
+                                            </div>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                            <button class="app-btn" style="background: rgba(0, 255, 136, 0.2); border: 1px solid #00ff88; color: #00ff88;">
+                                                <i class="fas fa-bell mr-1"></i> Alert
+                                            </button>
+                                            <button class="app-btn" style="background: rgba(0, 240, 255, 0.2); border: 1px solid #00f0ff; color: #00f0ff;">
+                                                <i class="fas fa-robot mr-1"></i> Analyze
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="app-nav">
+                                        <div class="app-nav-item active"><i class="fas fa-chart-line"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-list"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-newspaper"></i></div>
+                                        <div class="app-nav-item"><i class="fas fa-cog"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- App Info -->
+                    <div class="reveal">
+                        <div id="appinfo-focuslist" class="cyber-panel p-6" style="display: block;">
+                            <h3 class="font-orbitron text-2xl neon-cyan mb-4">
+                                <i class="fas fa-tasks mr-2"></i>FocusList
+                            </h3>
+                            <p class="text-gray-300 mb-4">
+                                A productivity powerhouse with intelligent task prioritization. Features include 
+                                deadline tracking, priority levels, recurring tasks, and productivity analytics.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="text-center p-3" style="background: rgba(0, 240, 255, 0.1); border-radius: 8px;">
+                                    <div class="font-orbitron text-xl neon-cyan">50K+</div>
+                                    <div class="text-xs text-gray-500">Downloads</div>
+                                </div>
+                                <div class="text-center p-3" style="background: rgba(0, 240, 255, 0.1); border-radius: 8px;">
+                                    <div class="font-orbitron text-xl neon-cyan">4.8★</div>
+                                    <div class="text-xs text-gray-500">Rating</div>
+                                </div>
+                            </div>
+                            <a href="apps.html" class="inline-flex items-center gap-2 px-6 py-3 border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all font-orbitron text-sm">
+                                <i class="fab fa-google-play"></i> View on Play Store
+                            </a>
+                        </div>
+                        
+                        <div id="appinfo-sleep" class="cyber-panel p-6" style="display: none;">
+                            <h3 class="font-orbitron text-2xl mb-4" style="color: #c77dff;">
+                                <i class="fas fa-moon mr-2"></i>SleepSounds Pro
+                            </h3>
+                            <p class="text-gray-300 mb-4">
+                                Premium sleep aid with AI-curated soundscapes. Features 50+ ambient sounds, 
+                                sleep timer, smart alarm, and sleep quality tracking.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="text-center p-3" style="background: rgba(157, 78, 221, 0.2); border-radius: 8px;">
+                                    <div class="font-orbitron text-xl" style="color: #c77dff;">30K+</div>
+                                    <div class="text-xs text-gray-500">Downloads</div>
+                                </div>
+                                <div class="text-center p-3" style="background: rgba(157, 78, 221, 0.2); border-radius: 8px;">
+                                    <div class="font-orbitron text-xl" style="color: #c77dff;">4.9★</div>
+                                    <div class="text-xs text-gray-500">Rating</div>
+                                </div>
+                            </div>
+                            <a href="apps.html" class="inline-flex items-center gap-2 px-6 py-3 border hover:bg-purple-400 hover:text-black transition-all font-orbitron text-sm" style="border-color: #c77dff; color: #c77dff;">
+                                <i class="fab fa-google-play"></i> View on Play Store
+                            </a>
+                        </div>
+                        
+                        <div id="appinfo-habit" class="cyber-panel p-6" style="display: none;">
+                            <h3 class="font-orbitron text-2xl mb-4" style="color: #ff6b35;">
+                                <i class="fas fa-fist-raised mr-2"></i>HabitPunch
+                            </h3>
+                            <p class="text-gray-300 mb-4">
+                                Gamified habit tracker with streak counters, achievement badges, 
+                                and social accountability features. Build lasting habits with AI-powered insights.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="text-center p-3" style="background: rgba(255, 107, 53, 0.2); border-radius: 8px;">
+                                    <div class="font-orbitron text-xl" style="color: #ff6b35;">25K+</div>
+                                    <div class="text-xs text-gray-500">Downloads</div>
+                                </div>
+                                <div class="text-center p-3" style="background: rgba(255, 107, 53, 0.2); border-radius: 8px;">
+                                    <div class="font-orbitron text-xl" style="color: #ff6b35;">4.7★</div>
+                                    <div class="text-xs text-gray-500">Rating</div>
+                                </div>
+                            </div>
+                            <a href="apps.html" class="inline-flex items-center gap-2 px-6 py-3 border hover:bg-orange-400 hover:text-black transition-all font-orbitron text-sm" style="border-color: #ff6b35; color: #ff6b35;">
+                                <i class="fab fa-google-play"></i> View on Play Store
+                            </a>
+                        </div>
+                        
+                        <div id="appinfo-trading" class="cyber-panel p-6" style="display: none;">
+                            <h3 class="font-orbitron text-2xl mb-4" style="color: #00ff88;">
+                                <i class="fas fa-chart-line mr-2"></i>CryptoIntel
+                            </h3>
+                            <p class="text-gray-300 mb-4">
+                                AI-powered crypto analysis with real-time signals, sentiment analysis, 
+                                and portfolio tracking. Get the edge with machine learning predictions.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="text-center p-3" style="background: rgba(0, 255, 136, 0.1); border-radius: 8px;">
+                                    <div class="font-orbitron text-xl" style="color: #00ff88;">15K+</div>
+                                    <div class="text-xs text-gray-500">Downloads</div>
+                                </div>
+                                <div class="text-center p-3" style="background: rgba(0, 255, 136, 0.1); border-radius: 8px;">
+                                    <div class="font-orbitron text-xl" style="color: #00ff88;">4.6★</div>
+                                    <div class="text-xs text-gray-500">Rating</div>
+                                </div>
+                            </div>
+                            <a href="apps.html" class="inline-flex items-center gap-2 px-6 py-3 border hover:bg-green-400 hover:text-black transition-all font-orbitron text-sm" style="border-color: #00ff88; color: #00ff88;">
+                                <i class="fab fa-google-play"></i> View on Play Store
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // ===== DEMO SWITCHER =====
+        function switchDemo(demo) {
+            // Update tabs
+            document.querySelectorAll('.demo-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.closest('.demo-tab').classList.add('active');
+            
+            // Update containers
+            document.querySelectorAll('.demo-container').forEach(container => container.classList.remove('active'));
+            document.getElementById(demo + '-demo').classList.add('active');
+        }
+        
+        // ===== TERMINAL HACKER GAME =====
+        const terminalOutput = document.getElementById('terminalOutput');
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalPrompt = document.getElementById('terminalPrompt');
+        
+        let currentDirectory = '~';
+        let missionActive = false;
+        let currentMissionId = null;
+        let score = 0;
+        let unlocked = [];
+        
+        // File system
+        const fileSystem = {
+            '~': {
+                type: 'dir',
+                contents: ['documents', 'downloads', 'system', '.secret']
+            },
+            '~/documents': {
+                type: 'dir',
+                contents: ['readme.txt', 'mission_brief.pdf']
+            },
+            '~/downloads': {
+                type: 'dir',
+                contents: ['exploit.sh', 'data_dump.zip']
+            },
+            '~/system': {
+                type: 'dir',
+                contents: ['config.ini', 'logs']
+            },
+            '~/.secret': {
+                type: 'dir',
+                contents: ['flag.txt'],
+                hidden: true
+            }
+        };
+        
+        const fileContents = {
+            'readme.txt': 'Welcome to HALOCORE Terminal.\nType "help" for available commands.\nComplete missions to unlock rewards.',
+            'mission_brief.pdf': '[ENCRYPTED] - Use "decrypt" command',
+            'flag.txt': 'FLAG{H4CK3R_M4ST3R_2026} - Congratulations! You found the secret!',
+            'config.ini': 'SYSTEM_CONFIG=PRODUCTION\nSECURITY_LEVEL=MAXIMUM\nAI_MODELS=3'
+        };
+        
+        const missions = {
+            1: {
+                name: 'System Recon',
+                description: 'Explore the file system and read readme.txt',
+                check: (cmd) => cmd === 'cat readme.txt',
+                reward: 'Novice Hacker Badge',
+                points: 100
+            },
+            2: {
+                name: 'File Discovery',
+                description: 'Find the hidden .secret directory',
+                check: (cmd, dir) => cmd === 'ls' && dir === '~/.secret',
+                reward: 'Explorer Badge',
+                points: 200
+            },
+            3: {
+                name: 'Decrypt Challenge',
+                description: 'Decrypt the mission_brief.pdf file',
+                check: (cmd) => cmd.startsWith('decrypt'),
+                reward: 'Cryptographer Badge',
+                points: 300
+            }
+        };
+        
+        function printLine(text, className = '') {
+            const line = document.createElement('div');
+            line.className = 'terminal-line ' + className;
+            line.innerHTML = text;
+            terminalOutput.appendChild(line);
+            document.getElementById('terminalGame').scrollTop = document.getElementById('terminalGame').scrollHeight;
+        }
+        
+        function processCommand(cmd) {
+            const parts = cmd.trim().split(' ');
+            const command = parts[0].toLowerCase();
+            const arg = parts[1];
+            
+            printLine(`<span class="terminal-prompt">${terminalPrompt.textContent}</span><span style="color:#00f0ff">${cmd}</span>`);
+            
+            switch(command) {
+                case 'help':
+                    printLine('AVAILABLE COMMANDS:', 'terminal-success');
+                    printLine('  ls [dir]       - List directory contents');
+                    printLine('  cd [dir]       - Change directory');
+                    printLine('  cat [file]     - Display file contents');
+                    printLine('  decrypt [file] - Decrypt encrypted files');
+                    printLine('  hack [target]  - Attempt to breach security');
+                    printLine('  scan           - Scan for vulnerabilities');
+                    printLine('  clear          - Clear terminal');
+                    printLine('  start          - Start a mission');
+                    printLine('  status         - Check mission status');
+                    break;
+                    
+                case 'ls':
+                    const dir = arg ? `${currentDirectory}/${arg}`.replace(/\/+/g, '/') : currentDirectory;
+                    if (fileSystem[dir]) {
+                        const contents = fileSystem[dir].contents;
+                        if (dir === '~/.secret' && !unlocked.includes('secret_access')) {
+                            printLine('Permission denied. Hidden directory.', 'terminal-error');
+                        } else {
+                            printLine(contents.join('  '));
+                        }
+                    } else {
+                        printLine(`Directory not found: ${dir}`, 'terminal-error');
+                    }
+                    break;
+                    
+                case 'cd':
+                    if (!arg || arg === '~') {
+                        currentDirectory = '~';
+                    } else if (arg === '..') {
+                        currentDirectory = currentDirectory.split('/').slice(0, -1).join('/') || '~';
+                    } else {
+                        const newDir = `${currentDirectory}/${arg}`.replace(/\/+/g, '/');
+                        if (fileSystem[newDir]) {
+                            currentDirectory = newDir;
+                        } else {
+                            printLine(`Directory not found: ${arg}`, 'terminal-error');
+                        }
+                    }
+                    terminalPrompt.textContent = `guest@halocore:${currentDirectory}$ `;
+                    break;
+                    
+                case 'cat':
+                    if (arg && fileContents[arg]) {
+                        printLine(fileContents[arg], 'terminal-hint');
+                        checkMission(cmd);
+                    } else {
+                        printLine(`File not found: ${arg}`, 'terminal-error');
+                    }
+                    break;
+                    
+                case 'decrypt':
+                    if (arg === 'mission_brief.pdf') {
+                        printLine('DECRYPTING...', 'terminal-success');
+                        setTimeout(() => {
+                            printLine('═══════════════════════════════', 'terminal-success');
+                            printLine('MISSION: Infiltrate target system', 'neon-cyan');
+                            printLine('OBJECTIVE: Retrieve classified data', 'neon-cyan');
+                            printLine('DIFFICULTY: MEDIUM', 'neon-pink');
+                            printLine('═══════════════════════════════', 'terminal-success');
+                            checkMission(cmd);
+                        }, 1000);
+                    } else {
+                        printLine('Usage: decrypt [encrypted_file]', 'terminal-error');
+                    }
+                    break;
+                    
+                case 'hack':
+                    if (!arg) {
+                        printLine('Usage: hack [target]', 'terminal-error');
+                    } else {
+                        startHackingGame(arg);
+                    }
+                    break;
+                    
+                case 'scan':
+                    printLine('Scanning network...', 'terminal-hint');
+                    setTimeout(() => {
+                        printLine('VULNERABILITIES FOUND:', 'terminal-success');
+                        printLine('  [1] Open port 8080 - API Gateway');
+                        printLine('  [2] Outdated firmware v2.1.4');
+                        printLine('  [3] Weak encryption on file storage');
+                    }, 1500);
+                    break;
+                    
+                case 'start':
+                    if (!missionActive) {
+                        const available = Object.keys(missions).find(id => !unlocked.includes(`mission_${id}`));
+                        if (available) {
+                            currentMissionId = available;
+                            missionActive = true;
+                            const m = missions[available];
+                            printLine(`MISSION ${available}: ${m.name}`, 'terminal-success');
+                            printLine(m.description, 'terminal-hint');
+                            document.getElementById('currentMission').textContent = m.description;
+                        } else {
+                            printLine('All missions completed! You are a master hacker.', 'terminal-success');
+                        }
+                    } else {
+                        printLine('Mission already in progress. Complete it first!', 'terminal-error');
+                    }
+                    break;
+                    
+                case 'status':
+                    printLine(`Score: ${score} points`);
+                    printLine(`Missions completed: ${unlocked.filter(u => u.startsWith('mission_')).length}/3`);
+                    printLine(`Badges: ${unlocked.filter(u => !u.startsWith('mission_')).join(', ') || 'None'}`);
+                    break;
+                    
+                case 'clear':
+                    terminalOutput.innerHTML = '';
+                    break;
+                    
+                case 'matrix':
+                    document.getElementById('matrixBg').classList.toggle('active');
+                    printLine('Matrix mode toggled.', 'terminal-success');
+                    break;
+                    
+                default:
+                    if (cmd.trim()) {
+                        printLine(`Command not found: ${command}`, 'terminal-error');
+                    }
+            }
+        }
+        
+        function startHackingGame(target) {
+            printLine(`Initiating brute force on ${target}...`, 'terminal-success');
+            printLine('<div class="hack-progress"><div class="hack-progress-bar" id="hackProgress" style="width: 0%"></div></div>');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    const success = Math.random() > 0.3;
+                    if (success) {
+                        printLine(`✓ ACCESS GRANTED to ${target}`, 'terminal-success');
+                        score += 50;
+                        updateScore();
+                    } else {
+                        printLine(`✗ ACCESS DENIED - Firewall blocked attempt`, 'terminal-error');
+                    }
+                }
+                document.getElementById('hackProgress').style.width = progress + '%';
+            }, 200);
+        }
+        
+        function checkMission(cmd) {
+            if (missionActive && currentMissionId) {
+                const m = missions[currentMissionId];
+                if (m.check(cmd, currentDirectory)) {
+                    printLine(`✓ MISSION COMPLETE: ${m.name}`, 'terminal-success');
+                    printLine(`Reward unlocked: ${m.reward}`, 'neon-pink');
+                    score += m.points;
+                    unlocked.push(`mission_${currentMissionId}`);
+                    unlocked.push(m.reward);
+                    missionActive = false;
+                    currentMissionId = null;
+                    updateScore();
+                    document.getElementById('currentMission').textContent = 'Type "start" for next mission';
+                }
+            }
+        }
+        
+        function updateScore() {
+            document.getElementById('hackerScore').textContent = score;
+            const unlocks = unlocked.filter(u => !u.startsWith('mission_'));
+            document.getElementById('unlockedItems').textContent = unlocks.join(', ') || 'None yet';
+        }
+        
+        terminalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                processCommand(terminalInput.value);
+                terminalInput.value = '';
+            }
+        });
+        
+        // Focus terminal on click
+        document.getElementById('terminalGame').addEventListener('click', () => {
+            terminalInput.focus();
+        });
+        
+        // Initial message
+        setTimeout(() => {
+            printLine('Welcome to HALOCORE Terminal v4.2.0', 'terminal-success');
+            printLine('Type "help" for available commands or "start" to begin a mission.', 'terminal-hint');
+        }, 500);
+        
+        // ===== AI CHAT DEMO =====
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+        const chatTyping = document.getElementById('chatTyping');
+        
+        const aiResponses = {
+            'what is halocore': 'HALOCORE is a self-hosted AI orchestration platform. It enables you to run autonomous agents with persistent memory, trading capabilities, and complete data sovereignty. No vendor lock-in, no API fees.',
+            'what is halocore?': 'HALOCORE is a self-hosted AI orchestration platform. It enables you to run autonomous agents with persistent memory, trading capabilities, and complete data sovereignty. No vendor lock-in, no API fees.',
+            'price': 'We offer three tiers: Starter ($49/month) for individuals, Professional ($199/month) for teams, and Enterprise (custom pricing) for large organizations. All include self-hosted infrastructure.',
+            'pricing': 'We offer three tiers: Starter ($49/month) for individuals, Professional ($199/month) for teams, and Enterprise (custom pricing) for large organizations. All include self-hosted infrastructure.',
+            'cost': 'We offer three tiers: Starter ($49/month) for individuals, Professional ($199/month) for teams, and Enterprise (custom pricing) for large organizations. All include self-hosted infrastructure.',
+            'how much': 'We offer three tiers: Starter ($49/month) for individuals, Professional ($199/month) for teams, and Enterprise (custom pricing) for large organizations. All include self-hosted infrastructure.',
+            'android': 'Our Android ecosystem includes 43+ apps spanning productivity (FocusList, HabitPunch), business tools (InvoiceGenerator, ReceiptScanner), utilities (QRCodeSuite, NetTools), security (GhostNet, SignalHunter), and AI tools (CryptoIntel).',
+            'apps': 'Our Android ecosystem includes 43+ apps spanning productivity (FocusList, HabitPunch), business tools (InvoiceGenerator, ReceiptScanner), utilities (QRCodeSuite, NetTools), security (GhostNet, SignalHunter), and AI tools (CryptoIntel).',
+            'difference': 'Unlike cloud AI services, HALOCORE runs entirely on your infrastructure. Your data never leaves your servers. No per-token pricing. No rate limits. Full control over models and memory.',
+            'why halocore': 'Unlike cloud AI services, HALOCORE runs entirely on your infrastructure. Your data never leaves your servers. No per-token pricing. No rate limits. Full control over models and memory.',
+            'memory': 'HALOCORE features a sophisticated memory architecture with 32GB+ semantic storage using sqlite-vec. Agents remember context indefinitely, enabling truly personalized interactions.',
+            'trading': 'Our trading infrastructure includes the CryptoIntel Android app for mobile signals, plus backend systems for automated trading strategies, risk management, and portfolio optimization.',
+            'security': 'Security is paramount. All data stays local. Encrypted storage. No third-party dependencies. Optional air-gapped deployment for maximum security.',
+            'contact': 'You can reach us at contact@halocore.ai for general inquiries, support@halocore.ai for technical issues, or enterprise@halocore.ai for business partnerships.',
+            'help': 'I can tell you about HALOCORE\'s features, pricing, Android apps, technical architecture, or how we compare to other AI platforms. What would you like to know?',
+            'hello': 'Greetings. I am COORDINATOR-7B, your guide to HALOCORE. How may I assist you today?',
+            'hi': 'Greetings. I am COORDINATOR-7B, your guide to HALOCORE. How may I assist you today?',
+            'default': 'That\'s an interesting question. While I\'m a demo AI with limited responses, our actual COORDINATOR-7B model can handle complex queries. Would you like to know about our features, pricing, or Android apps instead?'
+        };
+        
+        function addMessage(text, isUser = false) {
+            const msg = document.createElement('div');
+            msg.className = `chat-message ${isUser ? 'user' : 'ai'}`;
+            msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function getAIResponse(input) {
+            const lower = input.toLowerCase();
+            for (const [key, value] of Object.entries(aiResponses)) {
+                if (lower.includes(key)) return value;
+            }
+            return aiResponses.default;
+        }
+        
+        function askQuestion(question) {
+            chatInput.value = question;
+            sendMessage();
+        }
+        
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            
+            addMessage(text, true);
+            chatInput.value = '';
+            
+            // Show typing
+            chatTyping.classList.add('active');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Simulate AI thinking
+            setTimeout(() => {
+                chatTyping.classList.remove('active');
+                const response = getAIResponse(text);
+                typeWriter(response, 0);
+            }, 1000 + Math.random() * 1000);
+        }
+        
+        function typeWriter(text, i) {
+            if (i === 0) {
+                const msg = document.createElement('div');
+                msg.className = 'chat-message ai';
+                msg.id = 'typingMessage';
+                chatMessages.appendChild(msg);
+            }
+            
+            const msg = document.getElementById('typingMessage');
+            if (i < text.length) {
+                msg.textContent += text.charAt(i);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                setTimeout(() => typeWriter(text, i + 1), 20);
+            } else {
+                msg.removeAttribute('id');
+            }
+        }
+        
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        
+        // ===== ANDROID APP SWITCHER =====
+        function switchApp(app) {
+            // Update buttons
+            document.querySelectorAll('.app-select-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.app-select-btn').classList.add('active');
+            
+            // Hide all apps
+            document.querySelectorAll('[id^="app-"]').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('[id^="appinfo-"]').forEach(el => el.style.display = 'none');
+            
+            // Show selected
+            document.getElementById('app-' + app).style.display = 'block';
+            document.getElementById('appinfo-' + app).style.display = 'block';
+        }
+        
+        // ===== SCROLL REVEAL =====
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+        // ===== SCROLL PROGRESS =====
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+        
+        // ===== CONSOLE EASTER EGG =====
+        console.log('%c⚠️ HALOCORE INTERACTIVE DEMOS ⚠️', 'color: #00f0ff; font-size: 20px; font-weight: bold;');
+        console.log('%c> Terminal Hacker: Try "start" to begin', 'color: #00f0ff;');
+        console.log('%c> AI Chat: Ask about HALOCORE', 'color: #ff00ff;');
+        console.log('%c> App Previews: 4 interactive mockups', 'color: #00ff88;');
+    </script>
+</body>
+</html>

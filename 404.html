@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | SYSTEM NOT FOUND - HALOCORE</title>
+    <meta name="description" content="System segment not found. The requested neural pathway does not exist in the HALOCORE infrastructure.">
+    <meta name="theme-color" content="#ff00ff">
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #050505;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .font-orbitron { font-family: 'Orbitron', monospace; }
+        
+        /* Animated glitch effect */
+        @keyframes glitch {
+            0% { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 2px); }
+            20% { clip-path: inset(92% 0 1% 0); transform: translate(2px, -2px); }
+            40% { clip-path: inset(43% 0 1% 0); transform: translate(-2px, 2px); }
+            60% { clip-path: inset(25% 0 58% 0); transform: translate(2px, -2px); }
+            80% { clip-path: inset(54% 0 7% 0); transform: translate(-2px, 2px); }
+            100% { clip-path: inset(58% 0 43% 0); transform: translate(2px, -2px); }
+        }
+        
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite linear alternate-reverse;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            color: #00f0ff;
+            animation: glitch 2s infinite linear alternate-reverse;
+            clip-path: inset(0 0 0 0);
+        }
+        
+        .glitch::after {
+            color: #ff00ff;
+            animation: glitch 2.5s infinite linear alternate-reverse;
+            clip-path: inset(0 0 0 0);
+        }
+        
+        /* Scanlines */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1) 0px,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+        }
+        
+        /* Neon glow */
+        .neon-cyan {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+        }
+        
+        .neon-magenta {
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+        }
+        
+        /* Error code styling */
+        .error-code {
+            font-size: 12rem;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+        }
+        
+        /* Animated grid background */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+        
+        /* CRT flicker */
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            5% { opacity: 0.95; }
+            10% { opacity: 0.9; }
+            15% { opacity: 0.95; }
+            20% { opacity: 0.99; }
+            50% { opacity: 0.95; }
+            80% { opacity: 0.9; }
+            100% { opacity: 0.97; }
+        }
+        
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+        
+        /* Button styles */
+        .cyber-btn {
+            position: relative;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid #00f0ff;
+            color: #00f0ff;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            overflow: hidden;
+        }
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cyber-btn:hover {
+            background: #00f0ff;
+            color: #000;
+            box-shadow: 0 0 30px #00f0ff;
+        }
+        
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Terminal text effect */
+        .terminal-text {
+            font-family: 'Courier New', monospace;
+            color: #00f0ff;
+        }
+        
+        /* Blinking cursor */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #00f0ff;
+            animation: blink 1s infinite;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body class="crt-flicker">
+    <div class="scanlines"></div>
+    <div class="cyber-grid"></div>
+    
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <!-- Error Code -->
+        <div class="glitch error-code font-orbitron neon-cyan mb-4" data-text="404">
+            404
+        </div>
+        
+        <!-- Error Title -->
+        <h1 class="font-orbitron text-3xl md:text-4xl font-bold mb-4 neon-magenta tracking-widest">
+            SYSTEM NOT FOUND
+        </h1>
+        
+        <!-- Terminal output -->
+        <div class="terminal-text text-left max-w-2xl mx-auto mb-8 p-6 border border-cyan-900/50 bg-black/50">
+            <div class="mb-2"><span class="text-purple-400">root@halocore:~$</span> locate neural_pathway</div>
+            <div class="mb-2 text-red-400">ERROR: Segment not found in memory banks</div>
+            <div class="mb-2"><span class="text-purple-400">root@halocore:~$</span> trace_route --target=<span id="path"></span></div>
+            <div class="mb-2 text-yellow-400">WARNING: Connection terminated unexpectedly</div>
+            <div class="mb-2"><span class="text-purple-400">root@halocore:~$</span> <span class="cursor"></span></div>
+        </div>
+        
+        <!-- Description -->
+        <p class="text-gray-400 mb-10 text-lg max-w-xl mx-auto leading-relaxed">
+            The requested neural pathway does not exist in the HALOCORE infrastructure. 
+            The segment may have been moved, deleted, or never existed in this timeline.
+        </p>
+        
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="index.html" class="cyber-btn">
+                <i class="fas fa-home mr-2"></i> Return to Core
+            </a>
+            <a href="contact.html" class="cyber-btn" style="border-color: #ff00ff; color: #ff00ff;">
+                <i class="fas fa-broadcast-tower mr-2"></i> Contact Support
+            </a>
+        </div>
+        
+        <!-- Status indicators -->
+        <div class="mt-12 flex justify-center gap-8 text-xs text-gray-600 font-orbitron">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                <span>SECTOR LOST</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                <span>BACKUP ONLINE</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-cyan-500"></div>
+                <span>SYSTEM STABLE</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Type the current path
+        const currentPath = window.location.pathname;
+        const pathElement = document.getElementById('path');
+        let i = 0;
+        
+        function typePath() {
+            if (i < currentPath.length) {
+                pathElement.textContent += currentPath.charAt(i);
+                i++;
+                setTimeout(typePath, 50);
+            }
+        }
+        
+        setTimeout(typePath, 500);
+        
+        // Console Easter Egg
+        console.log('%c⚠️ 404 ERROR ⚠️', 'color: #ff00ff; font-size: 20px; font-weight: bold;');
+        console.log('%c> Neural pathway not found', 'color: #00f0ff;');
+        console.log('%c> Attempting recovery protocols...', 'color: #888;');
+    </script>
+</body>
+</html>

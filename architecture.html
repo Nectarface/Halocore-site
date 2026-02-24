@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Architecture | HALOCORE</title>
+    <meta name="description" content="Technical architecture of HALOCORE neural infrastructure. AI models, services inventory, and performance metrics.">
+    <meta name="theme-color" content="#00f0ff">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://halocore.example.com/architecture.html">
+    <meta property="og:title" content="Architecture | HALOCORE">
+    <meta property="og:description" content="Technical architecture of HALOCORE neural infrastructure. AI models, services inventory, and performance metrics.">
+    <meta property="og:image" content="https://halocore.example.com/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -35,13 +44,15 @@
     </style>
 </head>
 <body class="scanlines">
+    <!-- Scroll Progress Bar -->
+    <div class="progress-bar" id="scrollProgress" style="position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #00f0ff, #ff00ff); box-shadow: 0 0 10px #00f0ff; z-index: 9999; width: 0%; transition: width 0.1s;"></div>
     <div class="cyber-grid"></div>
     
     <nav class="nav-cyber fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="index.html" class="flex items-center gap-3">
-                    <img src="logo.png" alt="HALOCORE" class="w-12 h-12" style="filter: drop-shadow(0 0 10px #00f0ff);">
+                    <img src="logo.png" alt="HALOCORE" class="w-12 h-12" style="filter: drop-shadow(0 0 10px #00f0ff);" loading="lazy">
                     <span class="font-orbitron text-2xl font-bold text-white tracking-widest">HALO<span class="neon-cyan">CORE</span></span>
                 </a>
                 <div class="hidden md:flex items-center gap-8">
@@ -50,6 +61,7 @@
                     <a href="agents.html" class="nav-link-cyber font-orbitron">AGENTS</a>
                     <a href="pricing.html" class="nav-link-cyber font-orbitron">PRICING</a>
                     <a href="contact.html" class="cyber-btn font-orbitron text-sm px-6 py-3">CONTACT</a>
+                    <a href="demo.html" class="nav-link-cyber font-orbitron">DEMO</a>
                 </div>
             </div>
         </div>
@@ -203,6 +215,18 @@
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         revealElements.forEach(el => revealObserver.observe(el));
+        
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+        
+        // Console Easter Egg
+        console.log('%c⚠️ HALOCORE ARCHITECTURE ⚠️', 'color: #00f0ff; font-size: 20px; font-weight: bold;');
+        console.log('%c> Neural infrastructure specifications loaded', 'color: #ff00ff;');
     </script>
 </body>
 </html>

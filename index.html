@@ -4,7 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HALOCORE | Neural Infrastructure</title>
-    <meta name="description" content="Self-hosted AI orchestration with autonomous agents, persistent memory, and cyberpunk aesthetics.">
+    <meta name="description" content="Self-hosted AI orchestration with autonomous agents, persistent memory, and 30GB+ semantic databases. No vendor lock-in. Production-ready.">
+    <meta name="keywords" content="AI orchestration, autonomous agents, machine learning, self-hosted AI, trading bots, security tools, Android apps">
+    <meta name="author" content="HALOCORE">
+    <meta name="theme-color" content="#00f0ff">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://halocore.ai/">
+    <meta property="og:title" content="HALOCORE | Neural Infrastructure">
+    <meta property="og:description" content="Self-hosted AI orchestration with autonomous agents and persistent memory.">
+    <meta property="og:image" content="https://halocore.ai/logo.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://halocore.ai/">
+    <meta name="twitter:title" content="HALOCORE | Neural Infrastructure">
+    <meta name="twitter:description" content="Self-hosted AI orchestration with autonomous agents and persistent memory.">
+    <meta name="twitter:image" content="https://halocore.ai/logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,6 +219,129 @@
             50% { opacity: 0.3; }
         }
         
+        /* Custom Cursor */
+        body {
+            cursor: crosshair;
+        }
+        
+        a, button, .app-card, .category-btn {
+            cursor: pointer;
+        }
+        
+        /* Typewriter Effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #00f0ff;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00f0ff }
+        }
+        
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00f0ff, #ff00ff);
+            box-shadow: 0 0 10px #00f0ff;
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        /* Terminal Easter Egg */
+        .terminal-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid #00f0ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .terminal-trigger:hover {
+            background: #00f0ff;
+            box-shadow: 0 0 20px #00f0ff;
+        }
+        
+        .terminal-trigger:hover i {
+            color: #000;
+        }
+        
+        .terminal-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 700px;
+            background: #0a0a0f;
+            border: 1px solid #00f0ff;
+            z-index: 2000;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .terminal-modal.active {
+            display: block;
+        }
+        
+        .terminal-header {
+            background: #00f0ff;
+            color: #000;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .terminal-body {
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            color: #00f0ff;
+        }
+        
+        .terminal-line {
+            margin-bottom: 5px;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #00f0ff;
+            font-family: 'Courier New', monospace;
+            width: 100%;
+            outline: none;
+        }
+        
+        /* Lazy loading */
+        img[loading="lazy"] {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        img[loading="lazy"].loaded {
+            opacity: 1;
+        }
+        
         /* Logo container - fixed to show properly */
         .logo-container {
             position: relative;
@@ -212,6 +358,9 @@
     </style>
 </head>
 <body class="scanlines">
+    <!-- Scroll Progress Bar -->
+    <div class="progress-bar" id="scrollProgress"></div>
+    
     <!-- Background grid -->
     <div class="cyber-grid"></div>
 
@@ -220,7 +369,7 @@
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="index.html" class="flex items-center gap-3">
-                    <img src="logo.png" alt="HALOCORE" class="w-12 h-12" style="filter: drop-shadow(0 0 10px #00f0ff);">
+                    <img src="logo.png" alt="HALOCORE" class="w-12 h-12" loading="lazy" style="filter: drop-shadow(0 0 10px #00f0ff);">
                     <span class="font-orbitron text-2xl font-bold text-white tracking-widest">
                         HALO<span class="neon-cyan">CORE</span>
                     </span>
@@ -234,6 +383,7 @@
                     <a href="pricing.html" class="nav-link-cyber font-orbitron">PRICING</a>
                     <a href="about.html" class="nav-link-cyber font-orbitron">ABOUT</a>
                     <a href="contact.html" class="cyber-btn font-orbitron text-sm px-6 py-3">CONTACT</a>
+                    <a href="demo.html" class="nav-link-cyber font-orbitron">DEMO</a>
                 </div>
                 
                 <button id="mobile-menu-btn" class="md:hidden text-cyber-cyan text-2xl">
@@ -251,6 +401,7 @@
                 <a href="pricing.html" class="block text-gray-400 hover:text-cyber-cyan font-orbitron py-2">PRICING</a>
                 <a href="about.html" class="block text-gray-400 hover:text-cyber-cyan font-orbitron py-2">ABOUT</a>
                 <a href="contact.html" class="block text-cyber-cyan font-orbitron py-2">CONTACT</a>
+                <a href="demo.html" class="block text-gray-400 hover:text-cyber-cyan font-orbitron py-2">DEMO</a>
             </div>
         </div>
     </nav>
@@ -450,6 +601,62 @@
         </div>
     </section>
 
+    <!-- Interactive Demos CTA -->
+    <section class="py-24 px-6 relative z-10 border-t border-cyber-cyan/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 cyber-panel mb-6">
+                    <i class="fas fa-gamepad neon-cyan"></i>
+                    <span class="font-orbitron text-xs neon-cyan tracking-widest">INTERACTIVE</span>
+                </div>
+                <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-white mb-4">
+                    THE <span class="neon-pink">PLAYGROUND</span>
+                </h2>
+                <p class="font-rajdhani text-gray-400 max-w-2xl mx-auto">
+                    Hack the terminal. Chat with our AI. Preview Android apps. Test HALOCORE before you deploy.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Terminal Demo Card -->
+                <div class="cyber-panel p-6 reveal hover:border-cyber-cyan transition-all hover:transform hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4">
+                        <i class="fas fa-terminal text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl text-white mb-2">Terminal Hacker</h3>
+                    <p class="text-gray-400 text-sm mb-4">Navigate file systems, decrypt files, and complete hacking missions. Test your skills in our cyberpunk terminal.</p>
+                    <a href="demo.html" class="inline-flex items-center gap-2 text-cyber-cyan hover:text-white transition-colors font-orbitron text-sm">
+                        PLAY NOW <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- AI Chat Card -->
+                <div class="cyber-panel cyber-panel-pink p-6 reveal hover:border-cyber-pink transition-all hover:transform hover:-translate-y-2" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 rounded-lg bg-pink-500/10 border border-pink-500/30 flex items-center justify-center mb-4">
+                        <i class="fas fa-robot text-cyber-pink text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl text-white mb-2">AI Chat Demo</h3>
+                    <p class="text-gray-400 text-sm mb-4">Chat with COORDINATOR-7B. Ask about features, pricing, or our Android ecosystem. Experience our AI personality.</p>
+                    <a href="demo.html" class="inline-flex items-center gap-2 text-cyber-pink hover:text-white transition-colors font-orbitron text-sm">
+                        CHAT NOW <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- App Preview Card -->
+                <div class="cyber-panel p-6 reveal hover:border-cyber-cyan transition-all hover:transform hover:-translate-y-2" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4">
+                        <i class="fab fa-android text-cyber-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl text-white mb-2">App Previews</h3>
+                    <p class="text-gray-400 text-sm mb-4">Interactive mockups of FocusList, SleepSounds Pro, HabitPunch, and CryptoIntel. See the UI before you download.</p>
+                    <a href="demo.html" class="inline-flex items-center gap-2 text-cyber-cyan hover:text-white transition-colors font-orbitron text-sm">
+                        PREVIEW <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section class="py-24 px-6 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
@@ -553,6 +760,87 @@
         }, { threshold: 0.1 });
         
         revealElements.forEach(el => revealObserver.observe(el));
+        
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+        
+        // Lazy loading images
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            img.addEventListener('load', () => img.classList.add('loaded'));
+            if (img.complete) img.classList.add('loaded');
+        });
+        
+        // Console Easter Egg
+        console.log('%c⚠️ SYSTEM BREACH DETECTED ⚠️', 'color: #ff00ff; font-size: 24px; font-weight: bold;');
+        console.log('%c> HALOCORE Neural Infrastructure v4.2.0', 'color: #00f0ff; font-size: 14px;');
+        console.log('%c> Initializing autonomous agent protocols...', 'color: #00f0ff; font-size: 12px;');
+        console.log('%c> Type "help" for available commands', 'color: #888; font-size: 12px; font-style: italic;');
+        
+        // Terminal Easter Egg
+        const terminalTrigger = document.createElement('div');
+        terminalTrigger.className = 'terminal-trigger';
+        terminalTrigger.innerHTML = '<i class="fas fa-terminal text-cyan-400"></i>';
+        document.body.appendChild(terminalTrigger);
+        
+        const terminalModal = document.createElement('div');
+        terminalModal.className = 'terminal-modal';
+        terminalModal.id = 'terminalModal';
+        terminalModal.innerHTML = `
+            <div class="terminal-header">
+                <span class="font-bold">HALOCORE TERMINAL v4.2.0</span>
+                <button id="closeTerminal" style="background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-line" style="color: #ff00ff;">Welcome to HALOCORE Neural Infrastructure</div>
+                <div class="terminal-line">Type 'help' for available commands</div>
+                <div class="terminal-line" id="terminalOutput"></div>
+                <div class="terminal-line" style="display: flex;">
+                    <span style="color: #ff00ff; margin-right: 10px;">></span>
+                    <input type="text" class="terminal-input" id="terminalInput" autocomplete="off">
+                </div>
+            </div>
+        `;
+        document.body.appendChild(terminalModal);
+        
+        terminalTrigger.addEventListener('click', () => {
+            terminalModal.classList.add('active');
+            document.getElementById('terminalInput').focus();
+        });
+        
+        document.getElementById('closeTerminal').addEventListener('click', () => {
+            terminalModal.classList.remove('active');
+        });
+        
+        const commands = {
+            help: () => `Available commands:\n  help       - Show this help message\n  status     - System status\n  version    - Show version info\n  uptime     - System uptime\n  agents     - List active agents\n  matrix     - Enter the matrix\n  clear      - Clear terminal`,
+            status: () => `SYSTEM STATUS: OPERATIONAL\nNeural Network: ONLINE\nMemory Systems: ACTIVE (32GB)\nTrading Engine: RUNNING\nSecurity Protocols: ARMED`,
+            version: () => `HALOCORE v4.2.0-stable\nKernel: 6.1.0-neural\nArchitecture: x86_64\nBuild Date: 2026-02-23`,
+            uptime: () => `System uptime: 42 days, 16 hours, 23 minutes`,
+            agents: () => `ACTIVE AGENTS:\n  [ORCHESTRATOR-32B]  Status: RUNNING  Tasks: 847\n  [CODER-32B]         Status: RUNNING  Tasks: 1,234\n  [COORDINATOR-7B]    Status: RUNNING  Tasks: 5,672`,
+            matrix: () => { window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'; return 'Initiating matrix sequence...'; },
+            clear: () => { document.getElementById('terminalOutput').innerHTML = ''; return ''; }
+        };
+        
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalOutput = document.getElementById('terminalOutput');
+        
+        terminalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = terminalInput.value.trim().toLowerCase();
+                if (cmd) {
+                    terminalOutput.innerHTML += `<div style="color: #666;">> ${cmd}</div>`;
+                    const response = commands[cmd] ? commands[cmd]() : `Command not found: ${cmd}\nType 'help' for available commands`;
+                    if (response) terminalOutput.innerHTML += `<div style="margin-bottom: 10px;">${response.replace(/\n/g, '<br>')}</div>`;
+                    terminalInput.value = '';
+                    document.getElementById('terminalBody').scrollTop = document.getElementById('terminalBody').scrollHeight;
+                }
+            }
+        });
     </script>
 </body>
 </html>
