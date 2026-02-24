@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | HALOCORE</title>
+    <meta name="description" content="HALO Core pricing - Starter ($49/mo), Professional ($199/mo), and Enterprise (custom) tiers for AI orchestration.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #020617;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #020617);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .pricing-card {
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.featured {
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+        }
+        
+        .check-icon {
+            color: #10b981;
+        }
+        
+        .x-icon {
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">H</span>
+                    </div>
+                    <span class="text-xl font-bold text-white tracking-tight">HALOCORE</span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="architecture.html" class="nav-link text-sm text-slate-300 hover:text-white">Architecture</a>
+                    <a href="services.html" class="nav-link text-sm text-slate-300 hover:text-white">Services</a>
+                    <a href="agents.html" class="nav-link text-sm text-slate-300 hover:text-white">Agents</a>
+                    <a href="apps.html" class="nav-link text-sm text-slate-300 hover:text-white">Apps</a>
+                    <a href="pricing.html" class="nav-link text-sm text-white">Pricing</a>
+                    <a href="about.html" class="nav-link text-sm text-slate-300 hover:text-white">About</a>
+                    <a href="contact.html" class="btn-primary px-5 py-2 rounded-lg text-sm font-medium text-white">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-white text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-slate-700">
+            <div class="px-6 py-4 space-y-3">
+                <a href="architecture.html" class="block text-slate-300 hover:text-white py-2">Architecture</a>
+                <a href="services.html" class="block text-slate-300 hover:text-white py-2">Services</a>
+                <a href="agents.html" class="block text-slate-300 hover:text-white py-2">Agents</a>
+                <a href="apps.html" class="block text-slate-300 hover:text-white py-2">Apps</a>
+                <a href="pricing.html" class="block text-white py-2">Pricing</a>
+                <a href="about.html" class="block text-slate-300 hover:text-white py-2">About</a>
+                <a href="contact.html" class="block text-blue-400 hover:text-blue-300 py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-16 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
+                <i class="fas fa-tag text-blue-400"></i>
+                <span class="text-xs font-medium text-slate-300">PRICING TIERS</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
+                Simple, <span class="gradient-text">Predictable</span> Pricing
+            </h1>
+            <p class="text-lg text-slate-400 max-w-3xl mx-auto">
+                No per-token costs. No vendor lock-in. Just fixed pricing for your AI infrastructure.
+            </p>
+        </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Starter -->
+                <div class="glass-panel pricing-card rounded-2xl p-8 reveal">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Starter</h3>
+                        <p class="text-slate-400 text-sm">For individuals and small teams</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-white">$49</span>
+                        <span class="text-slate-500">/mo</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            5 concurrent agents
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            1,000 tasks/month
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            Basic analytics
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            Email support
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-500">
+                            <i class="fas fa-times x-icon"></i>
+                            Custom integrations
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-500">
+                            <i class="fas fa-times x-icon"></i>
+                            Priority support
+                        </li>
+                    </ul>
+                    <a href="contact.html" class="btn-secondary block text-center py-3 rounded-lg text-slate-300 font-medium">
+                        Get Started
+                    </a>
+                </div>
+                
+                <!-- Professional -->
+                <div class="glass-panel pricing-card featured rounded-2xl p-8 relative reveal" style="transition-delay: 100ms;">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                        <span class="px-4 py-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold">
+                            RECOMMENDED
+                        </span>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Professional</h3>
+                        <p class="text-slate-400 text-sm">For growing teams</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black gradient-text">$199</span>
+                        <span class="text-slate-500">/mo</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            25 concurrent agents
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            10,000 tasks/month
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            Advanced analytics
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            Priority support
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            Custom integrations
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-500">
+                            <i class="fas fa-times x-icon"></i>
+                            SLA guarantees
+                        </li>
+                    </ul>
+                    <a href="contact.html" class="btn-primary block text-center py-3 rounded-lg text-white font-medium">
+                        Get Started
+                    </a>
+                </div>
+                
+                <!-- Enterprise -->
+                <div class="glass-panel pricing-card rounded-2xl p-8 reveal" style="transition-delay: 200ms;">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Enterprise</h3>
+                        <p class="text-slate-400 text-sm">For large organizations</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-white">Custom</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            Unlimited agents
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            Unlimited tasks
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            Custom analytics
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            24/7 dedicated support
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            Custom agent training
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check check-icon"></i>
+                            SLA guarantees
+                        </li>
+                    </ul>
+                    <a href="contact.html" class="btn-secondary block text-center py-3 rounded-lg text-slate-300 font-medium">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deployment Options -->
+    <section class="py-16 px-6 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">Deployment Options</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-panel rounded-xl p-6 reveal">
+                    <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-cloud-download-alt text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Open Source</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        Self-hosted deployment with community support. Full access to all 36 services.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i>Self-hosted</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i>Community support</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i>Full control</li>
+                    </ul>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-building text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Enterprise License</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        On-premise deployment with professional support. Ideal for compliance requirements.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i>On-premise</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i>Professional support</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i>Compliance ready</li>
+                    </ul>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-server text-cyan-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Managed Hosting</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        We run HALO Core for you. Fully managed infrastructure with guaranteed uptime.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i>Fully managed</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i>SLA guarantees</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i>Auto-scaling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">Feature Comparison</h2>
+            
+            <div class="overflow-x-auto reveal">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b border-slate-700">
+                            <th class="pb-4 text-slate-400 font-medium">Feature</th>
+                            <th class="pb-4 text-center text-slate-300 font-medium">Starter</th>
+                            <th class="pb-4 text-center text-blue-400 font-medium">Professional</th>
+                            <th class="pb-4 text-center text-purple-400 font-medium">Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-slate-800">
+                            <td class="py-4 text-slate-300">Concurrent Agents</td>
+                            <td class="py-4 text-center text-slate-400">5</td>
+                            <td class="py-4 text-center text-white">25</td>
+                            <td class="py-4 text-center text-white">Unlimited</td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-4 text-slate-300">Monthly Tasks</td>
+                            <td class="py-4 text-center text-slate-400">1,000</td>
+                            <td class="py-4 text-center text-white">10,000</td>
+                            <td class="py-4 text-center text-white">Unlimited</td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-4 text-slate-300">API Access</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-4 text-slate-300">Memory System</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-4 text-slate-300">Trading Module</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-4 text-slate-300">Security Platform</td>
+                            <td class="py-4 text-center text-slate-600">-</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-4 text-slate-300">OSINT Tools</td>
+                            <td class="py-4 text-center text-slate-600">-</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-4 text-slate-300">Custom Integrations</td>
+                            <td class="py-4 text-center text-slate-600">-</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-4 text-slate-300">Priority Support</td>
+                            <td class="py-4 text-center text-slate-600">-</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 text-slate-300">SLA Guarantee</td>
+                            <td class="py-4 text-center text-slate-600">-</td>
+                            <td class="py-4 text-center text-slate-600">-</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 px-6 bg-slate-900/30">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="glass-panel rounded-xl p-6 reveal">
+                    <h3 class="text-white font-semibold mb-2">What's included in the agent count?</h3>
+                    <p class="text-slate-400 text-sm">
+                        The agent count refers to concurrently running autonomous agents. Each agent can execute tasks, use tools, and access memory. You can have more agents configured, but only the specified number will run simultaneously.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 100ms;">
+                    <h3 class="text-white font-semibold mb-2">Can I upgrade or downgrade my plan?</h3>
+                    <p class="text-slate-400 text-sm">
+                        Yes, you can change your plan at any time. Upgrades take effect immediately, while downgrades apply at the start of your next billing cycle.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-white font-semibold mb-2">Do you offer a free trial?</h3>
+                    <p class="text-slate-400 text-sm">
+                        We offer a 14-day free trial of the Professional tier. No credit card required. You can also deploy the open-source version for unlimited testing.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 300ms;">
+                    <h3 class="text-white font-semibold mb-2">What kind of support do you offer?</h3>
+                    <p class="text-slate-400 text-sm">
+                        Starter includes email support with 24-hour response time. Professional includes priority support with 4-hour response. Enterprise includes 24/7 dedicated support with a dedicated account manager.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <div class="glass-panel rounded-2xl p-8">
+                <h2 class="text-2xl font-bold text-white mb-4">Ready to Get Started?</h2>
+                <p class="text-slate-400 mb-6">
+                    Deploy your AI infrastructure today. Questions? We're here to help.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="btn-primary px-8 py-3 rounded-lg text-white font-medium">
+                        Contact Sales
+                    </a>
+                    <a href="architecture.html" class="btn-secondary px-8 py-3 rounded-lg text-slate-300 font-medium">
+                        View Architecture
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">H</span>
+                        </div>
+                        <span class="text-lg font-bold text-white">HALOCORE</span>
+                    </div>
+                    <p class="text-sm text-slate-500">Self-hosted AI orchestration platform.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Platform</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="architecture.html" class="hover:text-white">Architecture</a></li>
+                        <li><a href="services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="agents.html" class="hover:text-white">Agents</a></li>
+                        <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="apps.html" class="hover:text-white">Apps</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="privacy.html" class="hover:text-white">Privacy</a></li>
+                        <li><a href="terms.html" class="hover:text-white">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+                © 2026 HALOCORE. All systems operational.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | HALOCORE</title>
+    <meta name="description" content="Contact HALO Core - Get in touch for demos, enterprise licensing, and custom integrations.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #020617;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #020617);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .form-input {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #64748b;
+        }
+        
+        .form-label {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .contact-card {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">H</span>
+                    </div>
+                    <span class="text-xl font-bold text-white tracking-tight">HALOCORE</span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="architecture.html" class="nav-link text-sm text-slate-300 hover:text-white">Architecture</a>
+                    <a href="services.html" class="nav-link text-sm text-slate-300 hover:text-white">Services</a>
+                    <a href="agents.html" class="nav-link text-sm text-slate-300 hover:text-white">Agents</a>
+                    <a href="apps.html" class="nav-link text-sm text-slate-300 hover:text-white">Apps</a>
+                    <a href="pricing.html" class="nav-link text-sm text-slate-300 hover:text-white">Pricing</a>
+                    <a href="about.html" class="nav-link text-sm text-slate-300 hover:text-white">About</a>
+                    <a href="contact.html" class="btn-primary px-5 py-2 rounded-lg text-sm font-medium text-white">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-white text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-slate-700">
+            <div class="px-6 py-4 space-y-3">
+                <a href="architecture.html" class="block text-slate-300 hover:text-white py-2">Architecture</a>
+                <a href="services.html" class="block text-slate-300 hover:text-white py-2">Services</a>
+                <a href="agents.html" class="block text-slate-300 hover:text-white py-2">Agents</a>
+                <a href="apps.html" class="block text-slate-300 hover:text-white py-2">Apps</a>
+                <a href="pricing.html" class="block text-slate-300 hover:text-white py-2">Pricing</a>
+                <a href="about.html" class="block text-slate-300 hover:text-white py-2">About</a>
+                <a href="contact.html" class="block text-white py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-16 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
+                <i class="fas fa-envelope text-blue-400"></i>
+                <span class="text-xs font-medium text-slate-300">CONTACT</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
+                Get in <span class="gradient-text">Touch</span>
+            </h1>
+            <p class="text-lg text-slate-400 max-w-3xl mx-auto">
+                Ready to deploy your AI workforce? Have questions about enterprise licensing? We're here to help.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Options -->
+    <section class="py-8 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="glass-panel contact-card rounded-xl p-6 text-center reveal">
+                    <div class="w-14 h-14 mx-auto rounded-xl bg-blue-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-envelope text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Email</h3>
+                    <a href="mailto:contact@halocore.ai" class="text-slate-400 hover:text-white transition-colors">
+                        contact@halocore.ai
+                    </a>
+                </div>
+                
+                <div class="glass-panel contact-card rounded-xl p-6 text-center reveal" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 mx-auto rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+                        <i class="fab fa-github text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">GitHub</h3>
+                    <a href="https://github.com/halocore" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+                        @halocore
+                    </a>
+                </div>
+                
+                <div class="glass-panel contact-card rounded-xl p-6 text-center reveal" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 mx-auto rounded-xl bg-cyan-500/20 flex items-center justify-center mb-4">
+                        <i class="fab fa-discord text-cyan-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Community</h3>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                        Join Discord
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-16 px-6 bg-slate-900/30">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-panel rounded-2xl p-8 md:p-12 reveal">
+                <h2 class="text-2xl font-bold text-white mb-2 text-center">Send us a Message</h2>
+                <p class="text-slate-400 text-center mb-8">Fill out the form below and we'll get back to you within 24 hours.</p>
+                
+                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success.html">
+                    <input type="hidden" name="form-name" value="contact" />
+                    <p class="hidden">
+                        <label>Don't fill this out: <input name="bot-field" /></label>
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="form-label" for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required class="form-input w-full px-4 py-3 rounded-lg" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="form-label" for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 rounded-lg" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="form-label" for="organization">Organization</label>
+                            <input type="text" id="organization" name="organization" class="form-input w-full px-4 py-3 rounded-lg" placeholder="Company Name">
+                        </div>
+                        <div>
+                            <label class="form-label" for="profile">Customer Profile *</label>
+                            <select id="profile" name="profile" required class="form-input w-full px-4 py-3 rounded-lg">
+                                <option value="">Select your profile...</option>
+                                <option value="tech">Mid-size Tech Company</option>
+                                <option value="trading">Trading Firm</option>
+                                <option value="security">Security Organization</option>
+                                <option value="intelligence">Intelligence Agency/OSINT</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="form-label" for="interest">Service Interest *</label>
+                        <select id="interest" name="interest" required class="form-input w-full px-4 py-3 rounded-lg">
+                            <option value="">Select a service...</option>
+                            <option value="platform">AI Orchestration Platform</option>
+                            <option value="trading">Trading Automation</option>
+                            <option value="security">Security Platform</option>
+                            <option value="osint">OSINT Tools</option>
+                            <option value="android">Android Apps</option>
+                            <option value="integration">Custom Integration</option>
+                            <option value="enterprise">Enterprise License</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="form-label" for="message">Project Details *</label>
+                        <textarea id="message" name="message" rows="5" required class="form-input w-full px-4 py-3 rounded-lg resize-none" placeholder="Tell us about your project and requirements..."></textarea>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="form-label" for="budget">Budget Range</label>
+                        <select id="budget" name="budget" class="form-input w-full px-4 py-3 rounded-lg">
+                            <option value="">Select budget range...</option>
+                            <option value="under-5k">Under $5,000</option>
+                            <option value="5k-25k">$5,000 - $25,000</option>
+                            <option value="25k-100k">$25,000 - $100,000</option>
+                            <option value="over-100k">Over $100,000</option>
+                            <option value="undisclosed">Prefer not to say</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 mb-8">
+                        <input type="checkbox" id="newsletter" name="newsletter" class="w-4 h-4 rounded border-slate-600 bg-slate-800 text-blue-500 focus:ring-blue-500">
+                        <label for="newsletter" class="text-slate-400 text-sm">Subscribe to our newsletter for updates</label>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full py-4 rounded-lg text-white font-semibold text-lg">
+                        <i class="fas fa-paper-plane mr-2"></i>Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="glass-panel rounded-xl p-6 reveal">
+                    <h3 class="text-white font-semibold mb-2">How quickly can we get started?</h3>
+                    <p class="text-slate-400 text-sm">
+                        For self-hosted deployments, you can be up and running within a day using our deployment scripts. For managed hosting, we typically provision within 48 hours.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 100ms;">
+                    <h3 class="text-white font-semibold mb-2">Do you offer custom integrations?</h3>
+                    <p class="text-slate-400 text-sm">
+                        Yes, our Professional and Enterprise tiers include custom integration services. We can connect HALO Core to your existing systems and workflows.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-white font-semibold mb-2">What hardware requirements are needed?</h3>
+                    <p class="text-slate-400 text-sm">
+                        Minimum: 16GB RAM, 4-core CPU. Recommended: 64GB RAM, RTX 4090 or better GPU for model inference. We provide detailed specs based on your use case.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 300ms;">
+                    <h3 class="text-white font-semibold mb-2">Is there a free trial available?</h3>
+                    <p class="text-slate-400 text-sm">
+                        Yes, we offer a 14-day free trial of the Professional tier. You can also deploy the open-source version for unlimited testing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Locations (Optional) -->
+    <section class="py-16 px-6 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">Global Presence</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-panel rounded-xl p-6 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                            <i class="fas fa-map-marker-alt text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-semibold">Headquarters</h3>
+                            <p class="text-slate-500 text-sm">San Francisco, CA</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm">
+                        Primary development and business operations center.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                            <i class="fas fa-map-marker-alt text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-semibold">R&D Center</h3>
+                            <p class="text-slate-500 text-sm">London, UK</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm">
+                        Trading systems and security research development.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 200ms;">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                            <i class="fas fa-map-marker-alt text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-semibold">APAC Office</h3>
+                            <p class="text-slate-500 text-sm">Singapore</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm">
+                        Regional support and partnership development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">H</span>
+                        </div>
+                        <span class="text-lg font-bold text-white">HALOCORE</span>
+                    </div>
+                    <p class="text-sm text-slate-500">Self-hosted AI orchestration platform.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Platform</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="architecture.html" class="hover:text-white">Architecture</a></li>
+                        <li><a href="services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="agents.html" class="hover:text-white">Agents</a></li>
+                        <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="apps.html" class="hover:text-white">Apps</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="privacy.html" class="hover:text-white">Privacy</a></li>
+                        <li><a href="terms.html" class="hover:text-white">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+                © 2026 HALOCORE. All systems operational.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

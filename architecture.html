@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture | HALOCORE</title>
+    <meta name="description" content="Technical architecture of HALO Core - 36 production services, multi-model orchestration, persistent memory, and distributed agent mesh.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #020617;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #020617);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .topology-box {
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: rgba(15, 23, 42, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .topology-box:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            background: rgba(15, 23, 42, 0.6);
+        }
+        
+        .connection-line {
+            border-left: 2px dashed rgba(59, 130, 246, 0.3);
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">H</span>
+                    </div>
+                    <span class="text-xl font-bold text-white tracking-tight">HALOCORE</span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="architecture.html" class="nav-link text-sm text-white">Architecture</a>
+                    <a href="services.html" class="nav-link text-sm text-slate-300 hover:text-white">Services</a>
+                    <a href="agents.html" class="nav-link text-sm text-slate-300 hover:text-white">Agents</a>
+                    <a href="apps.html" class="nav-link text-sm text-slate-300 hover:text-white">Apps</a>
+                    <a href="pricing.html" class="nav-link text-sm text-slate-300 hover:text-white">Pricing</a>
+                    <a href="about.html" class="nav-link text-sm text-slate-300 hover:text-white">About</a>
+                    <a href="contact.html" class="btn-primary px-5 py-2 rounded-lg text-sm font-medium text-white">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-white text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-slate-700">
+            <div class="px-6 py-4 space-y-3">
+                <a href="architecture.html" class="block text-white py-2">Architecture</a>
+                <a href="services.html" class="block text-slate-300 hover:text-white py-2">Services</a>
+                <a href="agents.html" class="block text-slate-300 hover:text-white py-2">Agents</a>
+                <a href="apps.html" class="block text-slate-300 hover:text-white py-2">Apps</a>
+                <a href="pricing.html" class="block text-slate-300 hover:text-white py-2">Pricing</a>
+                <a href="about.html" class="block text-slate-300 hover:text-white py-2">About</a>
+                <a href="contact.html" class="block text-blue-400 hover:text-blue-300 py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-16 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
+                <i class="fas fa-microchip text-blue-400"></i>
+                <span class="text-xs font-medium text-slate-300">SYSTEM ARCHITECTURE</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
+                Technical <span class="gradient-text">Architecture</span>
+            </h1>
+            <p class="text-lg text-slate-400 max-w-3xl mx-auto">
+                36 production services orchestrated across GPU clusters. Multi-model routing, persistent memory, and distributed agent coordination.
+            </p>
+        </div>
+    </section>
+
+    <!-- System Topology -->
+    <section class="py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">System Topology</h2>
+            
+            <!-- Topology Diagram -->
+            <div class="glass-panel rounded-2xl p-8 mb-12 reveal">
+                <!-- HALO CORE Header -->
+                <div class="text-center mb-8">
+                    <div class="inline-block px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600">
+                        <span class="text-white font-bold">HALO CORE SYSTEM</span>
+                    </div>
+                </div>
+                
+                <!-- Layer 1: Entry Points -->
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="topology-box rounded-xl p-4 text-center">
+                        <div class="text-blue-400 text-xs mb-1">Port 9000</div>
+                        <div class="text-white font-semibold text-sm">API Gateway</div>
+                        <div class="text-slate-500 text-xs">FastAPI</div>
+                    </div>
+                    <div class="topology-box rounded-xl p-4 text-center">
+                        <div class="text-purple-400 text-xs mb-1">Port 8889</div>
+                        <div class="text-white font-semibold text-sm">Router</div>
+                        <div class="text-slate-500 text-xs">Intelligent Routing</div>
+                    </div>
+                    <div class="topology-box rounded-xl p-4 text-center">
+                        <div class="text-cyan-400 text-xs mb-1">sqlite-vec</div>
+                        <div class="text-white font-semibold text-sm">Memory System</div>
+                        <div class="text-slate-500 text-xs">32GB+ Vector DB</div>
+                    </div>
+                </div>
+                
+                <!-- Connection -->
+                <div class="flex justify-center mb-6">
+                    <div class="connection-line h-8"></div>
+                </div>
+                
+                <!-- Layer 2: GPU Cluster -->
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="topology-box rounded-xl p-4 text-center border-blue-500/50">
+                        <div class="text-blue-400 text-xs mb-1">GPU 0: RTX 5090</div>
+                        <div class="text-white font-semibold text-sm">32B Models</div>
+                        <div class="text-slate-500 text-xs">Orchestrator/Coder/R1</div>
+                        <div class="text-green-400 text-xs mt-1">Hot-swap Capable</div>
+                    </div>
+                    <div class="topology-box rounded-xl p-4 text-center border-purple-500/50">
+                        <div class="text-purple-400 text-xs mb-1">GPU 1: RTX 3060</div>
+                        <div class="text-white font-semibold text-sm">7B Coordinator</div>
+                        <div class="text-slate-500 text-xs">Always-on Fast Queries</div>
+                        <div class="text-green-400 text-xs mt-1">Always Available</div>
+                    </div>
+                    <div class="topology-box rounded-xl p-4 text-center border-cyan-500/50">
+                        <div class="text-cyan-400 text-xs mb-1">CPU</div>
+                        <div class="text-white font-semibold text-sm">TTS 1.7B</div>
+                        <div class="text-slate-500 text-xs">Port 8010</div>
+                        <div class="text-slate-400 text-xs mt-1">Text-to-Speech</div>
+                    </div>
+                </div>
+                
+                <!-- Connection -->
+                <div class="flex justify-center mb-6">
+                    <div class="connection-line h-8"></div>
+                </div>
+                
+                <!-- Layer 3: Agent Mesh -->
+                <div class="text-center mb-6">
+                    <div class="inline-block topology-box rounded-xl p-4">
+                        <div class="text-amber-400 text-xs mb-1">Redis-backed</div>
+                        <div class="text-white font-semibold">Agent Mesh</div>
+                        <div class="text-slate-500 text-xs">50+ Agents | Distributed Coordination</div>
+                    </div>
+                </div>
+                
+                <!-- Connection -->
+                <div class="flex justify-center mb-6">
+                    <div class="connection-line h-8"></div>
+                </div>
+                
+                <!-- Layer 4: Subsystems -->
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="topology-box rounded-xl p-4 text-center border-green-500/50">
+                        <div class="text-green-400 text-xs mb-1">Port 8091</div>
+                        <div class="text-white font-semibold text-sm">Trading Platform</div>
+                        <div class="text-slate-500 text-xs">QAMAS Architecture</div>
+                    </div>
+                    <div class="topology-box rounded-xl p-4 text-center border-red-500/50">
+                        <div class="text-red-400 text-xs mb-1">ErebusPrime</div>
+                        <div class="text-white font-semibold text-sm">Security Platform</div>
+                        <div class="text-slate-500 text-xs">Bug Bounty Automation</div>
+                    </div>
+                    <div class="topology-box rounded-xl p-4 text-center border-orange-500/50">
+                        <div class="text-orange-400 text-xs mb-1">100+ Tools</div>
+                        <div class="text-white font-semibold text-sm">OSINT Suite</div>
+                        <div class="text-slate-500 text-xs">Intelligence Gathering</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Inventory -->
+    <section class="py-16 px-6 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">Service Inventory (36 Services)</h2>
+            
+            <div class="overflow-x-auto reveal">
+                <table class="w-full text-left text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-700">
+                            <th class="pb-4 text-slate-400 font-medium">Service</th>
+                            <th class="pb-4 text-slate-400 font-medium">Port</th>
+                            <th class="pb-4 text-slate-400 font-medium">Purpose</th>
+                            <th class="pb-4 text-slate-400 font-medium">Resource</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-300">
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-blue-400">halo-api-memory</td>
+                            <td class="py-3">9000</td>
+                            <td class="py-3">API Gateway</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-slate-800 text-xs">CPU</span></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-blue-400">halo-router</td>
+                            <td class="py-3">8889</td>
+                            <td class="py-3">Request Router</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-slate-800 text-xs">CPU</span></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-purple-400">halo-vllm-orchestrator</td>
+                            <td class="py-3">8002</td>
+                            <td class="py-3">Main AI Model (32B)</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-blue-900/50 text-blue-300 text-xs">GPU 0</span></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-purple-400">halo-vllm-coder</td>
+                            <td class="py-3">8005</td>
+                            <td class="py-3">Code Model (32B)</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-blue-900/50 text-blue-300 text-xs">GPU 0</span></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-purple-400">halo-vllm-r1</td>
+                            <td class="py-3">8007</td>
+                            <td class="py-3">Reasoning Model (32B)</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-blue-900/50 text-blue-300 text-xs">GPU 0</span></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-cyan-400">halo-vllm-7b</td>
+                            <td class="py-3">8006</td>
+                            <td class="py-3">Coordinator (7B)</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-purple-900/50 text-purple-300 text-xs">GPU 1</span></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-cyan-400">halo-vllm-tts</td>
+                            <td class="py-3">8010</td>
+                            <td class="py-3">Text-to-Speech</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-slate-800 text-xs">CPU</span></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-amber-400">halo-mir</td>
+                            <td class="py-3">8888</td>
+                            <td class="py-3">Model Intelligence Registry</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-slate-800 text-xs">CPU</span></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-green-400">halo-trading-bridge</td>
+                            <td class="py-3">8091</td>
+                            <td class="py-3">Trading API</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-slate-800 text-xs">CPU</span></td>
+                        </tr>
+                        <tr class="border-b border-slate-800">
+                            <td class="py-3 font-mono text-slate-400">halo-dashboard</td>
+                            <td class="py-3">8890</td>
+                            <td class="py-3">Web Dashboard</td>
+                            <td class="py-3"><span class="px-2 py-1 rounded bg-slate-800 text-xs">CPU</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-center text-slate-500 text-xs mt-4">+ 25 additional specialized services</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Metrics -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">Performance Characteristics</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-panel rounded-xl p-6 reveal">
+                    <div class="text-slate-400 text-sm mb-2">Memory Search</div>
+                    <div class="flex items-end gap-2">
+                        <span class="text-3xl font-bold text-white">50ms</span>
+                        <span class="text-slate-500 text-sm mb-1">typical</span>
+                    </div>
+                    <div class="text-green-400 text-xs mt-2">P99: 200ms</div>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 100ms;">
+                    <div class="text-slate-400 text-sm mb-2">Model Response</div>
+                    <div class="flex items-end gap-2">
+                        <span class="text-3xl font-bold text-white">5-10s</span>
+                        <span class="text-slate-500 text-sm mb-1">typical</span>
+                    </div>
+                    <div class="text-yellow-400 text-xs mt-2">P99: 30s</div>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 200ms;">
+                    <div class="text-slate-400 text-sm mb-2">Trade Execution</div>
+                    <div class="flex items-end gap-2">
+                        <span class="text-3xl font-bold text-white">&lt;50ms</span>
+                        <span class="text-slate-500 text-sm mb-1">typical</span>
+                    </div>
+                    <div class="text-green-400 text-xs mt-2">P99: 100ms</div>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 300ms;">
+                    <div class="text-slate-400 text-sm mb-2">Agent Coordination</div>
+                    <div class="flex items-end gap-2">
+                        <span class="text-3xl font-bold text-white">200ms</span>
+                        <span class="text-slate-500 text-sm mb-1">typical</span>
+                    </div>
+                    <div class="text-green-400 text-xs mt-2">P99: 1s</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memory Architecture -->
+    <section class="py-16 px-6 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">Memory Architecture</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-panel rounded-xl p-6 reveal">
+                    <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-database text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Semantic Database</h3>
+                    <div class="text-2xl font-bold gradient-text mb-2">30GB</div>
+                    <p class="text-slate-400 text-sm">
+                        Vector embeddings for natural language search using sqlite-vec. Enables human-like recall across the entire knowledge base.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Structural Database</h3>
+                    <div class="text-2xl font-bold gradient-text mb-2">4.7GB</div>
+                    <p class="text-slate-400 text-sm">
+                        File index, code symbols, and system events. Maintains codebase structure for precise navigation and reference.
+                    </p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 reveal" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-comments text-cyan-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Notes Database</h3>
+                    <div class="text-2xl font-bold gradient-text mb-2">68MB</div>
+                    <p class="text-slate-400 text-sm">
+                        Conversation history and persistent notes. Maintains context across sessions for continuous workflows.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-8 glass-panel rounded-xl p-6 reveal">
+                <h3 class="text-lg font-semibold text-white mb-4">Key Memory Features</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            Workspace isolation prevents cross-domain contamination
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            Source weighting for intelligent result ranking
+                        </li>
+                    </ul>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            Citation validation prevents hallucination
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            Sub-100ms query response times
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GPU-Aware Routing -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">GPU-Aware Model Routing</h2>
+            
+            <div class="glass-panel rounded-xl p-6 reveal">
+                <p class="text-slate-400 mb-6 text-center">
+                    HALO Core intelligently routes requests to the optimal AI model based on task context and workspace.
+                </p>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="pb-4 text-slate-400 font-medium">Workspace</th>
+                                <th class="pb-4 text-slate-400 font-medium">Model</th>
+                                <th class="pb-4 text-slate-400 font-medium">GPU</th>
+                                <th class="pb-4 text-slate-400 font-medium">Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">General</td>
+                                <td class="py-3 font-mono text-cyan-400">7B Coordinator</td>
+                                <td class="py-3"><span class="px-2 py-1 rounded bg-purple-900/50 text-purple-300 text-xs">GPU 1</span></td>
+                                <td class="py-3">Fast responses, simple queries</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Coding</td>
+                                <td class="py-3 font-mono text-blue-400">32B Coder</td>
+                                <td class="py-3"><span class="px-2 py-1 rounded bg-blue-900/50 text-blue-300 text-xs">GPU 0</span></td>
+                                <td class="py-3">Code generation, analysis, debugging</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Reasoning</td>
+                                <td class="py-3 font-mono text-blue-400">32B R1</td>
+                                <td class="py-3"><span class="px-2 py-1 rounded bg-blue-900/50 text-blue-300 text-xs">GPU 0</span></td>
+                                <td class="py-3">Complex logic, multi-step problems</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Trading</td>
+                                <td class="py-3 font-mono text-blue-400">32B Orchestrator</td>
+                                <td class="py-3"><span class="px-2 py-1 rounded bg-blue-900/50 text-blue-300 text-xs">GPU 0</span></td>
+                                <td class="py-3">Market analysis, trading decisions</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">Security</td>
+                                <td class="py-3 font-mono text-blue-400">32B Orchestrator</td>
+                                <td class="py-3"><span class="px-2 py-1 rounded bg-blue-900/50 text-blue-300 text-xs">GPU 0</span></td>
+                                <td class="py-3">Vulnerability assessment, OSINT</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-6 p-4 rounded-lg bg-blue-900/20 border border-blue-500/30">
+                    <p class="text-blue-300 text-sm">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <strong>GPU Hot-Swapping:</strong> Only one 32B model loaded at a time on GPU 0, automatically swapped based on demand. The 7B coordinator on GPU 1 remains always available for fast queries.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <div class="glass-panel rounded-2xl p-8">
+                <h2 class="text-2xl font-bold text-white mb-4">Ready to Deploy?</h2>
+                <p class="text-slate-400 mb-6">
+                    Get started with HALO Core's complete AI infrastructure.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="btn-primary px-6 py-3 rounded-lg text-white font-medium">
+                        Request Demo
+                    </a>
+                    <a href="services.html" class="btn-secondary px-6 py-3 rounded-lg text-slate-300 font-medium">
+                        Explore Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">H</span>
+                        </div>
+                        <span class="text-lg font-bold text-white">HALOCORE</span>
+                    </div>
+                    <p class="text-sm text-slate-500">
+                        Self-hosted AI orchestration platform.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Platform</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="architecture.html" class="hover:text-white">Architecture</a></li>
+                        <li><a href="services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="agents.html" class="hover:text-white">Agents</a></li>
+                        <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="apps.html" class="hover:text-white">Apps</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="privacy.html" class="hover:text-white">Privacy</a></li>
+                        <li><a href="terms.html" class="hover:text-white">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+                © 2026 HALOCORE. All systems operational.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

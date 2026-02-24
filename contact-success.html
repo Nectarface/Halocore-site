@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Sent | HALOCORE</title>
+    <meta name="description" content="Thank you for contacting HALO Core. We'll be in touch soon.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #020617;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #020617);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .success-icon {
+            animation: scaleIn 0.5s ease;
+        }
+        
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="gradient-bg">
+    <div class="max-w-md w-full mx-auto px-6">
+        <div class="glass-panel rounded-2xl p-8 md:p-12 text-center">
+            <div class="success-icon w-20 h-20 mx-auto rounded-full bg-green-500/20 flex items-center justify-center mb-6">
+                <i class="fas fa-check text-green-400 text-3xl"></i>
+            </div>
+            
+            <h1 class="text-2xl font-bold text-white mb-4">Message Sent!</h1>
+            <p class="text-slate-400 mb-8">
+                Thank you for reaching out. We've received your message and will get back to you within 24 hours.
+            </p>
+            
+            <div class="space-y-3">
+                <a href="index.html" class="btn-primary block w-full py-3 rounded-lg text-white font-medium">
+                    <i class="fas fa-home mr-2"></i>Back to Home
+                </a>
+                <a href="services.html" class="block w-full py-3 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-slate-500 transition-colors">
+                    Explore Services
+                </a>
+            </div>
+        </div>
+        
+        <div class="text-center mt-8">
+            <p class="text-slate-500 text-sm">
+                Need immediate assistance? <a href="mailto:contact@halocore.ai" class="text-blue-400 hover:text-blue-300">Email us directly</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

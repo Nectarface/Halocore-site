@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agents | HALOCORE</title>
+    <meta name="description" content="HALO Core agent catalog - 50+ autonomous agents for trading, security, OSINT, and general automation.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #020617;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #020617);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .agent-card {
+            transition: all 0.3s ease;
+        }
+        
+        .agent-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .status-badge {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-live {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+        
+        .status-beta {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+        
+        .status-soon {
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
+        }
+        
+        .tool-tag {
+            font-size: 0.7rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">H</span>
+                    </div>
+                    <span class="text-xl font-bold text-white tracking-tight">HALOCORE</span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="architecture.html" class="nav-link text-sm text-slate-300 hover:text-white">Architecture</a>
+                    <a href="services.html" class="nav-link text-sm text-slate-300 hover:text-white">Services</a>
+                    <a href="agents.html" class="nav-link text-sm text-white">Agents</a>
+                    <a href="apps.html" class="nav-link text-sm text-slate-300 hover:text-white">Apps</a>
+                    <a href="pricing.html" class="nav-link text-sm text-slate-300 hover:text-white">Pricing</a>
+                    <a href="about.html" class="nav-link text-sm text-slate-300 hover:text-white">About</a>
+                    <a href="contact.html" class="btn-primary px-5 py-2 rounded-lg text-sm font-medium text-white">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-white text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-slate-700">
+            <div class="px-6 py-4 space-y-3">
+                <a href="architecture.html" class="block text-slate-300 hover:text-white py-2">Architecture</a>
+                <a href="services.html" class="block text-slate-300 hover:text-white py-2">Services</a>
+                <a href="agents.html" class="block text-white py-2">Agents</a>
+                <a href="apps.html" class="block text-slate-300 hover:text-white py-2">Apps</a>
+                <a href="pricing.html" class="block text-slate-300 hover:text-white py-2">Pricing</a>
+                <a href="about.html" class="block text-slate-300 hover:text-white py-2">About</a>
+                <a href="contact.html" class="block text-blue-400 hover:text-blue-300 py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-16 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
+                <i class="fas fa-robot text-blue-400"></i>
+                <span class="text-xs font-medium text-slate-300">AGENT CATALOG</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
+                Autonomous <span class="gradient-text">Agent Swarm</span>
+            </h1>
+            <p class="text-lg text-slate-400 max-w-3xl mx-auto">
+                50+ specialized agents working in coordination. Each agent can use tools, access memory, and execute complex workflows autonomously.
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Agents -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 reveal">Core Platform Agents</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Drop Ingestor -->
+                <div class="glass-panel agent-card rounded-xl p-6 reveal">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                            <i class="fas fa-download text-blue-400 text-xl"></i>
+                        </div>
+                        <span class="status-badge status-soon px-2 py-1 rounded-full">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Drop Ingestor</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        Detect, classify, and route inputs into appropriate workflows. Handles file uploads, API requests, and trigger events.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-tag px-2 py-1 rounded">read_file</span>
+                        <span class="tool-tag px-2 py-1 rounded">classify</span>
+                        <span class="tool-tag px-2 py-1 rounded">route</span>
+                    </div>
+                </div>
+                
+                <!-- Healer/Evolver -->
+                <div class="glass-panel agent-card rounded-xl p-6 reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                            <i class="fas fa-magic text-purple-400 text-xl"></i>
+                        </div>
+                        <span class="status-badge status-soon px-2 py-1 rounded-full">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Healer / Evolver</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        Repair and improve modules automatically. Detects code issues, applies fixes, and optimizes performance.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-tag px-2 py-1 rounded">read_file</span>
+                        <span class="tool-tag px-2 py-1 rounded">write_file</span>
+                        <span class="tool-tag px-2 py-1 rounded">bash</span>
+                    </div>
+                </div>
+                
+                <!-- Orchestrator -->
+                <div class="glass-panel agent-card rounded-xl p-6 reveal" style="transition-delay: 200ms;">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-amber-500/20 flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-amber-400 text-xl"></i>
+                        </div>
+                        <span class="status-badge status-soon px-2 py-1 rounded-full">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Orchestrator</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        Split tasks across agents and models, track outcomes, and coordinate complex multi-step workflows.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-tag px-2 py-1 rounded">delegate</span>
+                        <span class="tool-tag px-2 py-1 rounded">monitor</span>
+                        <span class="tool-tag px-2 py-1 rounded">coordinate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trading Agents -->
+    <section class="py-16 px-6 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 reveal">Trading Agents</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-panel agent-card rounded-xl p-5 reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-green-400"></i>
+                        </div>
+                        <span class="status-badge status-live px-2 py-1 rounded-full">Live</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-1">Market Analyst</h3>
+                    <p class="text-slate-500 text-xs">Technical analysis and pattern recognition</p>
+                </div>
+                
+                <div class="glass-panel agent-card rounded-xl p-5 reveal" style="transition-delay: 50ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                            <i class="fas fa-balance-scale text-green-400"></i>
+                        </div>
+                        <span class="status-badge status-live px-2 py-1 rounded-full">Live</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-1">Risk Manager</h3>
+                    <p class="text-slate-500 text-xs">Position sizing and risk monitoring</p>
+                </div>
+                
+                <div class="glass-panel agent-card rounded-xl p-5 reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                            <i class="fas fa-robot text-green-400"></i>
+                        </div>
+                        <span class="status-badge status-live px-2 py-1 rounded-full">Live</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-1">Trade Executor</h3>
+                    <p class="text-slate-500 text-xs">Order execution and slippage control</p>
+                </div>
+                
+                <div class="glass-panel agent-card rounded-xl p-5 reveal" style="transition-delay: 150ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-green-400"></i>
+                        </div>
+                        <span class="status-badge status-live px-2 py-1 rounded-full">Live</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-1">Learning Engine</h3>
+                    <p class="text-slate-500 text-xs">Strategy optimization from results</p>
+                </div>
+            </div>
+            
+            <div class="mt-6 glass-panel rounded-xl p-6 reveal">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-lg bg-green-500/20 flex items-center justify-center">
+                        <i class="fas fa-users text-green-400 text-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">25+</div>
+                        <div class="text-slate-400 text-sm">Parallel trading agents across markets</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Agents -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 reveal">Security & OSINT Agents</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-panel agent-card rounded-xl p-5 reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center">
+                            <i class="fas fa-bug text-red-400"></i>
+                        </div>
+                        <span class="status-badge status-live px-2 py-1 rounded-full">Live</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-1">Vulnerability Scanner</h3>
+                    <p class="text-slate-500 text-xs">XSS, SQLi, and common vulnerability detection</p>
+                </div>
+                
+                <div class="glass-panel agent-card rounded-xl p-5 reveal" style="transition-delay: 50ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center">
+                            <i class="fas fa-trophy text-red-400"></i>
+                        </div>
+                        <span class="status-badge status-live px-2 py-1 rounded-full">Live</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-1">Bounty Hunter</h3>
+                    <p class="text-slate-500 text-xs">Automated bug bounty submission</p>
+                </div>
+                
+                <div class="glass-panel agent-card rounded-xl p-5 reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
+                            <i class="fas fa-search text-orange-400"></i>
+                        </div>
+                        <span class="status-badge status-live px-2 py-1 rounded-full">Live</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-1">OSINT Analyzer</h3>
+                    <p class="text-slate-500 text-xs">Intelligence gathering and correlation</p>
+                </div>
+                
+                <div class="glass-panel agent-card rounded-xl p-5 reveal" style="transition-delay: 150ms;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
+                            <i class="fas fa-file-alt text-orange-400"></i>
+                        </div>
+                        <span class="status-badge status-live px-2 py-1 rounded-full">Live</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-1">Report Generator</h3>
+                    <p class="text-slate-500 text-xs">Structured vulnerability reports</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agent Capabilities -->
+    <section class="py-16 px-6 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 text-center reveal">Agent Capabilities</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-panel rounded-xl p-6 text-center reveal">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-blue-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-file-code text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">File Operations</h3>
+                    <code class="text-blue-400 text-sm">read_file</code>
+                    <code class="text-blue-400 text-sm block mt-1">write_file</code>
+                    <p class="text-slate-500 text-xs mt-3">Read and write files with workspace isolation</p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 text-center reveal" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-purple-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-terminal text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Shell Execution</h3>
+                    <code class="text-purple-400 text-sm">bash</code>
+                    <p class="text-slate-500 text-xs mt-3">Execute shell commands with safety guardrails</p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 text-center reveal" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-cyan-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-search text-cyan-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Search Operations</h3>
+                    <code class="text-cyan-400 text-sm">grep</code>
+                    <code class="text-cyan-400 text-sm block mt-1">glob</code>
+                    <p class="text-slate-500 text-xs mt-3">Search within files and list directory contents</p>
+                </div>
+                
+                <div class="glass-panel rounded-xl p-6 text-center reveal" style="transition-delay: 300ms;">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-amber-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Memory Query</h3>
+                    <code class="text-amber-400 text-sm">memory_query</code>
+                    <p class="text-slate-500 text-xs mt-3">Retrieve context from 30GB+ knowledge base</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agent Mesh -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass-panel rounded-2xl p-8 reveal">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4">Distributed Agent Mesh</h2>
+                        <p class="text-slate-400 mb-6">
+                            Agents coordinate through a Redis-backed mesh with health monitoring, load balancing, and circuit breakers for fault tolerance.
+                        </p>
+                        <ul class="space-y-3 text-sm text-slate-400">
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-400"></i>
+                                Agent registry with health monitoring
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-400"></i>
+                                Task distribution with load balancing
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-400"></i>
+                                Circuit breakers for fault tolerance
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-400"></i>
+                                Shared memory for distributed state
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-panel rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold gradient-text mb-1">50+</div>
+                            <div class="text-slate-500 text-xs">Specialized Agents</div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold gradient-text mb-1">24/7</div>
+                            <div class="text-slate-500 text-xs">Autonomous Operation</div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold gradient-text mb-1">&lt;200ms</div>
+                            <div class="text-slate-500 text-xs">Coordination Latency</div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold gradient-text mb-1">100%</div>
+                            <div class="text-slate-500 text-xs">Tool Access</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <div class="glass-panel rounded-2xl p-8">
+                <h2 class="text-2xl font-bold text-white mb-4">Deploy Your Agent Swarm</h2>
+                <p class="text-slate-400 mb-6">
+                    Get access to 50+ autonomous agents ready to automate your workflows.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="btn-primary px-8 py-3 rounded-lg text-white font-medium">
+                        Get Started
+                    </a>
+                    <a href="architecture.html" class="btn-secondary px-8 py-3 rounded-lg text-slate-300 font-medium">
+                        View Architecture
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">H</span>
+                        </div>
+                        <span class="text-lg font-bold text-white">HALOCORE</span>
+                    </div>
+                    <p class="text-sm text-slate-500">Self-hosted AI orchestration platform.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Platform</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="architecture.html" class="hover:text-white">Architecture</a></li>
+                        <li><a href="services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="agents.html" class="hover:text-white">Agents</a></li>
+                        <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="apps.html" class="hover:text-white">Apps</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="privacy.html" class="hover:text-white">Privacy</a></li>
+                        <li><a href="terms.html" class="hover:text-white">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+                © 2026 HALOCORE. All systems operational.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
