@@ -65,6 +65,7 @@
                     <a href="pricing.html" class="nav-link-cyber font-orbitron text-sm">PRICING</a>
                     <a href="contact.html" class="cyber-btn font-orbitron text-sm px-6 py-2">CONTACT</a>
                     <a href="demo.html" class="nav-link-cyber font-orbitron text-sm">DEMO</a>
+                    <a href="comparison.html" class="nav-link-cyber font-orbitron text-sm">COMPARE</a>
                 </div>
             </div>
         </div>
@@ -85,104 +86,30 @@
         </div>
     </section>
 
-    <!-- Core Services -->
-    <section class="py-16 px-6 relative z-10">
+    <!-- Search Bar -->
+    <section class="py-6 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="cyber-panel service-card p-6 reveal">
-                    <div class="w-14 h-14 flex items-center justify-center border border-cyber-cyan/50 bg-cyber-cyan/10 mb-4">
-                        <i class="fas fa-code text-2xl text-cyber-cyan"></i>
-                    </div>
-                    <h3 class="font-orbitron text-lg text-white mb-2">AUTONOMOUS CODING</h3>
-                    <p class="font-rajdhani text-gray-400 text-sm mb-4">AI agents that write, review, and optimize code. Multi-language support.</p>
-                    <div class="flex gap-2">
-                        <span class="px-2 py-1 border border-cyber-cyan/30 text-cyber-cyan text-xs font-orbitron">ACTIVE</span>
-                    </div>
-                </div>
-                
-                <div class="cyber-panel cyber-panel-pink service-card p-6 reveal" style="transition-delay: 100ms;">
-                    <div class="w-14 h-14 flex items-center justify-center border border-cyber-pink/50 bg-cyber-pink/10 mb-4">
-                        <i class="fas fa-chart-line text-2xl text-cyber-pink"></i>
-                    </div>
-                    <h3 class="font-orbitron text-lg text-white mb-2">DATA INTELLIGENCE</h3>
-                    <p class="font-rajdhani text-gray-400 text-sm mb-4">Pattern recognition. Predictive analytics. Automated reporting.</p>
-                    <div class="flex gap-2">
-                        <span class="px-2 py-1 border border-cyber-pink/30 text-cyber-pink text-xs font-orbitron">ANALYSIS</span>
-                    </div>
-                </div>
-                
-                <div class="cyber-panel service-card p-6 reveal" style="transition-delay: 200ms;">
-                    <div class="w-14 h-14 flex items-center justify-center border border-cyber-cyan/50 bg-cyber-cyan/10 mb-4">
-                        <i class="fas fa-pen-nib text-2xl text-cyber-cyan"></i>
-                    </div>
-                    <h3 class="font-orbitron text-lg text-white mb-2">CONTENT SYNTHESIS</h3>
-                    <p class="font-rajdhani text-gray-400 text-sm mb-4">Generate documentation and creative content at scale.</p>
-                    <div class="flex gap-2">
-                        <span class="px-2 py-1 border border-cyber-cyan/30 text-cyber-cyan text-xs font-orbitron">GENERATE</span>
-                    </div>
+            <div class="service-search-container max-w-2xl mx-auto reveal">
+                <div class="relative">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                    <input type="text" id="serviceSearch" placeholder="Search services..." class="w-full pl-12 pr-4 py-3 bg-black/50 border border-cyber-cyan/30 text-white font-rajdhani focus:outline-none focus:border-cyber-cyan focus:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-all duration-300">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- QAMAS Trading -->
-    <section class="py-16 px-6 relative z-10 border-t border-cyber-cyan/20">
+    <!-- Services Grid -->
+    <section class="py-16 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12 reveal">
-                <div class="inline-flex items-center gap-2 px-4 py-2 cyber-panel mb-4">
-                    <i class="fas fa-chart-bar text-cyber-cyan"></i>
-                    <span class="font-orbitron text-xs text-cyber-cyan">TRADING SUBSYSTEM</span>
-                </div>
-                <h2 class="font-orbitron text-3xl text-white mb-4">QAMAS <span class="neon-cyan">PLATFORM</span></h2>
+            <div id="servicesGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Services will be rendered by JavaScript -->
             </div>
             
-            <div class="grid md:grid-cols-4 gap-4 mb-8">
-                <div class="cyber-panel p-5 reveal">
-                    <div class="font-orbitron text-cyber-cyan text-xs mb-2">LAYER 1</div>
-                    <h3 class="font-orbitron text-white mb-2">EXECUTION</h3>
-                    <p class="font-rajdhani text-gray-400 text-sm">Buy/sell signals with intelligent position sizing.</p>
-                </div>
-                <div class="cyber-panel cyber-panel-pink p-5 reveal" style="transition-delay: 100ms;">
-                    <div class="font-orbitron text-cyber-pink text-xs mb-2">LAYER 2</div>
-                    <h3 class="font-orbitron text-white mb-2">STRATEGY</h3>
-                    <p class="font-rajdhani text-gray-400 text-sm">Technical indicators and AI predictions.</p>
-                </div>
-                <div class="cyber-panel p-5 reveal" style="transition-delay: 200ms;">
-                    <div class="font-orbitron text-cyber-magenta text-xs mb-2">LAYER 3</div>
-                    <h3 class="font-orbitron text-white mb-2">RISK</h3>
-                    <p class="font-rajdhani text-gray-400 text-sm">Position limits and circuit breakers.</p>
-                </div>
-                <div class="cyber-panel cyber-panel-pink p-5 reveal" style="transition-delay: 300ms;">
-                    <div class="font-orbitron text-cyber-purple text-xs mb-2">LAYER 4</div>
-                    <h3 class="font-orbitron text-white mb-2">INTELLIGENCE</h3>
-                    <p class="font-rajdhani text-gray-400 text-sm">Market analysis and memory learning.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Security -->
-    <section class="py-16 px-6 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="cyber-panel cyber-panel-pink p-8 reveal">
-                    <h2 class="font-orbitron text-2xl text-white mb-4">EREBUS <span class="neon-pink">PRIME</span></h2>
-                    <p class="font-rajdhani text-gray-400 mb-6">Automated bounty hunting with integrated scanners and case management.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 border border-cyber-pink/30 text-cyber-pink text-xs font-orbitron">HACKERONE</span>
-                        <span class="px-3 py-1 border border-cyber-pink/30 text-cyber-pink text-xs font-orbitron">BUGCROWD</span>
-                        <span class="px-3 py-1 border border-cyber-pink/30 text-cyber-pink text-xs font-orbitron">XSSTRIKE</span>
-                    </div>
-                </div>
-                <div class="cyber-panel p-8 reveal" style="transition-delay: 100ms;">
-                    <h2 class="font-orbitron text-2xl text-white mb-4">OSINT <span class="neon-cyan">SUITE</span></h2>
-                    <p class="font-rajdhani text-gray-400 mb-6">100+ specialized analyzers for intelligence gathering and threat analysis.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 border border-cyber-cyan/30 text-cyber-cyan text-xs font-orbitron">EMAIL</span>
-                        <span class="px-3 py-1 border border-cyber-cyan/30 text-cyber-cyan text-xs font-orbitron">DNS</span>
-                        <span class="px-3 py-1 border border-cyber-cyan/30 text-cyber-cyan text-xs font-orbitron">BLOCKCHAIN</span>
-                    </div>
-                </div>
+            <!-- No Results Message -->
+            <div id="noResults" class="hidden text-center py-12">
+                <i class="fas fa-search text-4xl text-gray-600 mb-4"></i>
+                <p class="font-orbitron text-xl text-gray-400">No services found</p>
+                <p class="font-rajdhani text-gray-500 mt-2">Try a different search term</p>
             </div>
         </div>
     </section>
@@ -194,6 +121,169 @@
     </footer>
 
     <script>
+        // Service data array for search functionality
+        const services = [
+            { 
+                id: 'autonomous-coding', 
+                name: 'AUTONOMOUS CODING', 
+                category: 'core', 
+                icon: 'fa-code', 
+                color: 'cyan', 
+                description: 'AI agents that write, review, and optimize code. Multi-language support.',
+                tags: ['ACTIVE'],
+                section: 'Core Services'
+            },
+            { 
+                id: 'data-intelligence', 
+                name: 'DATA INTELLIGENCE', 
+                category: 'core', 
+                icon: 'fa-chart-line', 
+                color: 'pink', 
+                description: 'Pattern recognition. Predictive analytics. Automated reporting.',
+                tags: ['ANALYSIS'],
+                section: 'Core Services'
+            },
+            { 
+                id: 'content-synthesis', 
+                name: 'CONTENT SYNTHESIS', 
+                category: 'core', 
+                icon: 'fa-pen-nib', 
+                color: 'cyan', 
+                description: 'Generate documentation and creative content at scale.',
+                tags: ['GENERATE'],
+                section: 'Core Services'
+            },
+            { 
+                id: 'qamas-execution', 
+                name: 'EXECUTION', 
+                category: 'trading', 
+                icon: 'fa-exchange-alt', 
+                color: 'cyan', 
+                description: 'Buy/sell signals with intelligent position sizing.',
+                tags: ['LAYER 1'],
+                section: 'QAMAS Platform'
+            },
+            { 
+                id: 'qamas-strategy', 
+                name: 'STRATEGY', 
+                category: 'trading', 
+                icon: 'fa-brain', 
+                color: 'pink', 
+                description: 'Technical indicators and AI predictions.',
+                tags: ['LAYER 2'],
+                section: 'QAMAS Platform'
+            },
+            { 
+                id: 'qamas-risk', 
+                name: 'RISK', 
+                category: 'trading', 
+                icon: 'fa-shield-alt', 
+                color: 'cyan', 
+                description: 'Position limits and circuit breakers.',
+                tags: ['LAYER 3'],
+                section: 'QAMAS Platform'
+            },
+            { 
+                id: 'qamas-intelligence', 
+                name: 'INTELLIGENCE', 
+                category: 'trading', 
+                icon: 'fa-memory', 
+                color: 'pink', 
+                description: 'Market analysis and memory learning.',
+                tags: ['LAYER 4'],
+                section: 'QAMAS Platform'
+            },
+            { 
+                id: 'erebus-prime', 
+                name: 'EREBUS PRIME', 
+                category: 'security', 
+                icon: 'fa-bug', 
+                color: 'pink', 
+                description: 'Automated bounty hunting with integrated scanners and case management.',
+                tags: ['HACKERONE', 'BUGCROWD', 'XSSTRIKE'],
+                section: 'Security'
+            },
+            { 
+                id: 'osint-suite', 
+                name: 'OSINT SUITE', 
+                category: 'security', 
+                icon: 'fa-search', 
+                color: 'cyan', 
+                description: '100+ specialized analyzers for intelligence gathering and threat analysis.',
+                tags: ['EMAIL', 'DNS', 'BLOCKCHAIN'],
+                section: 'Security'
+            }
+        ];
+
+        // Search functionality
+        const searchInput = document.getElementById('serviceSearch');
+        const servicesGrid = document.getElementById('servicesGrid');
+        const noResults = document.getElementById('noResults');
+
+        // Render services function
+        function renderServices(servicesToRender) {
+            if (servicesToRender.length === 0) {
+                servicesGrid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            noResults.classList.add('hidden');
+            servicesGrid.innerHTML = servicesToRender.map(service => {
+                const isPink = service.color === 'pink';
+                const borderColor = isPink ? 'border-cyber-pink/50' : 'border-cyber-cyan/50';
+                const bgColor = isPink ? 'bg-cyber-pink/10' : 'bg-cyber-cyan/10';
+                const textColor = isPink ? 'text-cyber-pink' : 'text-cyber-cyan';
+                const pinkClass = isPink ? 'cyber-panel-pink' : '';
+                const pinkHoverClass = isPink ? 'pink' : '';
+                
+                const tagsHtml = service.tags.map(tag => {
+                    const tagBorder = isPink ? 'border-cyber-pink/30 text-cyber-pink' : 'border-cyber-cyan/30 text-cyber-cyan';
+                    return `<span class="px-2 py-1 border ${tagBorder} text-xs font-orbitron">${tag}</span>`;
+                }).join('');
+                
+                return `
+                    <div class="cyber-panel ${pinkClass} service-card p-6 reveal ${pinkHoverClass}" data-category="${service.category}">
+                        <div class="w-14 h-14 flex items-center justify-center border ${borderColor} ${bgColor} mb-4">
+                            <i class="fas ${service.icon} text-2xl ${textColor}"></i>
+                        </div>
+                        <div class="font-orbitron text-cyber-cyan/60 text-xs mb-2">${service.section}</div>
+                        <h3 class="font-orbitron text-lg text-white mb-2">${service.name}</h3>
+                        <p class="font-rajdhani text-gray-400 text-sm mb-4">${service.description}</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${tagsHtml}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Re-initialize reveal animation for new elements
+            const newRevealElements = servicesGrid.querySelectorAll('.reveal');
+            newRevealElements.forEach(el => {
+                el.classList.add('active');
+            });
+        }
+
+        // Initial render
+        renderServices(services);
+
+        function filterServices() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            const filtered = services.filter(service => {
+                return service.name.toLowerCase().includes(searchTerm) || 
+                       service.description.toLowerCase().includes(searchTerm) ||
+                       service.category.toLowerCase().includes(searchTerm) ||
+                       service.section.toLowerCase().includes(searchTerm) ||
+                       service.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+            });
+            
+            renderServices(filtered);
+        }
+
+        searchInput.addEventListener('input', filterServices);
+
+        // Scroll reveal
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
@@ -211,6 +301,8 @@
         // Console Easter Egg
         console.log('%c⚠️ HALOCORE SERVICES ⚠️', 'color: #00f0ff; font-size: 20px; font-weight: bold;');
         console.log('%c> Service catalog loaded', 'color: #ff00ff;');
+        console.log('%c> Search functionality active', 'color: #00f0ff;');
     </script>
+<script src="chat-widget.js"></script>
 </body>
 </html>

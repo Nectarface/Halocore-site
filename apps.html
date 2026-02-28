@@ -78,6 +78,7 @@
                     <a href="pricing.html" class="nav-link-cyber font-orbitron">PRICING</a>
                     <a href="contact.html" class="cyber-btn font-orbitron text-sm px-6 py-3">CONTACT</a>
                     <a href="demo.html" class="nav-link-cyber font-orbitron">DEMO</a>
+                    <a href="comparison.html" class="nav-link-cyber font-orbitron">COMPARE</a>
                 </div>
             </div>
         </div>
@@ -101,8 +102,20 @@
         </div>
     </section>
 
+    <!-- Search Bar -->
+    <section class="py-6 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="app-search-container max-w-2xl mx-auto reveal">
+                <div class="relative">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                    <input type="text" id="appSearch" placeholder="Search apps..." class="w-full pl-12 pr-4 py-3 bg-black/50 border border-cyber-cyan/30 text-white font-rajdhani focus:outline-none focus:border-cyber-cyan focus:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-all duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Category Filter -->
-    <section class="py-8 px-6 relative z-10">
+    <section class="py-4 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-wrap justify-center gap-3 reveal">
                 <button class="category-btn active px-6 py-3 border border-cyber-cyan/50 rounded font-orbitron text-sm" data-category="all">ALL APPS</button>
@@ -116,366 +129,10 @@
     </section>
 
     <!-- Apps Grid - All 43 Apps -->
-    <section class="py-16 px-6 relative z-10">
+    <section class="py-12 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
-            <div id="apps-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-                
-                <!-- Productivity -->
-                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="HaloCoreHub" onclick="openAppModal('halocorehub')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-home text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">HaloCore Hub</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Central Dashboard</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="QuickNotes" onclick="openAppModal('quicknotes')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-sticky-note text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">QuickNotes</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Fast Notes</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="FocusList" onclick="openAppModal('focuslist')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-tasks text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">FocusList</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Todo & Tasks</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="HabitPunch" onclick="openAppModal('habitpunch')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-fist-raised text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">HabitPunch</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Habit Tracker</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="BreakTimer" onclick="openAppModal('breaktimer')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-clock text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">BreakTimer</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Pomodoro Timer</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="TimestampNotes" onclick="openAppModal('timestampnotes')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-history text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">TimestampNotes</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Auto Timestamp</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="SimpleSteps" onclick="openAppModal('simplesteps')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-walking text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">SimpleSteps</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Step Counter</p>
-                </div>
-
-                <!-- Business -->
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="QRCodeSuite" onclick="openAppModal('qrcodesuite')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-qrcode text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">QRCodeSuite</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">QR Scanner</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="TipCalc" onclick="openAppModal('tipcalc')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-calculator text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">TipCalc</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Tip Calculator</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="InvoiceGenerator" onclick="openAppModal('invoicegenerator')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-file-invoice text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">Invoice Generator</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">PDF Invoices</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="ReceiptScanner" onclick="openAppModal('receiptscanner')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-receipt text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">ReceiptScanner</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">OCR Scanning</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="ResumeBuilder" onclick="openAppModal('resumebuilder')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-id-card text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">ResumeBuilder</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">CV Creator</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="SplitBill" onclick="openAppModal('splitbill')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-users text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">SplitBill</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Expense Split</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="LedgerLite" onclick="openAppModal('ledgerlite')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-book text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">LedgerLite</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Accounting</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="PriceCompare" onclick="openAppModal('pricecompare')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-tags text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">PriceCompare</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Unit Pricing</p>
-                </div>
-
-                <!-- Utility -->
-                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="FileConverter" onclick="openAppModal('fileconverter')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-exchange-alt text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">FileConverter</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Format Convert</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="HashCheck" onclick="openAppModal('hashcheck')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-hashtag text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">HashCheck</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">File Verification</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="BarcodeMaker" onclick="openAppModal('barcodemaker')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-barcode text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">BarcodeMaker</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Barcode Gen</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="PhotoResize" onclick="openAppModal('photoresize')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-image text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">PhotoResize</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Batch Resize</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="ColorPicker" onclick="openAppModal('colorpicker')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-eye-dropper text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">ColorPicker</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Color ID</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="DeviceInfo" onclick="openAppModal('deviceinfo')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-mobile-alt text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">DeviceInfo</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Phone Specs</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="RandomGen" onclick="openAppModal('randomgen')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-random text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">RandomGen</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Password Gen</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="KeyGen" onclick="openAppModal('keygen')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-key text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">KeyGen</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Key Generator</p>
-                </div>
-
-                <!-- Security -->
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="security" data-app="SignalHunter" onclick="openAppModal('signalhunter')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-wifi text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">SignalHunter</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">WiFi Analyzer</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="security" data-app="BLERadar" onclick="openAppModal('bleradar')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fab fa-bluetooth text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">BLERadar</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">BT Scanner</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="security" data-app="GhostNet" onclick="openAppModal('ghostnet')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-ghost text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">GhostNet</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Privacy Toolkit</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="security" data-app="NetTools" onclick="openAppModal('nettools')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-network-wired text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">NetTools</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Network Tools</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="security" data-app="SubnetNinja" onclick="openAppModal('subnetninja')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-sitemap text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">SubnetNinja</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Subnet Calc</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="security" data-app="PixelPurge" onclick="openAppModal('pixelpurge')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-trash-alt text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">PixelPurge</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Secure Delete</p>
-                </div>
-
-                <!-- AI Tools -->
-                <div class="cyber-panel app-card p-5 text-center" data-category="ai" data-app="LocalAI" onclick="openAppModal('localai')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-brain text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">LocalAI</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">On-Device AI</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="ai" data-app="AI_Suite_Production" onclick="openAppModal('aisuite')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-robot text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">AI Suite</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">AI Toolkit</p>
-                </div>
-
-                <div class="cyber-panel app-card p-5 text-center" data-category="ai" data-app="SensorGraph" onclick="openAppModal('sensorgraph')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-wave-square text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">SensorGraph</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Sensor Viz</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="ai" data-app="CryptoIntel" onclick="openAppModal('cryptointel')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fab fa-bitcoin text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">CryptoIntel</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Crypto Tracker</p>
-                </div>
-
-                <!-- More Productivity -->
-                <div class="cyber-panel app-card p-5 text-center" data-category="productivity" data-app="CalWidget" onclick="openAppModal('calwidget')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-calendar text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">CalWidget</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Calendar Widget</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="SleepSoundsPro" onclick="openAppModal('sleepsoundspro')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-moon text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">SleepSounds</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Sleep Aid</p>
-                </div>
-
-                <!-- More Business -->
-                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="CallRecorder" onclick="openAppModal('callrecorder')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-phone text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">CallRecorder</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Record Calls</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="business" data-app="FakeCall" onclick="openAppModal('fakecall')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-phone-volume text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">FakeCall</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Fake Calls</p>
-                </div>
-
-                <!-- More Utility -->
-                <div class="cyber-panel app-card p-5 text-center" data-category="utility" data-app="TinyFile" onclick="openAppModal('tinyfile')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-folder text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">TinyFile</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">File Manager</p>
-                </div>
-
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="StreamViewer" onclick="openAppModal('streamviewer')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-video text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">StreamViewer</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Media Player</p>
-                </div>
-
-                <!-- More Security -->
-                <div class="cyber-panel app-card p-5 text-center" data-category="security" data-app="HaloCoreToolkit" onclick="openAppModal('halocoretoolkit')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-toolbox text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">Toolkit</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Dev Tools</p>
-                </div>
-
-                <!-- Health/Fitness -->
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="productivity" data-app="HIITForge" onclick="openAppModal('hiitforge')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-dumbbell text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">HIITForge</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Workout App</p>
-                </div>
-
-                <!-- Social -->
-                <div class="cyber-panel app-card p-5 text-center" data-category="business" data-app="bond" onclick="openAppModal('bond')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-cyan/50 bg-cyber-cyan/10">
-                        <i class="fas fa-heart text-cyber-cyan text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">bond</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">For Couples</p>
-                </div>
-
-                <!-- Games -->
-                <div class="cyber-panel app-card pink p-5 text-center" data-category="utility" data-app="NotificationRules" onclick="openAppModal('notificationrules')">
-                    <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-cyber-pink/50 bg-cyber-pink/10">
-                        <i class="fas fa-bell text-cyber-pink text-2xl"></i>
-                    </div>
-                    <h3 class="font-orbitron text-sm text-white mb-1">NotifRules</h3>
-                    <p class="font-rajdhani text-xs text-gray-500">Auto DND</p>
-                </div>
-
+            <div id="appsGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                <!-- Apps will be rendered by JavaScript -->
             </div>
         </div>
     </section>
@@ -561,7 +218,54 @@
     </footer>
 
     <script>
-        // App data
+        // App data array for search functionality
+        const apps = [
+            { id: 'halocorehub', name: 'HaloCore Hub', category: 'productivity', icon: 'fa-home', color: 'cyan', description: 'Central dashboard for the entire HALO ecosystem. Access all apps, monitor system status, manage AI agents.', privacyUrl: 'HaloCoreHub-privacy.html', termsUrl: 'HaloCoreHub-terms.html', betaUrl: 'HaloCoreHub-beta-signup.html' },
+            { id: 'quicknotes', name: 'QuickNotes', category: 'productivity', icon: 'fa-sticky-note', color: 'pink', description: 'Fast note-taking with folders and organization. Sync across devices.', privacyUrl: 'QuickNotes-privacy.html', termsUrl: 'QuickNotes-terms.html', betaUrl: 'QuickNotes-beta-signup.html' },
+            { id: 'focuslist', name: 'FocusList', category: 'productivity', icon: 'fa-tasks', color: 'cyan', description: 'Todo list with priorities, deadlines, and productivity tracking.', privacyUrl: 'FocusList-privacy.html', termsUrl: 'FocusList-terms.html', betaUrl: 'FocusList-beta-signup.html' },
+            { id: 'habitpunch', name: 'HabitPunch', category: 'productivity', icon: 'fa-fist-raised', color: 'pink', description: 'Habit tracker with streaks, reminders, and progress analytics.', privacyUrl: 'HabitPunch-privacy.html', termsUrl: 'HabitPunch-terms.html', betaUrl: 'HabitPunch-beta-signup.html' },
+            { id: 'breaktimer', name: 'BreakTimer', category: 'productivity', icon: 'fa-clock', color: 'cyan', description: 'Pomodoro timer with customizable work/break intervals.', privacyUrl: 'BreakTimer-privacy.html', termsUrl: 'BreakTimer-terms.html', betaUrl: 'BreakTimer-beta-signup.html' },
+            { id: 'timestampnotes', name: 'TimestampNotes', category: 'productivity', icon: 'fa-history', color: 'pink', description: 'Auto timestamped notes for meetings and recordings.', privacyUrl: 'TimestampNotes-privacy.html', termsUrl: 'TimestampNotes-terms.html', betaUrl: 'TimestampNotes-beta-signup.html' },
+            { id: 'simplesteps', name: 'SimpleSteps', category: 'productivity', icon: 'fa-walking', color: 'cyan', description: 'Step counter and activity tracker.', privacyUrl: 'SimpleSteps-privacy.html', termsUrl: 'SimpleSteps-terms.html', betaUrl: 'SimpleSteps-beta-signup.html' },
+            { id: 'calwidget', name: 'CalWidget', category: 'productivity', icon: 'fa-calendar', color: 'cyan', description: 'Calendar widget for home screen.', privacyUrl: 'CalWidget-privacy.html', termsUrl: 'CalWidget-terms.html', betaUrl: 'CalWidget-beta-signup.html' },
+            { id: 'sleepsoundspro', name: 'SleepSounds Pro', category: 'productivity', icon: 'fa-moon', color: 'pink', description: 'Sleep aid with white noise and nature sounds.', privacyUrl: 'SleepSoundsPro-privacy.html', termsUrl: 'SleepSoundsPro-terms.html', betaUrl: 'SleepSoundsPro-beta-signup.html' },
+            { id: 'hiitforge', name: 'HIITForge', category: 'productivity', icon: 'fa-dumbbell', color: 'pink', description: 'High-intensity interval training workout app.', privacyUrl: 'HIITForge-privacy.html', termsUrl: 'HIITForge-terms.html', betaUrl: 'HIITForge-beta-signup.html' },
+            { id: 'qrcodesuite', name: 'QRCodeSuite', category: 'business', icon: 'fa-qrcode', color: 'pink', description: 'QR code scanner and generator with history and sharing.', privacyUrl: 'QRCodeSuite-privacy.html', termsUrl: 'QRCodeSuite-terms.html', betaUrl: 'QRCodeSuite-beta-signup.html' },
+            { id: 'tipcalc', name: 'TipCalc', category: 'business', icon: 'fa-calculator', color: 'cyan', description: 'Tip calculator with bill splitting.', privacyUrl: 'TipCalc-privacy.html', termsUrl: 'TipCalc-terms.html', betaUrl: 'TipCalc-beta-signup.html' },
+            { id: 'invoicegenerator', name: 'Invoice Generator', category: 'business', icon: 'fa-file-invoice', color: 'cyan', description: 'Professional PDF invoice creation with templates and branding.', privacyUrl: 'InvoiceGenerator-privacy.html', termsUrl: 'InvoiceGenerator-terms.html', betaUrl: 'InvoiceGenerator-beta-signup.html' },
+            { id: 'receiptscanner', name: 'ReceiptScanner', category: 'business', icon: 'fa-receipt', color: 'cyan', description: 'OCR scanning for receipts and expense tracking.', privacyUrl: 'ReceiptScanner-privacy.html', termsUrl: 'ReceiptScanner-terms.html', betaUrl: 'ReceiptScanner-beta-signup.html' },
+            { id: 'resumebuilder', name: 'ResumeBuilder', category: 'business', icon: 'fa-id-card', color: 'pink', description: 'CV creator with professional templates.', privacyUrl: 'ResumeBuilder-privacy.html', termsUrl: 'ResumeBuilder-terms.html', betaUrl: 'ResumeBuilder-beta-signup.html' },
+            { id: 'splitbill', name: 'SplitBill', category: 'business', icon: 'fa-users', color: 'cyan', description: 'Expense splitting for groups and friends.', privacyUrl: 'SplitBill-privacy.html', termsUrl: 'SplitBill-terms.html', betaUrl: 'SplitBill-beta-signup.html' },
+            { id: 'ledgerlite', name: 'LedgerLite', category: 'business', icon: 'fa-book', color: 'pink', description: 'Simple accounting and bookkeeping.', privacyUrl: 'LedgerLite-privacy.html', termsUrl: 'LedgerLite-terms.html', betaUrl: 'LedgerLite-beta-signup.html' },
+            { id: 'pricecompare', name: 'PriceCompare', category: 'business', icon: 'fa-tags', color: 'cyan', description: 'Unit pricing comparison tool.', privacyUrl: 'PriceCompare-privacy.html', termsUrl: 'PriceCompare-terms.html', betaUrl: 'PriceCompare-beta-signup.html' },
+            { id: 'callrecorder', name: 'CallRecorder', category: 'business', icon: 'fa-phone', color: 'cyan', description: 'Call recording with cloud backup.', privacyUrl: 'CallRecorder-privacy.html', termsUrl: 'CallRecorder-terms.html', betaUrl: 'CallRecorder-beta-signup.html' },
+            { id: 'fakecall', name: 'FakeCall', category: 'business', icon: 'fa-phone-volume', color: 'pink', description: 'Schedule fake calls for emergency situations.', privacyUrl: 'FakeCall-privacy.html', termsUrl: 'FakeCall-terms.html', betaUrl: 'FakeCall-beta-signup.html' },
+            { id: 'bond', name: 'bond', category: 'business', icon: 'fa-heart', color: 'cyan', description: 'App for couples to stay connected.', privacyUrl: 'bond-privacy.html', termsUrl: 'bond-terms.html', betaUrl: 'bond-beta-signup.html' },
+            { id: 'fileconverter', name: 'FileConverter', category: 'utility', icon: 'fa-exchange-alt', color: 'cyan', description: 'Format conversion for documents and media.', privacyUrl: 'FileConverter-privacy.html', termsUrl: 'FileConverter-terms.html', betaUrl: 'FileConverter-beta-signup.html' },
+            { id: 'hashcheck', name: 'HashCheck', category: 'utility', icon: 'fa-hashtag', color: 'pink', description: 'File verification with MD5 and SHA checksums.', privacyUrl: 'HashCheck-privacy.html', termsUrl: 'HashCheck-terms.html', betaUrl: 'HashCheck-beta-signup.html' },
+            { id: 'barcodemaker', name: 'BarcodeMaker', category: 'utility', icon: 'fa-barcode', color: 'cyan', description: 'Barcode generator for products.', privacyUrl: 'BarcodeMaker-privacy.html', termsUrl: 'BarcodeMaker-terms.html', betaUrl: 'BarcodeMaker-beta-signup.html' },
+            { id: 'photoresize', name: 'PhotoResize', category: 'utility', icon: 'fa-image', color: 'pink', description: 'Batch image resizing and compression.', privacyUrl: 'PhotoResize-privacy.html', termsUrl: 'PhotoResize-terms.html', betaUrl: 'PhotoResize-beta-signup.html' },
+            { id: 'colorpicker', name: 'ColorPicker', category: 'utility', icon: 'fa-eye-dropper', color: 'cyan', description: 'Color identification and palette creation.', privacyUrl: 'ColorPicker-privacy.html', termsUrl: 'ColorPicker-terms.html', betaUrl: 'ColorPicker-beta-signup.html' },
+            { id: 'deviceinfo', name: 'DeviceInfo', category: 'utility', icon: 'fa-mobile-alt', color: 'pink', description: 'Detailed phone specifications and diagnostics.', privacyUrl: 'DeviceInfo-privacy.html', termsUrl: 'DeviceInfo-terms.html', betaUrl: 'DeviceInfo-beta-signup.html' },
+            { id: 'randomgen', name: 'RandomGen', category: 'utility', icon: 'fa-random', color: 'cyan', description: 'Password and random data generator.', privacyUrl: 'RandomGen-privacy.html', termsUrl: 'RandomGen-terms.html', betaUrl: 'RandomGen-beta-signup.html' },
+            { id: 'keygen', name: 'KeyGen', category: 'utility', icon: 'fa-key', color: 'pink', description: 'Secure key generation for various uses.', privacyUrl: 'KeyGen-privacy.html', termsUrl: 'KeyGen-terms.html', betaUrl: 'KeyGen-beta-signup.html' },
+            { id: 'tinyfile', name: 'TinyFile', category: 'utility', icon: 'fa-folder', color: 'cyan', description: 'Lightweight file manager.', privacyUrl: 'TinyFile-privacy.html', termsUrl: 'TinyFile-terms.html', betaUrl: 'TinyFile-beta-signup.html' },
+            { id: 'streamviewer', name: 'StreamViewer', category: 'utility', icon: 'fa-video', color: 'pink', description: 'Media player for streaming content.', privacyUrl: 'StreamViewer-privacy.html', termsUrl: 'StreamViewer-terms.html', betaUrl: 'StreamViewer-beta-signup.html' },
+            { id: 'notificationrules', name: 'NotificationRules', category: 'utility', icon: 'fa-bell', color: 'pink', description: 'Auto DND and notification management.', privacyUrl: 'NotificationRules-privacy.html', termsUrl: 'NotificationRules-terms.html', betaUrl: 'NotificationRules-beta-signup.html' },
+            { id: 'signalhunter', name: 'SignalHunter', category: 'security', icon: 'fa-wifi', color: 'pink', description: 'WiFi signal analyzer with heat maps and channel recommendations.', privacyUrl: 'SignalHunter-privacy.html', termsUrl: 'SignalHunter-terms.html', betaUrl: 'SignalHunter-beta-signup.html' },
+            { id: 'bleradar', name: 'BLERadar', category: 'security', icon: 'fa-bluetooth', color: 'cyan', description: 'Bluetooth device scanner for finding nearby devices.', privacyUrl: 'BLERadar-privacy.html', termsUrl: 'BLERadar-terms.html', betaUrl: 'BLERadar-beta-signup.html' },
+            { id: 'ghostnet', name: 'GhostNet', category: 'security', icon: 'fa-ghost', color: 'pink', description: 'Privacy toolkit with VPN, DNS, and tracking protection.', privacyUrl: 'GhostNet-privacy.html', termsUrl: 'GhostNet-terms.html', betaUrl: 'GhostNet-beta-signup.html' },
+            { id: 'nettools', name: 'NetTools', category: 'security', icon: 'fa-network-wired', color: 'cyan', description: 'Network diagnostic and analysis tools.', privacyUrl: 'NetTools-privacy.html', termsUrl: 'NetTools-terms.html', betaUrl: 'NetTools-beta-signup.html' },
+            { id: 'subnetninja', name: 'SubnetNinja', category: 'security', icon: 'fa-sitemap', color: 'pink', description: 'Subnet calculator and network planner.', privacyUrl: 'SubnetNinja-privacy.html', termsUrl: 'SubnetNinja-terms.html', betaUrl: 'SubnetNinja-beta-signup.html' },
+            { id: 'pixelpurge', name: 'PixelPurge', category: 'security', icon: 'fa-trash-alt', color: 'cyan', description: 'Secure file deletion with overwrite.', privacyUrl: 'PixelPurge-privacy.html', termsUrl: 'PixelPurge-terms.html', betaUrl: 'PixelPurge-beta-signup.html' },
+            { id: 'halocoretoolkit', name: 'HaloCore Toolkit', category: 'security', icon: 'fa-toolbox', color: 'cyan', description: 'Developer tools and utilities.', privacyUrl: 'HaloCoreToolkit-privacy.html', termsUrl: 'HaloCoreToolkit-terms.html', betaUrl: 'HaloCoreToolkit-beta-signup.html' },
+            { id: 'localai', name: 'LocalAI', category: 'ai', icon: 'fa-brain', color: 'cyan', description: 'On-device AI chat with local LLM processing. No cloud required.', privacyUrl: 'LocalAI-privacy.html', termsUrl: 'LocalAI-terms.html', betaUrl: 'LocalAI-beta-signup.html' },
+            { id: 'aisuite', name: 'AI Suite', category: 'ai', icon: 'fa-robot', color: 'pink', description: 'Collection of AI-powered tools for productivity and creativity.', privacyUrl: 'AI_Suite_Production-privacy.html', termsUrl: 'AI_Suite_Production-terms.html', betaUrl: 'AI_Suite_Production-beta-signup.html' },
+            { id: 'sensorgraph', name: 'SensorGraph', category: 'ai', icon: 'fa-wave-square', color: 'cyan', description: 'Sensor data visualization and analysis.', privacyUrl: 'SensorGraph-privacy.html', termsUrl: 'SensorGraph-terms.html', betaUrl: 'SensorGraph-beta-signup.html' },
+            { id: 'cryptointel', name: 'CryptoIntel', category: 'ai', icon: 'fa-bitcoin', color: 'pink', description: 'Cryptocurrency tracker with AI insights.', privacyUrl: 'CryptoIntel-privacy.html', termsUrl: 'CryptoIntel-terms.html', betaUrl: 'CryptoIntel-beta-signup.html' }
+        ];
+
+        // Legacy appData for modal (keep for compatibility)
         const appData = {
             halocorehub: {
                 name: "HaloCore Hub",
@@ -662,7 +366,7 @@
                 privacy: "LocalAI-privacy.html",
                 beta: "LocalAI-beta-signup.html"
             },
-            aisuite: {
+                aisuite: {
                 name: "AI Suite",
                 category: "AI Tools",
                 desc: "Collection of AI-powered tools for productivity and creativity.",
@@ -670,12 +374,352 @@
                 color: "pink",
                 privacy: "AI_Suite_Production-privacy.html",
                 beta: "AI_Suite_Production-beta-signup.html"
+            },
+            timestampnotes: {
+                name: "TimestampNotes",
+                category: "Productivity",
+                desc: "Auto timestamped notes for meetings and recordings.",
+                icon: "fa-history",
+                color: "pink",
+                privacy: "TimestampNotes-privacy.html",
+                beta: "TimestampNotes-beta-signup.html"
+            },
+            simplesteps: {
+                name: "SimpleSteps",
+                category: "Productivity",
+                desc: "Step counter and activity tracker.",
+                icon: "fa-walking",
+                color: "cyan",
+                privacy: "SimpleSteps-privacy.html",
+                beta: "SimpleSteps-beta-signup.html"
+            },
+            tipcalc: {
+                name: "TipCalc",
+                category: "Business",
+                desc: "Tip calculator with bill splitting.",
+                icon: "fa-calculator",
+                color: "cyan",
+                privacy: "TipCalc-privacy.html",
+                beta: "TipCalc-beta-signup.html"
+            },
+            receiptscanner: {
+                name: "ReceiptScanner",
+                category: "Business",
+                desc: "OCR scanning for receipts and expense tracking.",
+                icon: "fa-receipt",
+                color: "cyan",
+                privacy: "ReceiptScanner-privacy.html",
+                beta: "ReceiptScanner-beta-signup.html"
+            },
+            splitbill: {
+                name: "SplitBill",
+                category: "Business",
+                desc: "Expense splitting for groups and friends.",
+                icon: "fa-users",
+                color: "cyan",
+                privacy: "SplitBill-privacy.html",
+                beta: "SplitBill-beta-signup.html"
+            },
+            ledgerlite: {
+                name: "LedgerLite",
+                category: "Business",
+                desc: "Simple accounting and bookkeeping.",
+                icon: "fa-book",
+                color: "pink",
+                privacy: "LedgerLite-privacy.html",
+                beta: "LedgerLite-beta-signup.html"
+            },
+            pricecompare: {
+                name: "PriceCompare",
+                category: "Business",
+                desc: "Unit pricing comparison tool.",
+                icon: "fa-tags",
+                color: "cyan",
+                privacy: "PriceCompare-privacy.html",
+                beta: "PriceCompare-beta-signup.html"
+            },
+            fileconverter: {
+                name: "FileConverter",
+                category: "Utility",
+                desc: "Format conversion for documents and media.",
+                icon: "fa-exchange-alt",
+                color: "cyan",
+                privacy: "FileConverter-privacy.html",
+                beta: "FileConverter-beta-signup.html"
+            },
+            barcodemaker: {
+                name: "BarcodeMaker",
+                category: "Utility",
+                desc: "Barcode generator for products.",
+                icon: "fa-barcode",
+                color: "cyan",
+                privacy: "BarcodeMaker-privacy.html",
+                beta: "BarcodeMaker-beta-signup.html"
+            },
+            photoresize: {
+                name: "PhotoResize",
+                category: "Utility",
+                desc: "Batch image resizing and compression.",
+                icon: "fa-image",
+                color: "pink",
+                privacy: "PhotoResize-privacy.html",
+                beta: "PhotoResize-beta-signup.html"
+            },
+            colorpicker: {
+                name: "ColorPicker",
+                category: "Utility",
+                desc: "Color identification and palette creation.",
+                icon: "fa-eye-dropper",
+                color: "cyan",
+                privacy: "ColorPicker-privacy.html",
+                beta: "ColorPicker-beta-signup.html"
+            },
+            deviceinfo: {
+                name: "DeviceInfo",
+                category: "Utility",
+                desc: "Detailed phone specifications and diagnostics.",
+                icon: "fa-mobile-alt",
+                color: "pink",
+                privacy: "DeviceInfo-privacy.html",
+                beta: "DeviceInfo-beta-signup.html"
+            },
+            randomgen: {
+                name: "RandomGen",
+                category: "Utility",
+                desc: "Password and random data generator.",
+                icon: "fa-random",
+                color: "cyan",
+                privacy: "RandomGen-privacy.html",
+                beta: "RandomGen-beta-signup.html"
+            },
+            nettools: {
+                name: "NetTools",
+                category: "Security",
+                desc: "Network diagnostic and analysis tools.",
+                icon: "fa-network-wired",
+                color: "cyan",
+                privacy: "NetTools-privacy.html",
+                beta: "NetTools-beta-signup.html"
+            },
+            subnetninja: {
+                name: "SubnetNinja",
+                category: "Security",
+                desc: "Subnet calculator and network planner.",
+                icon: "fa-sitemap",
+                color: "pink",
+                privacy: "SubnetNinja-privacy.html",
+                beta: "SubnetNinja-beta-signup.html"
+            },
+            pixelpurge: {
+                name: "PixelPurge",
+                category: "Security",
+                desc: "Secure file deletion with overwrite.",
+                icon: "fa-trash-alt",
+                color: "cyan",
+                privacy: "PixelPurge-privacy.html",
+                beta: "PixelPurge-beta-signup.html"
+            },
+            sensorgraph: {
+                name: "SensorGraph",
+                category: "AI Tools",
+                desc: "Sensor data visualization and analysis.",
+                icon: "fa-wave-square",
+                color: "cyan",
+                privacy: "SensorGraph-privacy.html",
+                beta: "SensorGraph-beta-signup.html"
+            },
+            cryptointel: {
+                name: "CryptoIntel",
+                category: "AI Tools",
+                desc: "Cryptocurrency tracker with AI insights.",
+                icon: "fa-bitcoin",
+                color: "pink",
+                privacy: "CryptoIntel-privacy.html",
+                beta: "CryptoIntel-beta-signup.html"
+            },
+            calwidget: {
+                name: "CalWidget",
+                category: "Productivity",
+                desc: "Calendar widget for home screen.",
+                icon: "fa-calendar",
+                color: "cyan",
+                privacy: "CalWidget-privacy.html",
+                beta: "CalWidget-beta-signup.html"
+            },
+            sleepsoundspro: {
+                name: "SleepSounds Pro",
+                category: "Productivity",
+                desc: "Sleep aid with white noise and nature sounds.",
+                icon: "fa-moon",
+                color: "pink",
+                privacy: "SleepSoundsPro-privacy.html",
+                beta: "SleepSoundsPro-beta-signup.html"
+            },
+            callrecorder: {
+                name: "CallRecorder",
+                category: "Business",
+                desc: "Call recording with cloud backup.",
+                icon: "fa-phone",
+                color: "cyan",
+                privacy: "CallRecorder-privacy.html",
+                beta: "CallRecorder-beta-signup.html"
+            },
+            fakecall: {
+                name: "FakeCall",
+                category: "Business",
+                desc: "Schedule fake calls for emergency situations.",
+                icon: "fa-phone-volume",
+                color: "pink",
+                privacy: "FakeCall-privacy.html",
+                beta: "FakeCall-beta-signup.html"
+            },
+            tinyfile: {
+                name: "TinyFile",
+                category: "Utility",
+                desc: "Lightweight file manager.",
+                icon: "fa-folder",
+                color: "cyan",
+                privacy: "TinyFile-privacy.html",
+                beta: "TinyFile-beta-signup.html"
+            },
+            streamviewer: {
+                name: "StreamViewer",
+                category: "Utility",
+                desc: "Media player for streaming content.",
+                icon: "fa-video",
+                color: "pink",
+                privacy: "StreamViewer-privacy.html",
+                beta: "StreamViewer-beta-signup.html"
+            },
+            halocoretoolkit: {
+                name: "HaloCore Toolkit",
+                category: "Security",
+                desc: "Developer tools and utilities.",
+                icon: "fa-toolbox",
+                color: "cyan",
+                privacy: "HaloCoreToolkit-privacy.html",
+                beta: "HaloCoreToolkit-beta-signup.html"
+            },
+            hiitforge: {
+                name: "HIITForge",
+                category: "Productivity",
+                desc: "High-intensity interval training workout app.",
+                icon: "fa-dumbbell",
+                color: "pink",
+                privacy: "HIITForge-privacy.html",
+                beta: "HIITForge-beta-signup.html"
+            },
+            bond: {
+                name: "bond",
+                category: "Business",
+                desc: "App for couples to stay connected.",
+                icon: "fa-heart",
+                color: "cyan",
+                privacy: "bond-privacy.html",
+                beta: "bond-beta-signup.html"
+            },
+            notificationrules: {
+                name: "NotifRules",
+                category: "Utility",
+                desc: "Auto DND and notification management.",
+                icon: "fa-bell",
+                color: "pink",
+                privacy: "NotificationRules-privacy.html",
+                beta: "NotificationRules-beta-signup.html"
+            },
+            hashcheck: {
+                name: "HashCheck",
+                category: "Utility",
+                desc: "File verification with MD5 and SHA checksums.",
+                icon: "fa-hashtag",
+                color: "pink",
+                privacy: "HashCheck-privacy.html",
+                beta: "HashCheck-beta-signup.html"
+            },
+            keygen: {
+                name: "KeyGen",
+                category: "Utility",
+                desc: "Secure key generation for various uses.",
+                icon: "fa-key",
+                color: "pink",
+                privacy: "KeyGen-privacy.html",
+                beta: "KeyGen-beta-signup.html"
+            },
+            resumebuilder: {
+                name: "ResumeBuilder",
+                category: "Business",
+                desc: "CV creator with professional templates.",
+                icon: "fa-id-card",
+                color: "pink",
+                privacy: "ResumeBuilder-privacy.html",
+                beta: "ResumeBuilder-beta-signup.html"
             }
         };
 
+        // Search functionality
+        const searchInput = document.getElementById('appSearch');
+        const appsGrid = document.getElementById('appsGrid');
+        const searchStats = document.createElement('div');
+        searchStats.className = 'text-center text-gray-500 text-sm mt-4 font-rajdhani';
+        searchStats.id = 'searchStats';
+        document.querySelector('.app-search-container').appendChild(searchStats);
+
+        // Render apps function
+        function renderApps(appsToRender) {
+            if (appsToRender.length === 0) {
+                appsGrid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-search text-4xl text-gray-600 mb-4"></i>
+                        <p class="font-orbitron text-xl text-gray-400">No apps found</p>
+                        <p class="font-rajdhani text-gray-500 mt-2">Try a different search term</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            appsGrid.innerHTML = appsToRender.map(app => {
+                const isPink = app.color === 'pink';
+                const borderColor = isPink ? 'border-cyber-pink/50' : 'border-cyber-cyan/50';
+                const bgColor = isPink ? 'bg-cyber-pink/10' : 'bg-cyber-cyan/10';
+                const textColor = isPink ? 'text-cyber-pink' : 'text-cyber-cyan';
+                const pinkClass = isPink ? 'pink' : '';
+                
+                return `
+                    <div class="cyber-panel app-card ${pinkClass} p-5 text-center" data-category="${app.category}" data-app="${app.name}" onclick="openAppModal('${app.id}')">
+                        <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 ${borderColor} ${bgColor}">
+                            <i class="fas ${app.icon} ${textColor} text-2xl"></i>
+                        </div>
+                        <h3 class="font-orbitron text-sm text-white mb-1">${app.name}</h3>
+                        <p class="font-rajdhani text-xs text-gray-500">${app.category.charAt(0).toUpperCase() + app.category.slice(1)}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Initial render
+        renderApps(apps);
+        searchStats.textContent = `Showing ${apps.length} of ${apps.length} apps`;
+
+        function filterApps() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.category-btn.active')?.dataset.category || 'all';
+            
+            const filtered = apps.filter(app => {
+                const matchesSearch = app.name.toLowerCase().includes(searchTerm) || 
+                                     app.description.toLowerCase().includes(searchTerm) ||
+                                     app.category.toLowerCase().includes(searchTerm);
+                const matchesCategory = activeCategory === 'all' || app.category === activeCategory;
+                return matchesSearch && matchesCategory;
+            });
+            
+            renderApps(filtered);
+            searchStats.textContent = `Showing ${filtered.length} of ${apps.length} apps`;
+        }
+
+        searchInput.addEventListener('input', filterApps);
+
         // Category filter
         const categoryBtns = document.querySelectorAll('.category-btn');
-        const appCards = document.querySelectorAll('.app-card');
 
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -686,14 +730,7 @@
                 btn.classList.add('active');
                 btn.classList.remove('text-gray-400');
 
-                const category = btn.dataset.category;
-                appCards.forEach(card => {
-                    if (category === 'all' || card.dataset.category === category) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                filterApps();
             });
         });
 
@@ -773,7 +810,9 @@
         // Console Easter Egg
         console.log('%c⚠️ HALOCORE ANDROID ECOSYSTEM ⚠️', 'color: #00f0ff; font-size: 20px; font-weight: bold;');
         console.log('%c> 43 apps loaded and ready for deployment', 'color: #ff00ff;');
+        console.log('%c> Search functionality active', 'color: #00f0ff;');
         console.log('%c> Beta access available', 'color: #888;');
     </script>
+<script src="chat-widget.js"></script>
 </body>
 </html>

@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HALOCORE vs Competitors | Feature Comparison</title>
+    <meta name="description" content="Compare HALOCORE's self-hosted AI infrastructure against OpenAI, Anthropic, and other cloud AI providers.">
+    <meta name="keywords" content="AI comparison, HALOCORE vs OpenAI, self-hosted AI, private AI, on-premise AI">
+    <meta name="author" content="HALOCORE">
+    <meta name="theme-color" content="#00f0ff">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://halocore.ai/comparison.html">
+    <meta property="og:title" content="HALOCORE vs Competitors | Feature Comparison">
+    <meta property="og:description" content="Compare HALOCORE's self-hosted AI infrastructure against OpenAI, Anthropic, and other cloud AI providers.">
+    <meta property="og:image" content="https://halocore.ai/logo.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://halocore.ai/comparison.html">
+    <meta name="twitter:title" content="HALOCORE vs Competitors | Feature Comparison">
+    <meta name="twitter:description" content="Compare HALOCORE's self-hosted AI infrastructure against OpenAI, Anthropic, and other cloud AI providers.">
+    <meta name="twitter:image" content="https://halocore.ai/logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #050505;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .font-orbitron { font-family: 'Orbitron', monospace; }
+        .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+        
+        /* Animated grid background */
+        .cyber-grid {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+        
+        /* Scanline effect */
+        .scanlines::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 240, 255, 0.02) 2px,
+                rgba(0, 240, 255, 0.02) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        /* Neon text glow */
+        .neon-cyan {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+        }
+        
+        .neon-pink {
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+        }
+        
+        /* Cyber panels */
+        .cyber-panel {
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.05);
+            position: relative;
+        }
+        
+        .cyber-panel::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 10px; height: 10px;
+            border-top: 2px solid #00f0ff;
+            border-left: 2px solid #00f0ff;
+        }
+        
+        .cyber-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 10px; height: 10px;
+            border-bottom: 2px solid #00f0ff;
+            border-right: 2px solid #00f0ff;
+        }
+        
+        .cyber-panel-pink {
+            border-color: rgba(255, 0, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.1), inset 0 0 20px rgba(255, 0, 255, 0.05);
+        }
+        
+        .cyber-panel-pink::before {
+            border-top-color: #ff00ff;
+            border-left-color: #ff00ff;
+        }
+        
+        .cyber-panel-pink::after {
+            border-bottom-color: #ff00ff;
+            border-right-color: #ff00ff;
+        }
+        
+        /* Cyber buttons */
+        .cyber-btn {
+            background: linear-gradient(45deg, transparent 5%, rgba(0, 240, 255, 0.1) 5%);
+            border: 1px solid #00f0ff;
+            color: #00f0ff;
+            position: relative;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+        
+        .cyber-btn:hover {
+            background: #00f0ff;
+            color: #000;
+            box-shadow: 0 0 30px #00f0ff;
+        }
+        
+        .cyber-btn-pink {
+            background: linear-gradient(45deg, transparent 5%, rgba(255, 0, 255, 0.1) 5%);
+            border-color: #ff00ff;
+            color: #ff00ff;
+        }
+        
+        .cyber-btn-pink:hover {
+            background: #ff00ff;
+            color: #000;
+            box-shadow: 0 0 30px #ff00ff;
+        }
+        
+        /* Navigation */
+        .nav-cyber {
+            background: rgba(5, 5, 5, 0.95);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-link-cyber {
+            color: #888;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .nav-link-cyber:hover {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff;
+        }
+        
+        .nav-link-cyber::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: #00f0ff;
+            transition: width 0.3s;
+            box-shadow: 0 0 10px #00f0ff;
+        }
+        
+        .nav-link-cyber:hover::after {
+            width: 100%;
+        }
+        
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00f0ff, #ff00ff);
+            box-shadow: 0 0 10px #00f0ff;
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        /* Comparison Table Styles */
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 800px;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        .comparison-table th {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(0, 240, 255, 0.05);
+            color: #00f0ff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .comparison-table th:first-child {
+            background: rgba(10, 10, 15, 0.95);
+            color: #fff;
+        }
+        
+        /* HALOCORE Column Highlighting */
+        .comparison-table th:nth-child(2) {
+            background: rgba(0, 240, 255, 0.15);
+            border: 1px solid #00f0ff;
+            border-bottom: none;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+        
+        .comparison-table td:nth-child(2) {
+            background: rgba(0, 240, 255, 0.03);
+            border-left: 1px solid #00f0ff;
+            border-right: 1px solid #00f0ff;
+            box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.05);
+        }
+        
+        .comparison-table tr:last-child td:nth-child(2) {
+            border-bottom: 1px solid #00f0ff;
+        }
+        
+        .comparison-table td {
+            font-family: 'Rajdhani', sans-serif;
+            color: #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        .comparison-table tr:hover td {
+            background: rgba(0, 240, 255, 0.05);
+        }
+        
+        .comparison-table tr:hover td:nth-child(2) {
+            background: rgba(0, 240, 255, 0.1);
+        }
+        
+        .comparison-table td:first-child {
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        /* Checkmark and X mark styling */
+        .check-positive {
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .check-negative {
+            color: #ff4444;
+        }
+        
+        .feature-neutral {
+            color: #888;
+        }
+        
+        /* Feature highlight for HALOCORE */
+        .feature-highlight {
+            color: #00f0ff;
+            font-weight: 600;
+        }
+        
+        /* Differentiator Cards */
+        .diff-card {
+            transition: all 0.3s ease;
+        }
+        
+        .diff-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.15);
+        }
+        
+        /* Mobile card view */
+        @media (max-width: 768px) {
+            .mobile-comparison-card {
+                background: rgba(10, 10, 15, 0.9);
+                border: 1px solid rgba(0, 240, 255, 0.2);
+                margin-bottom: 1rem;
+                padding: 1rem;
+            }
+            
+            .mobile-comparison-card.feature-name {
+                border-color: #00f0ff;
+                background: rgba(0, 240, 255, 0.1);
+            }
+            
+            .mobile-comparison-card.halocore-card {
+                border-color: #00f0ff;
+                border-width: 2px;
+                box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+            }
+        }
+        
+        /* Terminal Easter Egg */
+        .terminal-trigger {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid #00f0ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .terminal-trigger:hover {
+            background: #00f0ff;
+            box-shadow: 0 0 20px #00f0ff;
+        }
+        
+        .terminal-trigger:hover i {
+            color: #000;
+        }
+        
+        .terminal-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 700px;
+            background: #0a0a0f;
+            border: 1px solid #00f0ff;
+            z-index: 2000;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .terminal-modal.active {
+            display: block;
+        }
+        
+        .terminal-header {
+            background: #00f0ff;
+            color: #000;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .terminal-body {
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            color: #00f0ff;
+        }
+        
+        .terminal-line {
+            margin-bottom: 5px;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #00f0ff;
+            font-family: 'Courier New', monospace;
+            width: 100%;
+            outline: none;
+        }
+        
+        /* Custom Cursor */
+        body {
+            cursor: crosshair;
+        }
+        
+        a, button, .app-card, .category-btn {
+            cursor: pointer;
+        }
+        
+        /* Status dot */
+        .status-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body class="scanlines">
+    <!-- Scroll Progress Bar -->
+    <div class="progress-bar" id="scrollProgress"></div>
+    
+    <!-- Background grid -->
+    <div class="cyber-grid"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-cyber fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="logo.png" alt="HALOCORE" class="w-12 h-12" loading="lazy" style="filter: drop-shadow(0 0 10px #00f0ff);">
+                    <span class="font-orbitron text-2xl font-bold text-white tracking-widest">
+                        HALO<span class="neon-cyan">CORE</span>
+                    </span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link-cyber font-orbitron">HOME</a>
+                    <a href="architecture.html" class="nav-link-cyber font-orbitron">ARCHITECTURE</a>
+                    <a href="services.html" class="nav-link-cyber font-orbitron">SERVICES</a>
+                    <a href="apps.html" class="nav-link-cyber font-orbitron">APPS</a>
+                    <a href="pricing.html" class="nav-link-cyber font-orbitron">PRICING</a>
+                    <a href="contact.html" class="nav-link-cyber font-orbitron">CONTACT</a>
+                    <a href="demo.html" class="nav-link-cyber font-orbitron">DEMO</a>
+                    <a href="comparison.html" class="nav-link-cyber font-orbitron text-cyan-400">COMPARE</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-cyan-400 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden nav-cyber border-t border-cyan-400/30">
+            <div class="px-6 py-4 space-y-3">
+                <a href="index.html" class="block text-gray-400 hover:text-cyan-400 font-orbitron py-2">HOME</a>
+                <a href="architecture.html" class="block text-gray-400 hover:text-cyan-400 font-orbitron py-2">ARCHITECTURE</a>
+                <a href="services.html" class="block text-gray-400 hover:text-cyan-400 font-orbitron py-2">SERVICES</a>
+                <a href="apps.html" class="block text-gray-400 hover:text-cyan-400 font-orbitron py-2">APPS</a>
+                <a href="pricing.html" class="block text-gray-400 hover:text-cyan-400 font-orbitron py-2">PRICING</a>
+                <a href="contact.html" class="block text-gray-400 hover:text-cyan-400 font-orbitron py-2">CONTACT</a>
+                <a href="demo.html" class="block text-gray-400 hover:text-cyan-400 font-orbitron py-2">DEMO</a>
+                <a href="comparison.html" class="block text-cyan-400 font-orbitron py-2">COMPARE</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[60vh] flex items-center justify-center pt-32 pb-16 px-6 z-10">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 cyber-panel mb-6">
+                <i class="fas fa-balance-scale neon-cyan"></i>
+                <span class="font-orbitron text-xs neon-cyan tracking-widest">FEATURE ANALYSIS</span>
+            </div>
+            
+            <h1 class="font-orbitron text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+                THE <span class="neon-pink">COMPARISON</span>
+            </h1>
+            
+            <p class="font-rajdhani text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+                See how HALOCORE stacks up against cloud AI providers
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="flex items-center gap-2 text-gray-400">
+                    <i class="fas fa-server text-cyan-400"></i>
+                    <span class="font-rajdhani">Self-Hosted</span>
+                </div>
+                <div class="flex items-center gap-2 text-gray-400">
+                    <i class="fas fa-lock text-pink-400"></i>
+                    <span class="font-rajdhani">Private</span>
+                </div>
+                <div class="flex items-center gap-2 text-gray-400">
+                    <i class="fas fa-infinity text-cyan-400"></i>
+                    <span class="font-rajdhani">Unlimited</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table Section -->
+    <section class="py-16 px-6 relative z-10 border-t border-cyan-400/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-white mb-4">
+                    HEAD TO <span class="neon-cyan">HEAD</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-pink-500 mx-auto mb-4"></div>
+                <p class="font-rajdhani text-gray-400">Objective comparison of AI infrastructure solutions</p>
+            </div>
+            
+            <!-- Desktop Table -->
+            <div class="comparison-table-wrapper hidden md:block reveal">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="text-center">
+                                <div class="flex items-center justify-center gap-2">
+                                    <img src="logo.png" alt="HALOCORE" class="w-6 h-6" style="filter: drop-shadow(0 0 5px #00f0ff);">
+                                    <span>HALOCORE</span>
+                                </div>
+                            </th>
+                            <th class="text-center">OpenAI</th>
+                            <th class="text-center">Anthropic (Claude)</th>
+                            <th class="text-center">Google (Gemini)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-shield-alt mr-2 text-cyan-400"></i>Data Privacy</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>On-premise / Self-hosted</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Cloud-based</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Cloud-based</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Cloud-based</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-dollar-sign mr-2 text-cyan-400"></i>API Costs</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>One-time license / No per-token fees</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Per-token pricing</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Per-token pricing</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Per-token pricing</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-cube mr-2 text-cyan-400"></i>Model Ownership</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>Full ownership / Open weights</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Proprietary</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Proprietary</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Proprietary</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-graduation-cap mr-2 text-cyan-400"></i>Custom Training</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>Unlimited fine-tuning</td>
+                            <td class="feature-neutral">Limited / Expensive</td>
+                            <td class="feature-neutral">Limited / Expensive</td>
+                            <td class="feature-neutral">Limited</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-brain mr-2 text-cyan-400"></i>Persistent Memory</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>32GB+ semantic memory</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Context window only</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Context window only</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Context window only</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-robot mr-2 text-cyan-400"></i>Autonomous Agents</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>Native support</td>
+                            <td class="feature-neutral">Requires external tools</td>
+                            <td class="feature-neutral">Requires external tools</td>
+                            <td class="feature-neutral">Limited</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-chart-line mr-2 text-cyan-400"></i>Trading Integration</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>Built-in</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>None</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>None</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>None</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fab fa-android mr-2 text-cyan-400"></i>Android Ecosystem</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>43+ apps</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>None</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>None</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>None</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-tachometer-alt mr-2 text-cyan-400"></i>Rate Limits</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>None (your hardware)</td>
+                            <td class="feature-neutral">Strict limits</td>
+                            <td class="feature-neutral">Moderate limits</td>
+                            <td class="feature-neutral">Moderate limits</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-link mr-2 text-cyan-400"></i>Vendor Lock-in</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>None</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>High</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>High</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>High</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-microchip mr-2 text-cyan-400"></i>Custom Hardware</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>GPU/CPU flexible</td>
+                            <td class="feature-neutral">API only</td>
+                            <td class="feature-neutral">API only</td>
+                            <td class="feature-neutral">API only</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-wifi-slash mr-2 text-cyan-400"></i>Offline Capability</td>
+                            <td class="feature-highlight"><i class="fas fa-check-circle check-positive mr-2"></i>Full offline mode</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Requires internet</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Requires internet</td>
+                            <td class="feature-neutral"><i class="fas fa-times check-negative mr-2"></i>Requires internet</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Mobile Card View -->
+            <div class="md:hidden space-y-4 reveal">
+                <!-- Data Privacy -->
+                <div class="mobile-comparison-card feature-name">
+                    <div class="font-orbitron text-cyan-400 mb-2"><i class="fas fa-shield-alt mr-2"></i>Data Privacy</div>
+                </div>
+                <div class="mobile-comparison-card halocore-card">
+                    <div class="flex items-center justify-between">
+                        <span class="font-orbitron text-sm">HALOCORE</span>
+                        <span class="feature-highlight text-sm"><i class="fas fa-check-circle check-positive mr-1"></i>On-premise</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">OpenAI</div>
+                        <div class="feature-neutral text-xs"><i class="fas fa-times check-negative"></i></div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Anthropic</div>
+                        <div class="feature-neutral text-xs"><i class="fas fa-times check-negative"></i></div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Google</div>
+                        <div class="feature-neutral text-xs"><i class="fas fa-times check-negative"></i></div>
+                    </div>
+                </div>
+                
+                <!-- API Costs -->
+                <div class="mobile-comparison-card feature-name">
+                    <div class="font-orbitron text-cyan-400 mb-2"><i class="fas fa-dollar-sign mr-2"></i>API Costs</div>
+                </div>
+                <div class="mobile-comparison-card halocore-card">
+                    <div class="flex items-center justify-between">
+                        <span class="font-orbitron text-sm">HALOCORE</span>
+                        <span class="feature-highlight text-sm"><i class="fas fa-check-circle check-positive mr-1"></i>No per-token fees</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">OpenAI</div>
+                        <div class="feature-neutral text-xs">Per-token</div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Anthropic</div>
+                        <div class="feature-neutral text-xs">Per-token</div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Google</div>
+                        <div class="feature-neutral text-xs">Per-token</div>
+                    </div>
+                </div>
+                
+                <!-- Model Ownership -->
+                <div class="mobile-comparison-card feature-name">
+                    <div class="font-orbitron text-cyan-400 mb-2"><i class="fas fa-cube mr-2"></i>Model Ownership</div>
+                </div>
+                <div class="mobile-comparison-card halocore-card">
+                    <div class="flex items-center justify-between">
+                        <span class="font-orbitron text-sm">HALOCORE</span>
+                        <span class="feature-highlight text-sm"><i class="fas fa-check-circle check-positive mr-1"></i>Full ownership</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">OpenAI</div>
+                        <div class="feature-neutral text-xs">Proprietary</div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Anthropic</div>
+                        <div class="feature-neutral text-xs">Proprietary</div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Google</div>
+                        <div class="feature-neutral text-xs">Proprietary</div>
+                    </div>
+                </div>
+                
+                <!-- Persistent Memory -->
+                <div class="mobile-comparison-card feature-name">
+                    <div class="font-orbitron text-cyan-400 mb-2"><i class="fas fa-brain mr-2"></i>Persistent Memory</div>
+                </div>
+                <div class="mobile-comparison-card halocore-card">
+                    <div class="flex items-center justify-between">
+                        <span class="font-orbitron text-sm">HALOCORE</span>
+                        <span class="feature-highlight text-sm"><i class="fas fa-check-circle check-positive mr-1"></i>32GB+ semantic</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">OpenAI</div>
+                        <div class="feature-neutral text-xs">Context only</div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Anthropic</div>
+                        <div class="feature-neutral text-xs">Context only</div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Google</div>
+                        <div class="feature-neutral text-xs">Context only</div>
+                    </div>
+                </div>
+                
+                <!-- Rate Limits -->
+                <div class="mobile-comparison-card feature-name">
+                    <div class="font-orbitron text-cyan-400 mb-2"><i class="fas fa-tachometer-alt mr-2"></i>Rate Limits</div>
+                </div>
+                <div class="mobile-comparison-card halocore-card">
+                    <div class="flex items-center justify-between">
+                        <span class="font-orbitron text-sm">HALOCORE</span>
+                        <span class="feature-highlight text-sm"><i class="fas fa-check-circle check-positive mr-1"></i>None</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">OpenAI</div>
+                        <div class="feature-neutral text-xs">Strict</div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Anthropic</div>
+                        <div class="feature-neutral text-xs">Moderate</div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Google</div>
+                        <div class="feature-neutral text-xs">Moderate</div>
+                    </div>
+                </div>
+                
+                <!-- Offline Capability -->
+                <div class="mobile-comparison-card feature-name">
+                    <div class="font-orbitron text-cyan-400 mb-2"><i class="fas fa-wifi-slash mr-2"></i>Offline Capability</div>
+                </div>
+                <div class="mobile-comparison-card halocore-card">
+                    <div class="flex items-center justify-between">
+                        <span class="font-orbitron text-sm">HALOCORE</span>
+                        <span class="feature-highlight text-sm"><i class="fas fa-check-circle check-positive mr-1"></i>Full offline</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">OpenAI</div>
+                        <div class="feature-neutral text-xs"><i class="fas fa-times check-negative"></i></div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Anthropic</div>
+                        <div class="feature-neutral text-xs"><i class="fas fa-times check-negative"></i></div>
+                    </div>
+                    <div class="mobile-comparison-card text-center p-2">
+                        <div class="text-xs text-gray-500 mb-1">Google</div>
+                        <div class="feature-neutral text-xs"><i class="fas fa-times check-negative"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why HALOCORE Section -->
+    <section class="py-24 px-6 relative z-10 border-t border-cyan-400/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-white mb-4">
+                    WHY <span class="neon-pink">HALOCORE</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-cyan-400 mx-auto mb-4"></div>
+                <p class="font-rajdhani text-gray-400">Key differentiators that set us apart</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Data Sovereignty -->
+                <div class="cyber-panel diff-card p-6 reveal">
+                    <div class="w-14 h-14 flex items-center justify-center border border-cyan-400/50 bg-cyan-400/10 mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="font-orbitron text-lg text-white mb-2">DATA SOVEREIGNTY</h3>
+                    <p class="font-rajdhani text-gray-400 text-sm leading-relaxed">
+                        Your data never leaves your servers. Full control over sensitive information with zero third-party exposure.
+                    </p>
+                    <div class="mt-4 flex items-center gap-2">
+                        <i class="fas fa-lock text-cyan-400 text-sm"></i>
+                        <span class="text-cyan-400 text-xs font-orbitron">ENTERPRISE GRADE</span>
+                    </div>
+                </div>
+                
+                <!-- Cost Predictability -->
+                <div class="cyber-panel cyber-panel-pink diff-card p-6 reveal" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 flex items-center justify-center border border-pink-500/50 bg-pink-500/10 mb-4">
+                        <i class="fas fa-coins text-2xl text-pink-500"></i>
+                    </div>
+                    <h3 class="font-orbitron text-lg text-white mb-2">COST PREDICTABILITY</h3>
+                    <p class="font-rajdhani text-gray-400 text-sm leading-relaxed">
+                        No surprise API bills. One-time license fee with unlimited usage. Scale without cost anxiety.
+                    </p>
+                    <div class="mt-4 flex items-center gap-2">
+                        <i class="fas fa-chart-line text-pink-500 text-sm"></i>
+                        <span class="text-pink-500 text-xs font-orbitron">FIXED COSTS</span>
+                    </div>
+                </div>
+                
+                <!-- Unlimited Scale -->
+                <div class="cyber-panel diff-card p-6 reveal" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 flex items-center justify-center border border-purple-500/50 bg-purple-500/10 mb-4">
+                        <i class="fas fa-rocket text-2xl text-purple-500"></i>
+                    </div>
+                    <h3 class="font-orbitron text-lg text-white mb-2">UNLIMITED SCALE</h3>
+                    <p class="font-rajdhani text-gray-400 text-sm leading-relaxed">
+                        Limited only by your hardware. No rate limits, no throttling. Process millions of tokens without restrictions.
+                    </p>
+                    <div class="mt-4 flex items-center gap-2">
+                        <i class="fas fa-infinity text-purple-500 text-sm"></i>
+                        <span class="text-purple-500 text-xs font-orbitron">NO LIMITS</span>
+                    </div>
+                </div>
+                
+                <!-- Complete Control -->
+                <div class="cyber-panel cyber-panel-pink diff-card p-6 reveal" style="transition-delay: 300ms;">
+                    <div class="w-14 h-14 flex items-center justify-center border border-green-500/50 bg-green-500/10 mb-4">
+                        <i class="fas fa-sliders-h text-2xl text-green-500"></i>
+                    </div>
+                    <h3 class="font-orbitron text-lg text-white mb-2">COMPLETE CONTROL</h3>
+                    <p class="font-rajdhani text-gray-400 text-sm leading-relaxed">
+                        Customize everything. Models, pipelines, agents, integrations. Build exactly what you need.
+                    </p>
+                    <div class="mt-4 flex items-center gap-2">
+                        <i class="fas fa-cogs text-green-500 text-sm"></i>
+                        <span class="text-green-500 text-xs font-orbitron">FULL ACCESS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="cyber-panel p-12 reveal">
+                <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-white mb-4">
+                    READY TO BREAK FREE FROM <span class="neon-cyan">CLOUD AI?</span>
+                </h2>
+                <p class="font-rajdhani text-gray-400 mb-8 max-w-xl mx-auto">
+                    Join the organizations taking back control of their AI infrastructure. Self-hosted, secure, and scalable.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="pricing.html" class="cyber-btn font-orbitron px-8 py-4">
+                        VIEW PRICING
+                    </a>
+                    <a href="demo.html" class="cyber-btn cyber-btn-pink font-orbitron px-8 py-4">
+                        TRY THE PLAYGROUND
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyan-400/30 py-12 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="logo.png" alt="HALOCORE" class="w-8 h-8" style="filter: drop-shadow(0 0 10px #00f0ff);">
+                        <span class="font-orbitron text-lg font-bold text-white">HALO<span class="neon-cyan">CORE</span></span>
+                    </div>
+                    <p class="font-rajdhani text-sm text-gray-500">
+                        Neural infrastructure for autonomous intelligence.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-orbitron text-sm text-cyan-400 mb-4">PLATFORM</h4>
+                    <ul class="space-y-2 font-rajdhani text-sm">
+                        <li><a href="architecture.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Architecture</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Services</a></li>
+                        <li><a href="comparison.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Comparison</a></li>
+                        <li><a href="pricing.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-orbitron text-sm text-pink-500 mb-4">COMPANY</h4>
+                    <ul class="space-y-2 font-rajdhani text-sm">
+                        <li><a href="apps.html" class="text-gray-400 hover:text-pink-500 transition-colors">Android Apps</a></li>
+                        <li><a href="demo.html" class="text-gray-400 hover:text-pink-500 transition-colors">Demo</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-pink-500 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-orbitron text-sm text-purple-500 mb-4">CONNECT</h4>
+                    <div class="grid grid-cols-4 gap-2">
+                        <a href="https://github.com/Nectarface" target="_blank" class="w-10 h-10 border border-cyan-400/30 flex items-center justify-center text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/nectarface" target="_blank" class="w-10 h-10 border border-cyan-400/30 flex items-center justify-center text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all" title="Twitter/X">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                        <a href="https://discord.gg/nectarface" target="_blank" class="w-10 h-10 border border-pink-500/30 flex items-center justify-center text-pink-500 hover:bg-pink-500 hover:text-black transition-all" title="Discord">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="https://play.google.com/store/apps/dev?id=8904113367490829450" target="_blank" class="w-10 h-10 border border-green-500/30 flex items-center justify-center text-green-400 hover:bg-green-500 hover:text-black transition-all" title="Google Play">
+                            <i class="fab fa-google-play"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="font-orbitron text-xs text-gray-600">
+                    © 2026 HALOCORE. ALL SYSTEMS OPERATIONAL.
+                </div>
+                <div class="flex gap-6 font-rajdhani text-xs">
+                    <a href="privacy.html" class="text-gray-500 hover:text-cyan-400">PRIVACY</a>
+                    <a href="terms.html" class="text-gray-500 hover:text-cyan-400">TERMS</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+        
+        // Console Easter Egg
+        console.log('%c⚠️ SYSTEM BREACH DETECTED ⚠️', 'color: #ff00ff; font-size: 24px; font-weight: bold;');
+        console.log('%c> HALOCORE Neural Infrastructure v4.2.0', 'color: #00f0ff; font-size: 14px;');
+        console.log('%c> Comparison module loaded...', 'color: #00f0ff; font-size: 12px;');
+        console.log('%c> Analyzing competitor weaknesses...', 'color: #00f0ff; font-size: 12px;');
+        console.log('%c> Type "help" for available commands', 'color: #888; font-size: 12px; font-style: italic;');
+        
+        // Terminal Easter Egg
+        const terminalTrigger = document.createElement('div');
+        terminalTrigger.className = 'terminal-trigger';
+        terminalTrigger.innerHTML = '<i class="fas fa-terminal text-cyan-400"></i>';
+        document.body.appendChild(terminalTrigger);
+        
+        const terminalModal = document.createElement('div');
+        terminalModal.className = 'terminal-modal';
+        terminalModal.id = 'terminalModal';
+        terminalModal.innerHTML = `
+            <div class="terminal-header">
+                <span class="font-bold">HALOCORE TERMINAL v4.2.0</span>
+                <button id="closeTerminal" style="background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-line" style="color: #ff00ff;">Welcome to HALOCORE Neural Infrastructure</div>
+                <div class="terminal-line">Type 'help' for available commands</div>
+                <div class="terminal-line" id="terminalOutput"></div>
+                <div class="terminal-line" style="display: flex;">
+                    <span style="color: #ff00ff; margin-right: 10px;">></span>
+                    <input type="text" class="terminal-input" id="terminalInput" autocomplete="off">
+                </div>
+            </div>
+        `;
+        document.body.appendChild(terminalModal);
+        
+        terminalTrigger.addEventListener('click', () => {
+            terminalModal.classList.add('active');
+            document.getElementById('terminalInput').focus();
+        });
+        
+        document.getElementById('closeTerminal').addEventListener('click', () => {
+            terminalModal.classList.remove('active');
+        });
+        
+        const commands = {
+            help: () => `Available commands:\n  help       - Show this help message\n  status     - System status\n  version    - Show version info\n  compare    - Run comparison analysis\n  agents     - List active agents\n  clear      - Clear terminal`,
+            status: () => `SYSTEM STATUS: OPERATIONAL\nNeural Network: ONLINE\nMemory Systems: ACTIVE (32GB)\nComparison Engine: RUNNING\nCompetitor Analysis: COMPLETE`,
+            version: () => `HALOCORE v4.2.0-stable\nKernel: 6.1.0-neural\nArchitecture: x86_64\nBuild Date: 2026-02-23`,
+            compare: () => `COMPARISON ANALYSIS:\n  HALOCORE:    12/12 advantages ✓\n  OpenAI:      Cloud-dependent\n  Anthropic:   Limited customization\n  Google:      Vendor lock-in risk`,
+            agents: () => `ACTIVE AGENTS:\n  [ORCHESTRATOR-32B]  Status: RUNNING  Tasks: 847\n  [CODER-32B]         Status: RUNNING  Tasks: 1,234\n  [COORDINATOR-7B]    Status: RUNNING  Tasks: 5,672`,
+            clear: () => { document.getElementById('terminalOutput').innerHTML = ''; return ''; }
+        };
+        
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalOutput = document.getElementById('terminalOutput');
+        
+        terminalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = terminalInput.value.trim().toLowerCase();
+                if (cmd) {
+                    terminalOutput.innerHTML += `<div style="color: #666;">> ${cmd}</div>`;
+                    const response = commands[cmd] ? commands[cmd]() : `Command not found: ${cmd}\nType 'help' for available commands`;
+                    if (response) terminalOutput.innerHTML += `<div style="margin-bottom: 10px;">${response.replace(/\n/g, '<br>')}</div>`;
+                    terminalInput.value = '';
+                    document.getElementById('terminalBody').scrollTop = document.getElementById('terminalBody').scrollHeight;
+                }
+            }
+        });
+    </script>
+<script src="chat-widget.js"></script>
+</body>
+</html>

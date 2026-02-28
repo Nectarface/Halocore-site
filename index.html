@@ -263,7 +263,7 @@
         .terminal-trigger {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 20px;
             width: 50px;
             height: 50px;
             background: rgba(0, 240, 255, 0.1);
@@ -384,6 +384,7 @@
                     <a href="about.html" class="nav-link-cyber font-orbitron">ABOUT</a>
                     <a href="contact.html" class="cyber-btn font-orbitron text-sm px-6 py-3">CONTACT</a>
                     <a href="demo.html" class="nav-link-cyber font-orbitron">DEMO</a>
+                    <a href="comparison.html" class="nav-link-cyber font-orbitron">COMPARE</a>
                 </div>
                 
                 <button id="mobile-menu-btn" class="md:hidden text-cyber-cyan text-2xl">
@@ -402,6 +403,7 @@
                 <a href="about.html" class="block text-gray-400 hover:text-cyber-cyan font-orbitron py-2">ABOUT</a>
                 <a href="contact.html" class="block text-cyber-cyan font-orbitron py-2">CONTACT</a>
                 <a href="demo.html" class="block text-gray-400 hover:text-cyber-cyan font-orbitron py-2">DEMO</a>
+                <a href="comparison.html" class="block text-gray-400 hover:text-cyber-cyan font-orbitron py-2">COMPARE</a>
             </div>
         </div>
     </nav>
@@ -815,6 +817,10 @@
         document.getElementById('closeTerminal').addEventListener('click', () => {
             terminalModal.classList.remove('active');
         });
+    </script>
+    <script src="chat-widget.js"></script>
+</body>
+</html>
         
         const commands = {
             help: () => `Available commands:\n  help       - Show this help message\n  status     - System status\n  version    - Show version info\n  uptime     - System uptime\n  agents     - List active agents\n  matrix     - Enter the matrix\n  clear      - Clear terminal`,
@@ -842,5 +848,6 @@
             }
         });
     </script>
+    <script src="chat-widget.js"></script>
 </body>
 </html>
